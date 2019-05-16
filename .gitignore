@@ -1,25 +1,3 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-feedback-front/node_modules
-feedback-front/.pnp
-feedback-front/.pnp.js
-
-# testing
-feedback-front/coverage
-
-# production
-feedback-front/build
-
-# misc
-feedback-front/.DS_Store
-feedback-front/.env.local
-feedback-front/.env.development.local
-feedback-front/.env.test.local
-feedback-front/.env.production.local
-
-feedback-front/npm-debug.log*
-feedback-front/yarn-debug.log*
-feedback-front/yarn-error.log*
-
 .idea/
