@@ -17,7 +17,7 @@ function side(){
 				<ListItemText primary="Genie logiciel" />
 			</ListItem>
 			<ListItem button>
-				<ListItemText primary="Analyse de donnee" />
+				<ListItemText p	rimary="Analyse de donnee" />
 			</ListItem>
 		</List>
 	);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import actions from '../actions';
-import LoginPage from '../containers/LoginPage'
+import LoginPage from '../containers/LoginPage';
+import Home from '../containers/Home';
 import { Route, Switch, Redirect } from 'react-router';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -67,6 +68,7 @@ class App extends Component {
       <MuiThemeProvider theme={muiTheme}>
         <Switch>
           <Route exact path="/(index.html|)/" component={LoginPage} />
+          <Route exact path="/home" component={Home} />
         </Switch>
       </MuiThemeProvider>
     );
