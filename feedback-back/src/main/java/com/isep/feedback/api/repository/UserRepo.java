@@ -1,4 +1,4 @@
 package com.isep.feedback.api.repository;
 
-public class User {
+public class UserRepo {
 }

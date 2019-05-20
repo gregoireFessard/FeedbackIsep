@@ -21,6 +21,9 @@ public class User   {
   @JsonProperty("username")
   private String username;
 
+  @JsonProperty("enabled")
+  private Integer enabled;
+
   @JsonProperty("firstName")
   private String firstName;
 
@@ -40,7 +43,8 @@ public class User   {
   private String phone;
 
   @JsonProperty("role")
-  private String role;
+  @Valid
+  private List<String> role = null;
 
   @JsonProperty("avatar")
   private String avatar;
@@ -50,11 +54,11 @@ public class User   {
 
   @JsonProperty("courses_id")
   @Valid
-  private List<String> coursesId = null;
+  private List<Integer> coursesId = null;
 
   @JsonProperty("stakeholders_id")
   @Valid
-  private List<String> stakeholdersId = null;
+  private List<Integer> stakeholdersId = null;
 
   public User id(Long id) {
     this.id = id;
@@ -94,6 +98,26 @@ public class User   {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public User enabled(Integer enabled) {
+    this.enabled = enabled;
+    return this;
+  }
+
+  /**
+   * Get enabled
+   * @return enabled
+  */
+  @ApiModelProperty(value = "")
+
+
+  public Integer getEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(Integer enabled) {
+    this.enabled = enabled;
   }
 
   public User firstName(String firstName) {
@@ -216,8 +240,16 @@ public class User   {
     this.phone = phone;
   }
 
-  public User role(String role) {
+  public User role(List<String> role) {
     this.role = role;
+    return this;
+  }
+
+  public User addRoleItem(String roleItem) {
+    if (this.role == null) {
+      this.role = new ArrayList<>();
+    }
+    this.role.add(roleItem);
     return this;
   }
 
@@ -228,11 +260,11 @@ public class User   {
   @ApiModelProperty(value = "")
 
 
-  public String getRole() {
+  public List<String> getRole() {
     return role;
   }
 
-  public void setRole(String role) {
+  public void setRole(List<String> role) {
     this.role = role;
   }
 
@@ -276,12 +308,12 @@ public class User   {
     this.color = color;
   }
 
-  public User coursesId(List<String> coursesId) {
+  public User coursesId(List<Integer> coursesId) {
     this.coursesId = coursesId;
     return this;
   }
 
-  public User addCoursesIdItem(String coursesIdItem) {
+  public User addCoursesIdItem(Integer coursesIdItem) {
     if (this.coursesId == null) {
       this.coursesId = new ArrayList<>();
     }
@@ -296,20 +328,20 @@ public class User   {
   @ApiModelProperty(value = "")
 
 
-  public List<String> getCoursesId() {
+  public List<Integer> getCoursesId() {
     return coursesId;
   }
 
-  public void setCoursesId(List<String> coursesId) {
+  public void setCoursesId(List<Integer> coursesId) {
     this.coursesId = coursesId;
   }
 
-  public User stakeholdersId(List<String> stakeholdersId) {
+  public User stakeholdersId(List<Integer> stakeholdersId) {
     this.stakeholdersId = stakeholdersId;
     return this;
   }
 
-  public User addStakeholdersIdItem(String stakeholdersIdItem) {
+  public User addStakeholdersIdItem(Integer stakeholdersIdItem) {
     if (this.stakeholdersId == null) {
       this.stakeholdersId = new ArrayList<>();
     }
@@ -324,17 +356,17 @@ public class User   {
   @ApiModelProperty(value = "")
 
 
-  public List<String> getStakeholdersId() {
+  public List<Integer> getStakeholdersId() {
     return stakeholdersId;
   }
 
-  public void setStakeholdersId(List<String> stakeholdersId) {
+  public void setStakeholdersId(List<Integer> stakeholdersId) {
     this.stakeholdersId = stakeholdersId;
   }
 
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(java.lang.Object o) {
     if (this == o) {
       return true;
     }
@@ -344,6 +376,7 @@ public class User   {
     User user = (User) o;
     return Objects.equals(this.id, user.id) &&
         Objects.equals(this.username, user.username) &&
+        Objects.equals(this.enabled, user.enabled) &&
         Objects.equals(this.firstName, user.firstName) &&
         Objects.equals(this.lastName, user.lastName) &&
         Objects.equals(this.isepId, user.isepId) &&
@@ -359,7 +392,7 @@ public class User   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, firstName, lastName, isepId, email, password, phone, role, avatar, color, coursesId, stakeholdersId);
+    return Objects.hash(id, username, enabled, firstName, lastName, isepId, email, password, phone, role, avatar, color, coursesId, stakeholdersId);
   }
 
   @Override
@@ -369,6 +402,7 @@ public class User   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
+    sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    isepId: ").append(toIndentedString(isepId)).append("\n");
@@ -388,7 +422,7 @@ public class User   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
+  private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";
     }

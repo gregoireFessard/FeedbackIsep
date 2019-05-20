@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Validated
-@Api(value = "courses", tags = "course")
+@Api(value = "courses", description = "the courses API")
 public interface CoursesApi {
 
     default CoursesApiDelegate getDelegate() {
@@ -40,21 +40,8 @@ public interface CoursesApi {
     @RequestMapping(value = "/courses/{courseId}/comments/{commentId}/dislike",
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.POST)
-    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdDislikePost(@ApiParam(value = "id of the course", required = true) @PathVariable("courseId") Integer courseId, @ApiParam(value = "id of the course", required = true) @PathVariable("commentId") Integer commentId) {
+    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdDislikePost(@ApiParam(value = "id of the course",required=true) @PathVariable("courseId") Integer courseId,@ApiParam(value = "id of the course",required=true) @PathVariable("commentId") Integer commentId) {
         return getDelegate().coursesCourseIdCommentsCommentIdDislikePost(courseId, commentId);
-    }
-
-
-    @ApiOperation(value = "Modify a comment", nickname = "coursesCourseIdCommentsCommentIdDislikePut", notes = "Modify a comment", response = Comment.class, tags={ "comment", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Comment.class),
-        @ApiResponse(code = 404, message = "course not found") })
-    @RequestMapping(value = "/courses/{courseId}/comments/{commentId}/dislike",
-        produces = { "application/json", "application/xml" }, 
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdDislikePut(@ApiParam(value = "id of the course", required = true) @PathVariable("courseId") Integer courseId, @ApiParam(value = "id of the course", required = true) @PathVariable("commentId") Integer commentId, @ApiParam(value = "", required = true) @Valid @RequestBody Comment comment) {
-        return getDelegate().coursesCourseIdCommentsCommentIdDislikePut(courseId, commentId, comment);
     }
 
 
@@ -65,7 +52,7 @@ public interface CoursesApi {
     @RequestMapping(value = "/courses/{courseId}/comments/{commentId}/like",
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.POST)
-    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdLikePost(@ApiParam(value = "id of the course", required = true) @PathVariable("courseId") Integer courseId, @ApiParam(value = "id of the course", required = true) @PathVariable("commentId") Integer commentId) {
+    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdLikePost(@ApiParam(value = "id of the course",required=true) @PathVariable("courseId") Integer courseId,@ApiParam(value = "id of the course",required=true) @PathVariable("commentId") Integer commentId) {
         return getDelegate().coursesCourseIdCommentsCommentIdLikePost(courseId, commentId);
     }
 
@@ -78,8 +65,21 @@ public interface CoursesApi {
         produces = { "application/json", "application/xml" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdPost(@ApiParam(value = "id of the course", required = true) @PathVariable("courseId") Integer courseId, @ApiParam(value = "id of the course", required = true) @PathVariable("commentId") Integer commentId, @ApiParam(value = "", required = true) @Valid @RequestBody Comment comment) {
+    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdPost(@ApiParam(value = "id of the course",required=true) @PathVariable("courseId") Integer courseId,@ApiParam(value = "id of the course",required=true) @PathVariable("commentId") Integer commentId,@ApiParam(value = "" ,required=true )  @Valid @RequestBody Comment comment) {
         return getDelegate().coursesCourseIdCommentsCommentIdPost(courseId, commentId, comment);
+    }
+
+
+    @ApiOperation(value = "Modify a comment", nickname = "coursesCourseIdCommentsCommentIdPut", notes = "Modify a comment", response = Comment.class, tags={ "comment", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Comment.class),
+        @ApiResponse(code = 404, message = "course or comment not found") })
+    @RequestMapping(value = "/courses/{courseId}/comments/{commentId}",
+        produces = { "application/json", "application/xml" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.PUT)
+    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdPut(@ApiParam(value = "id of the course",required=true) @PathVariable("courseId") Integer courseId,@ApiParam(value = "id of the course",required=true) @PathVariable("commentId") Integer commentId,@ApiParam(value = "" ,required=true )  @Valid @RequestBody Comment comment) {
+        return getDelegate().coursesCourseIdCommentsCommentIdPut(courseId, commentId, comment);
     }
 
 
@@ -90,7 +90,7 @@ public interface CoursesApi {
     @RequestMapping(value = "/courses/{courseId}/comments",
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<List<Comment>> coursesCourseIdCommentsGet(@ApiParam(value = "id of the course", required = true) @PathVariable("courseId") Integer courseId) {
+    default ResponseEntity<List<Comment>> coursesCourseIdCommentsGet(@ApiParam(value = "id of the course",required=true) @PathVariable("courseId") Integer courseId) {
         return getDelegate().coursesCourseIdCommentsGet(courseId);
     }
 
@@ -103,7 +103,7 @@ public interface CoursesApi {
         produces = { "application/json", "application/xml" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Comment> coursesCourseIdCommentsPost(@ApiParam(value = "id of the course", required = true) @PathVariable("courseId") Integer courseId, @ApiParam(value = "", required = true) @Valid @RequestBody Comment comment) {
+    default ResponseEntity<Comment> coursesCourseIdCommentsPost(@ApiParam(value = "id of the course",required=true) @PathVariable("courseId") Integer courseId,@ApiParam(value = "" ,required=true )  @Valid @RequestBody Comment comment) {
         return getDelegate().coursesCourseIdCommentsPost(courseId, comment);
     }
 
@@ -115,7 +115,7 @@ public interface CoursesApi {
     @RequestMapping(value = "/courses/{courseId}/courseDocuments/{documentId}",
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.DELETE)
-    default ResponseEntity<String> coursesCourseIdCourseDocumentsDocumentIdDelete(@ApiParam(value = "id of the course", required = true) @PathVariable("courseId") Integer courseId, @ApiParam(value = "id of the document to delete", required = true) @PathVariable("documentId") Integer documentId) {
+    default ResponseEntity<String> coursesCourseIdCourseDocumentsDocumentIdDelete(@ApiParam(value = "id of the course",required=true) @PathVariable("courseId") Integer courseId,@ApiParam(value = "id of the document to delete",required=true) @PathVariable("documentId") Integer documentId) {
         return getDelegate().coursesCourseIdCourseDocumentsDocumentIdDelete(courseId, documentId);
     }
 
@@ -126,7 +126,7 @@ public interface CoursesApi {
     @RequestMapping(value = "/courses/{courseId}/courseDocuments",
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<List<CourseDocument>> coursesCourseIdCourseDocumentsGet(@ApiParam(value = "id of the course", required = true) @PathVariable("courseId") Integer courseId) {
+    default ResponseEntity<List<CourseDocument>> coursesCourseIdCourseDocumentsGet(@ApiParam(value = "id of the course",required=true) @PathVariable("courseId") Integer courseId) {
         return getDelegate().coursesCourseIdCourseDocumentsGet(courseId);
     }
 
@@ -138,7 +138,7 @@ public interface CoursesApi {
         produces = { "application/json", "application/xml" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<CourseDocument> coursesCourseIdCourseDocumentsPost(@ApiParam(value = "id of the course to add a document to", required = true) @PathVariable("courseId") Integer courseId, @ApiParam(value = "", required = true) @Valid @RequestBody CourseDocument courseDocument) {
+    default ResponseEntity<CourseDocument> coursesCourseIdCourseDocumentsPost(@ApiParam(value = "id of the course to add a document to",required=true) @PathVariable("courseId") Integer courseId,@ApiParam(value = "" ,required=true )  @Valid @RequestBody CourseDocument courseDocument) {
         return getDelegate().coursesCourseIdCourseDocumentsPost(courseId, courseDocument);
     }
 
@@ -162,7 +162,7 @@ public interface CoursesApi {
         produces = { "application/json", "application/xml" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Course> coursesPost(@ApiParam(value = "", required = true) @Valid @RequestBody Course course) {
+    default ResponseEntity<Course> coursesPost(@ApiParam(value = "" ,required=true )  @Valid @RequestBody Course course) {
         return getDelegate().coursesPost(course);
     }
 

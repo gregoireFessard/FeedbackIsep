@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @Validated
-@Api(value = "conversations", tags = "messages")
+@Api(value = "conversations", description = "the conversations API")
 public interface ConversationsApi {
 
     default ConversationsApiDelegate getDelegate() {
@@ -41,7 +41,7 @@ public interface ConversationsApi {
     @RequestMapping(value = "/conversations/{conversationId}",
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.DELETE)
-    default ResponseEntity<String> conversationsConversationIdDelete(@ApiParam(value = "id of the conversation to delete", required = true) @PathVariable("conversationId") Integer conversationId) {
+    default ResponseEntity<String> conversationsConversationIdDelete(@ApiParam(value = "id of the conversation to delete",required=true) @PathVariable("conversationId") Integer conversationId) {
         return getDelegate().conversationsConversationIdDelete(conversationId);
     }
 
@@ -53,7 +53,7 @@ public interface ConversationsApi {
     @RequestMapping(value = "/conversations/{conversationId}/messages",
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<List<Message>> conversationsConversationIdMessagesGet(@ApiParam(value = "id of the conversation to reply to", required = true) @PathVariable("conversationId") Integer conversationId) {
+    default ResponseEntity<List<Message>> conversationsConversationIdMessagesGet(@ApiParam(value = "id of the conversation to reply to",required=true) @PathVariable("conversationId") Integer conversationId) {
         return getDelegate().conversationsConversationIdMessagesGet(conversationId);
     }
 
@@ -66,7 +66,7 @@ public interface ConversationsApi {
         produces = { "application/json", "application/xml" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Message> conversationsConversationIdMessagesPost(@ApiParam(value = "id of the conversation to reply to", required = true) @PathVariable("conversationId") Integer conversationId, @ApiParam(value = "", required = true) @Valid @RequestBody Message message) {
+    default ResponseEntity<Message> conversationsConversationIdMessagesPost(@ApiParam(value = "id of the conversation to reply to",required=true) @PathVariable("conversationId") Integer conversationId,@ApiParam(value = "" ,required=true )  @Valid @RequestBody Message message) {
         return getDelegate().conversationsConversationIdMessagesPost(conversationId, message);
     }
 
@@ -83,15 +83,14 @@ public interface ConversationsApi {
     }
 
 
-    @ApiOperation(value = "Creates a conversation", nickname = "conversationsPost", notes = "Creates a conversation", response = InlineResponse200.class, tags={ "messages", })
+    @ApiOperation(value = "Create a conversation", nickname = "conversationsPost", notes = "Create a conversation", response = InlineResponse200.class, tags={ "messages", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = InlineResponse200.class),
-        @ApiResponse(code = 404, message = "User not found") })
+        @ApiResponse(code = 200, message = "successful operation", response = InlineResponse200.class) })
     @RequestMapping(value = "/conversations",
         produces = { "application/json", "application/xml" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<InlineResponse200> conversationsPost(@ApiParam(value = "") @Valid @RequestBody InlineObject inlineObject) {
+    default ResponseEntity<InlineResponse200> conversationsPost(@ApiParam(value = ""  )  @Valid @RequestBody InlineObject inlineObject) {
         return getDelegate().conversationsPost(inlineObject);
     }
 

@@ -58,7 +58,7 @@ public interface ConversationsApiDelegate {
      * @see ConversationsApi#conversationsConversationIdMessagesPost
      */
     default ResponseEntity<Message> conversationsConversationIdMessagesPost(Integer conversationId,
-                                                                            Message message) {
+        Message message) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

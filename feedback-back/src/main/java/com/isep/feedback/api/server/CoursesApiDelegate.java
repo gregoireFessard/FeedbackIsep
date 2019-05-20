@@ -29,29 +29,7 @@ public interface CoursesApiDelegate {
      * @see CoursesApi#coursesCourseIdCommentsCommentIdDislikePost
      */
     default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdDislikePost(Integer courseId,
-                                                                                Integer commentId) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    ApiUtil.setExampleResponse(request, "application/json", "{  \"dateTime\" : \"dateTime\",  \"course_id\" : 1,  \"user_id\" : 6,  \"answers_id\" : [ 2, 2 ],  \"number_like\" : 5,  \"id\" : 0,  \"number_dislike\" : 5,  \"content\" : \"content\"}");
-                    break;
-                }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<Comment>  <id>123456789</id>  <user_id>123456789</user_id>  <course_id>123456789</course_id>  <content>aeiou</content>  <dateTime>aeiou</dateTime>  <number_like>123</number_like>  <number_dislike>123</number_dislike>  <answers_id>123</answers_id></Comment>");
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-    /**
-     * @see CoursesApi#coursesCourseIdCommentsCommentIdDislikePut
-     */
-    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdDislikePut(Integer courseId,
-                                                                               Integer commentId,
-                                                                               Comment comment) {
+        Integer commentId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -72,7 +50,7 @@ public interface CoursesApiDelegate {
      * @see CoursesApi#coursesCourseIdCommentsCommentIdLikePost
      */
     default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdLikePost(Integer courseId,
-                                                                             Integer commentId) {
+        Integer commentId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -93,8 +71,30 @@ public interface CoursesApiDelegate {
      * @see CoursesApi#coursesCourseIdCommentsCommentIdPost
      */
     default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdPost(Integer courseId,
-                                                                         Integer commentId,
-                                                                         Comment comment) {
+        Integer commentId,
+        Comment comment) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    ApiUtil.setExampleResponse(request, "application/json", "{  \"dateTime\" : \"dateTime\",  \"course_id\" : 1,  \"user_id\" : 6,  \"answers_id\" : [ 2, 2 ],  \"number_like\" : 5,  \"id\" : 0,  \"number_dislike\" : 5,  \"content\" : \"content\"}");
+                    break;
+                }
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
+                    ApiUtil.setExampleResponse(request, "application/xml", "<Comment>  <id>123456789</id>  <user_id>123456789</user_id>  <course_id>123456789</course_id>  <content>aeiou</content>  <dateTime>aeiou</dateTime>  <number_like>123</number_like>  <number_dislike>123</number_dislike>  <answers_id>123</answers_id></Comment>");
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+    /**
+     * @see CoursesApi#coursesCourseIdCommentsCommentIdPut
+     */
+    default ResponseEntity<Comment> coursesCourseIdCommentsCommentIdPut(Integer courseId,
+        Integer commentId,
+        Comment comment) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -135,7 +135,7 @@ public interface CoursesApiDelegate {
      * @see CoursesApi#coursesCourseIdCommentsPost
      */
     default ResponseEntity<Comment> coursesCourseIdCommentsPost(Integer courseId,
-                                                                Comment comment) {
+        Comment comment) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -156,7 +156,7 @@ public interface CoursesApiDelegate {
      * @see CoursesApi#coursesCourseIdCourseDocumentsDocumentIdDelete
      */
     default ResponseEntity<String> coursesCourseIdCourseDocumentsDocumentIdDelete(Integer courseId,
-                                                                                  Integer documentId) {
+        Integer documentId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -185,7 +185,7 @@ public interface CoursesApiDelegate {
      * @see CoursesApi#coursesCourseIdCourseDocumentsPost
      */
     default ResponseEntity<CourseDocument> coursesCourseIdCourseDocumentsPost(Integer courseId,
-                                                                              CourseDocument courseDocument) {
+        CourseDocument courseDocument) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

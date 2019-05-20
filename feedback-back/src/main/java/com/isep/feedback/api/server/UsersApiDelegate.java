@@ -43,7 +43,7 @@ public interface UsersApiDelegate {
      * @see UsersApi#loginUser
      */
     default ResponseEntity<String> loginUser(String username,
-                                             String password) {
+        String password) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -59,16 +59,15 @@ public interface UsersApiDelegate {
     /**
      * @see UsersApi#updateUser
      */
-    default ResponseEntity<User> updateUser(String userId,
-                                            User user) {
+    default ResponseEntity<User> updateUser(User user) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    ApiUtil.setExampleResponse(request, "application/json", "{  \"lastName\" : \"lastName\",  \"role\" : \"role\",  \"color\" : \"color\",  \"courses_id\" : [ \"courses_id\", \"courses_id\" ],  \"isep_id\" : 6,  \"avatar\" : \"avatar\",  \"firstName\" : \"firstName\",  \"password\" : \"password\",  \"phone\" : \"phone\",  \"id\" : 0,  \"stakeholders_id\" : [ \"stakeholders_id\", \"stakeholders_id\" ],  \"email\" : \"email\",  \"username\" : \"username\"}");
+                    ApiUtil.setExampleResponse(request, "application/json", "{  \"lastName\" : \"lastName\",  \"role\" : [ \"role\", \"role\" ],  \"color\" : \"color\",  \"courses_id\" : [ 5, 5 ],  \"isep_id\" : 1,  \"avatar\" : \"avatar\",  \"enabled\" : 6,  \"firstName\" : \"firstName\",  \"password\" : \"password\",  \"phone\" : \"phone\",  \"id\" : 0,  \"stakeholders_id\" : [ 5, 5 ],  \"email\" : \"email\",  \"username\" : \"username\"}");
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<User>  <id>123456789</id>  <username>aeiou</username>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <isep_id>123456789</isep_id>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <role>aeiou</role>  <avatar>aeiou</avatar>  <color>aeiou</color>  <courses_id>aeiou</courses_id>  <stakeholders_id>aeiou</stakeholders_id></User>");
+                    ApiUtil.setExampleResponse(request, "application/xml", "<User>  <id>123456789</id>  <username>aeiou</username>  <enabled>123</enabled>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <isep_id>123456789</isep_id>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <role>aeiou</role>  <avatar>aeiou</avatar>  <color>aeiou</color>  <courses_id>123</courses_id>  <stakeholders_id>123</stakeholders_id></User>");
                     break;
                 }
             }
@@ -84,11 +83,11 @@ public interface UsersApiDelegate {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    ApiUtil.setExampleResponse(request, "application/json", "{  \"lastName\" : \"lastName\",  \"role\" : \"role\",  \"color\" : \"color\",  \"courses_id\" : [ \"courses_id\", \"courses_id\" ],  \"isep_id\" : 6,  \"avatar\" : \"avatar\",  \"firstName\" : \"firstName\",  \"password\" : \"password\",  \"phone\" : \"phone\",  \"id\" : 0,  \"stakeholders_id\" : [ \"stakeholders_id\", \"stakeholders_id\" ],  \"email\" : \"email\",  \"username\" : \"username\"}");
+                    ApiUtil.setExampleResponse(request, "application/json", "{  \"lastName\" : \"lastName\",  \"role\" : [ \"role\", \"role\" ],  \"color\" : \"color\",  \"courses_id\" : [ 5, 5 ],  \"isep_id\" : 1,  \"avatar\" : \"avatar\",  \"enabled\" : 6,  \"firstName\" : \"firstName\",  \"password\" : \"password\",  \"phone\" : \"phone\",  \"id\" : 0,  \"stakeholders_id\" : [ 5, 5 ],  \"email\" : \"email\",  \"username\" : \"username\"}");
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<User>  <id>123456789</id>  <username>aeiou</username>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <isep_id>123456789</isep_id>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <role>aeiou</role>  <avatar>aeiou</avatar>  <color>aeiou</color>  <courses_id>aeiou</courses_id>  <stakeholders_id>aeiou</stakeholders_id></User>");
+                    ApiUtil.setExampleResponse(request, "application/xml", "<User>  <id>123456789</id>  <username>aeiou</username>  <enabled>123</enabled>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <isep_id>123456789</isep_id>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <role>aeiou</role>  <avatar>aeiou</avatar>  <color>aeiou</color>  <courses_id>123</courses_id>  <stakeholders_id>123</stakeholders_id></User>");
                     break;
                 }
             }
@@ -104,11 +103,11 @@ public interface UsersApiDelegate {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    ApiUtil.setExampleResponse(request, "application/json", "{  \"lastName\" : \"lastName\",  \"role\" : \"role\",  \"color\" : \"color\",  \"courses_id\" : [ \"courses_id\", \"courses_id\" ],  \"isep_id\" : 6,  \"avatar\" : \"avatar\",  \"firstName\" : \"firstName\",  \"password\" : \"password\",  \"phone\" : \"phone\",  \"id\" : 0,  \"stakeholders_id\" : [ \"stakeholders_id\", \"stakeholders_id\" ],  \"email\" : \"email\",  \"username\" : \"username\"}");
+                    ApiUtil.setExampleResponse(request, "application/json", "{  \"lastName\" : \"lastName\",  \"role\" : [ \"role\", \"role\" ],  \"color\" : \"color\",  \"courses_id\" : [ 5, 5 ],  \"isep_id\" : 1,  \"avatar\" : \"avatar\",  \"enabled\" : 6,  \"firstName\" : \"firstName\",  \"password\" : \"password\",  \"phone\" : \"phone\",  \"id\" : 0,  \"stakeholders_id\" : [ 5, 5 ],  \"email\" : \"email\",  \"username\" : \"username\"}");
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<User>  <id>123456789</id>  <username>aeiou</username>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <isep_id>123456789</isep_id>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <role>aeiou</role>  <avatar>aeiou</avatar>  <color>aeiou</color>  <courses_id>aeiou</courses_id>  <stakeholders_id>aeiou</stakeholders_id></User>");
+                    ApiUtil.setExampleResponse(request, "application/xml", "<User>  <id>123456789</id>  <username>aeiou</username>  <enabled>123</enabled>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <isep_id>123456789</isep_id>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <role>aeiou</role>  <avatar>aeiou</avatar>  <color>aeiou</color>  <courses_id>123</courses_id>  <stakeholders_id>123</stakeholders_id></User>");
                     break;
                 }
             }

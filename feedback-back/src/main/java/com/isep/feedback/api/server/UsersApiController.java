@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("${openapi.feedBack.base-path:/KevinTAN52/FeedBackISEP/1.0.0}")
+@RequestMapping("${openapi.feedBack.base-path:}")
 public class UsersApiController implements UsersApi {
 
     private final UsersApiDelegate delegate;
