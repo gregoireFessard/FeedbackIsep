@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.ArrayList;
-import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -42,23 +40,14 @@ public class User   {
   @JsonProperty("phone")
   private String phone;
 
-  @JsonProperty("role")
-  @Valid
-  private List<String> role = null;
-
   @JsonProperty("avatar")
   private String avatar;
 
   @JsonProperty("color")
   private String color;
 
-  @JsonProperty("courses_id")
-  @Valid
-  private List<Integer> coursesId = null;
-
-  @JsonProperty("stakeholders_id")
-  @Valid
-  private List<Integer> stakeholdersId = null;
+  @JsonProperty("parent_id")
+  private String parentId;
 
   public User id(Long id) {
     this.id = id;
@@ -240,34 +229,6 @@ public class User   {
     this.phone = phone;
   }
 
-  public User role(List<String> role) {
-    this.role = role;
-    return this;
-  }
-
-  public User addRoleItem(String roleItem) {
-    if (this.role == null) {
-      this.role = new ArrayList<>();
-    }
-    this.role.add(roleItem);
-    return this;
-  }
-
-  /**
-   * Get role
-   * @return role
-  */
-  @ApiModelProperty(value = "")
-
-
-  public List<String> getRole() {
-    return role;
-  }
-
-  public void setRole(List<String> role) {
-    this.role = role;
-  }
-
   public User avatar(String avatar) {
     this.avatar = avatar;
     return this;
@@ -308,60 +269,24 @@ public class User   {
     this.color = color;
   }
 
-  public User coursesId(List<Integer> coursesId) {
-    this.coursesId = coursesId;
-    return this;
-  }
-
-  public User addCoursesIdItem(Integer coursesIdItem) {
-    if (this.coursesId == null) {
-      this.coursesId = new ArrayList<>();
-    }
-    this.coursesId.add(coursesIdItem);
+  public User parentId(String parentId) {
+    this.parentId = parentId;
     return this;
   }
 
   /**
-   * Get coursesId
-   * @return coursesId
+   * Get parentId
+   * @return parentId
   */
   @ApiModelProperty(value = "")
 
 
-  public List<Integer> getCoursesId() {
-    return coursesId;
+  public String getParentId() {
+    return parentId;
   }
 
-  public void setCoursesId(List<Integer> coursesId) {
-    this.coursesId = coursesId;
-  }
-
-  public User stakeholdersId(List<Integer> stakeholdersId) {
-    this.stakeholdersId = stakeholdersId;
-    return this;
-  }
-
-  public User addStakeholdersIdItem(Integer stakeholdersIdItem) {
-    if (this.stakeholdersId == null) {
-      this.stakeholdersId = new ArrayList<>();
-    }
-    this.stakeholdersId.add(stakeholdersIdItem);
-    return this;
-  }
-
-  /**
-   * Get stakeholdersId
-   * @return stakeholdersId
-  */
-  @ApiModelProperty(value = "")
-
-
-  public List<Integer> getStakeholdersId() {
-    return stakeholdersId;
-  }
-
-  public void setStakeholdersId(List<Integer> stakeholdersId) {
-    this.stakeholdersId = stakeholdersId;
+  public void setParentId(String parentId) {
+    this.parentId = parentId;
   }
 
 
@@ -383,16 +308,14 @@ public class User   {
         Objects.equals(this.email, user.email) &&
         Objects.equals(this.password, user.password) &&
         Objects.equals(this.phone, user.phone) &&
-        Objects.equals(this.role, user.role) &&
         Objects.equals(this.avatar, user.avatar) &&
         Objects.equals(this.color, user.color) &&
-        Objects.equals(this.coursesId, user.coursesId) &&
-        Objects.equals(this.stakeholdersId, user.stakeholdersId);
+        Objects.equals(this.parentId, user.parentId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, enabled, firstName, lastName, isepId, email, password, phone, role, avatar, color, coursesId, stakeholdersId);
+    return Objects.hash(id, username, enabled, firstName, lastName, isepId, email, password, phone, avatar, color, parentId);
   }
 
   @Override
@@ -409,11 +332,9 @@ public class User   {
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
-    sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
     sb.append("    color: ").append(toIndentedString(color)).append("\n");
-    sb.append("    coursesId: ").append(toIndentedString(coursesId)).append("\n");
-    sb.append("    stakeholdersId: ").append(toIndentedString(stakeholdersId)).append("\n");
+    sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

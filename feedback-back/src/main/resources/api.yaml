@@ -1,17 +1,10 @@
 openapi: 3.0.0
 # Added by API Auto Mocking Plugin
-servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/KevinTAN52/FeedBackISEP/1.0.0
 info:
-  description: |
-    [http://swagger.io](http://swagger.io) or on
-    [irc.freenode.net, #swagger](http://swagger.io/irc/).
   version: "1.0.0"
   title: FeedBack
-  termsOfService: 'http://swagger.io/terms/'
   contact:
-    email: apiteam@swagger.io
+    email: kevin.tan@isep.fr
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -71,6 +64,33 @@ paths:
             schema:
               $ref: '#/components/schemas/User'
         description: Created user object
+        required: true
+    put:
+      tags:
+        - user
+      summary: Update an user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid user supplied
+        '404':
+          description: User not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Updated user object
         required: true
   /users/login:
     get:
@@ -149,40 +169,7 @@ paths:
           description: Invalid userId supplied
         '404':
           description: User not found
-    put:
-      tags:
-        - user
-      summary: Update an user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      parameters:
-        - name: userId
-          in: path
-          description: id that need to be updated
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
-        '400':
-          description: Invalid user supplied
-        '404':
-          description: User not found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-        description: Updated user object
-        required: true
+
     delete:
       tags:
         - user
@@ -428,6 +415,42 @@ paths:
                 $ref: '#/components/schemas/Comment'
         '404':
           description: User, course or comment not found
+    put:
+      tags:
+        - comment
+      summary: Modify a comment
+      description: Modify a comment
+      parameters:
+        - name: courseId
+          in: path
+          description: id of the course
+          required: true
+          schema:
+            type: integer
+        - name: commentId
+          in: path
+          description: id of the course
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '404':
+          description:  course or comment not found
   '/courses/{courseId}/comments/{commentId}/like':
     post:
       tags:
@@ -490,48 +513,13 @@ paths:
                 $ref: '#/components/schemas/Comment'
         '404':
           description: User, course or comment not found
-    put:
-      tags:
-        - comment
-      summary: Modify a comment
-      description: Modify a comment
-      parameters:
-        - name: courseId
-          in: path
-          description: id of the course
-          required: true
-          schema:
-            type: integer
-        - name: commentId
-          in: path
-          description: id of the course
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Comment'
-        required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Comment'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Comment'
-        '404':
-          description:  course not found
+
   '/conversations':
     post:
       tags:
         - messages
-      summary: Creates a conversation
-      description: Creates a conversation
+      summary: Create a conversation
+      description: Create a conversation
       requestBody:
         content:
           application/json:
@@ -542,6 +530,7 @@ paths:
                   $ref: '#/components/schemas/Conversation'
                 message:
                   $ref: '#/components/schemas/Message'
+        required: true
       responses:
         '200':
           description: successful operation
@@ -562,8 +551,6 @@ paths:
                     $ref: '#/components/schemas/Conversation'
                   message:
                     $ref: '#/components/schemas/Message'
-        '404':
-          description: User not found
     get:
       tags:
         - messages
@@ -679,6 +666,8 @@ components:
           format: int64
         username:
           type: string
+        enabled:
+          type: integer
         firstName:
           type: string
         lastName:
@@ -692,20 +681,12 @@ components:
           type: string
         phone:
           type: string
-        role:
-          type: string
         avatar:
           type: string
         color:
           type: string
-        courses_id:
-          type: array
-          items:
-            type: string
-        stakeholders_id:
-          type: array
-          items:
-            type: string
+        parent_id:
+          type: string
       xml:
         name: User
     Course:
@@ -724,16 +705,17 @@ components:
           type: string
         duration:
           type: string
-        comments_id:
-          type: array
-          items:
-            type: integer
-        couseDocuments_id:
-          type: array
-          items:
-            type: integer
       xml:
         name: Course
+    UserCourse:
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        course_id:
+          type: string
     Comment:
       type: object
       properties:
@@ -754,10 +736,8 @@ components:
           type: integer
         number_dislike:
           type: integer
-        answers_id:
-          type: array
-          items:
-            type: integer
+        parent_id:
+          type: string
       xml:
         name: Comment
     CourseDocument:
@@ -771,6 +751,8 @@ components:
         document:
           type: string
         user_id:
+          type: integer
+        course_id:
           type: integer
       xml:
         name: CourseDocument
@@ -819,16 +801,7 @@ components:
           type: string
         messages_id:
           type: string
-  securitySchemes:
-    petstore_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
-          scopes:
-            'write:pets': modify pets in your account
-            'read:pets': read your pets
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/KevinTAN52/FeedBackISEP/1.0.0

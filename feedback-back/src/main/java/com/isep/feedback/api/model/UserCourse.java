@@ -9,26 +9,20 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * CourseDocument
+ * UserCourse
  */
 
-public class CourseDocument   {
+public class UserCourse   {
   @JsonProperty("id")
-  private Long id;
-
-  @JsonProperty("name")
-  private String name;
-
-  @JsonProperty("document")
-  private String document;
+  private String id;
 
   @JsonProperty("user_id")
-  private Integer userId;
+  private String userId;
 
   @JsonProperty("course_id")
-  private Integer courseId;
+  private String courseId;
 
-  public CourseDocument id(Long id) {
+  public UserCourse id(String id) {
     this.id = id;
     return this;
   }
@@ -40,55 +34,15 @@ public class CourseDocument   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
-  public CourseDocument name(String name) {
-    this.name = name;
-    return this;
-  }
-
-  /**
-   * Get name
-   * @return name
-  */
-  @ApiModelProperty(value = "")
-
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public CourseDocument document(String document) {
-    this.document = document;
-    return this;
-  }
-
-  /**
-   * Get document
-   * @return document
-  */
-  @ApiModelProperty(value = "")
-
-
-  public String getDocument() {
-    return document;
-  }
-
-  public void setDocument(String document) {
-    this.document = document;
-  }
-
-  public CourseDocument userId(Integer userId) {
+  public UserCourse userId(String userId) {
     this.userId = userId;
     return this;
   }
@@ -100,15 +54,15 @@ public class CourseDocument   {
   @ApiModelProperty(value = "")
 
 
-  public Integer getUserId() {
+  public String getUserId() {
     return userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(String userId) {
     this.userId = userId;
   }
 
-  public CourseDocument courseId(Integer courseId) {
+  public UserCourse courseId(String courseId) {
     this.courseId = courseId;
     return this;
   }
@@ -120,11 +74,11 @@ public class CourseDocument   {
   @ApiModelProperty(value = "")
 
 
-  public Integer getCourseId() {
+  public String getCourseId() {
     return courseId;
   }
 
-  public void setCourseId(Integer courseId) {
+  public void setCourseId(String courseId) {
     this.courseId = courseId;
   }
 
@@ -137,27 +91,23 @@ public class CourseDocument   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CourseDocument courseDocument = (CourseDocument) o;
-    return Objects.equals(this.id, courseDocument.id) &&
-        Objects.equals(this.name, courseDocument.name) &&
-        Objects.equals(this.document, courseDocument.document) &&
-        Objects.equals(this.userId, courseDocument.userId) &&
-        Objects.equals(this.courseId, courseDocument.courseId);
+    UserCourse userCourse = (UserCourse) o;
+    return Objects.equals(this.id, userCourse.id) &&
+        Objects.equals(this.userId, userCourse.userId) &&
+        Objects.equals(this.courseId, userCourse.courseId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, document, userId, courseId);
+    return Objects.hash(id, userId, courseId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CourseDocument {\n");
+    sb.append("class UserCourse {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    document: ").append(toIndentedString(document)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    courseId: ").append(toIndentedString(courseId)).append("\n");
     sb.append("}");

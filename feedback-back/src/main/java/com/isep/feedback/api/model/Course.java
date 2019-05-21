@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.ArrayList;
-import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -29,14 +27,6 @@ public class Course   {
 
   @JsonProperty("duration")
   private String duration;
-
-  @JsonProperty("comments_id")
-  @Valid
-  private List<Integer> commentsId = null;
-
-  @JsonProperty("couseDocuments_id")
-  @Valid
-  private List<Integer> couseDocumentsId = null;
 
   public Course id(Long id) {
     this.id = id;
@@ -138,62 +128,6 @@ public class Course   {
     this.duration = duration;
   }
 
-  public Course commentsId(List<Integer> commentsId) {
-    this.commentsId = commentsId;
-    return this;
-  }
-
-  public Course addCommentsIdItem(Integer commentsIdItem) {
-    if (this.commentsId == null) {
-      this.commentsId = new ArrayList<>();
-    }
-    this.commentsId.add(commentsIdItem);
-    return this;
-  }
-
-  /**
-   * Get commentsId
-   * @return commentsId
-  */
-  @ApiModelProperty(value = "")
-
-
-  public List<Integer> getCommentsId() {
-    return commentsId;
-  }
-
-  public void setCommentsId(List<Integer> commentsId) {
-    this.commentsId = commentsId;
-  }
-
-  public Course couseDocumentsId(List<Integer> couseDocumentsId) {
-    this.couseDocumentsId = couseDocumentsId;
-    return this;
-  }
-
-  public Course addCouseDocumentsIdItem(Integer couseDocumentsIdItem) {
-    if (this.couseDocumentsId == null) {
-      this.couseDocumentsId = new ArrayList<>();
-    }
-    this.couseDocumentsId.add(couseDocumentsIdItem);
-    return this;
-  }
-
-  /**
-   * Get couseDocumentsId
-   * @return couseDocumentsId
-  */
-  @ApiModelProperty(value = "")
-
-
-  public List<Integer> getCouseDocumentsId() {
-    return couseDocumentsId;
-  }
-
-  public void setCouseDocumentsId(List<Integer> couseDocumentsId) {
-    this.couseDocumentsId = couseDocumentsId;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -208,14 +142,12 @@ public class Course   {
         Objects.equals(this.teacherId, course.teacherId) &&
         Objects.equals(this.materialId, course.materialId) &&
         Objects.equals(this.dateTime, course.dateTime) &&
-        Objects.equals(this.duration, course.duration) &&
-        Objects.equals(this.commentsId, course.commentsId) &&
-        Objects.equals(this.couseDocumentsId, course.couseDocumentsId);
+        Objects.equals(this.duration, course.duration);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, teacherId, materialId, dateTime, duration, commentsId, couseDocumentsId);
+    return Objects.hash(id, teacherId, materialId, dateTime, duration);
   }
 
   @Override
@@ -228,8 +160,6 @@ public class Course   {
     sb.append("    materialId: ").append(toIndentedString(materialId)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
     sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
-    sb.append("    commentsId: ").append(toIndentedString(commentsId)).append("\n");
-    sb.append("    couseDocumentsId: ").append(toIndentedString(couseDocumentsId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

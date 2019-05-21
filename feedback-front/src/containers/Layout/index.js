@@ -1,35 +1,37 @@
 import React, { Component} from 'react';
 import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
-import Logo from '../../assets/IsepLogo.svg';
+import NavBar from '../../components/NavBar';
+
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const styles = theme =>({
-
+    main : {
+        display: 'flex',
+    }
 
 
 })
 
 
-export default class Layout extends Component {
+class Layout extends Component {
 
     render(){
 
-        const {children} = this.props;
+        const {classes, children} = this.props;
         return(
-            <div >
+            <div className={classes.main}>
                 <div>
-                    <img src={Logo}></img>
+                    <NavBar/>
                 </div>
-                <div>
+                <div style={{width: '100%'}}>
                     <Header/>
-                </div>
-                <div>
-                    <Sidebar/>
-                </div>
-                <div>
-                    {children}
+                    <div>
+                        {children}
+                    </div>
                 </div>
             </div>
         )
     }
 }
+
+export default withStyles(styles)(Layout)

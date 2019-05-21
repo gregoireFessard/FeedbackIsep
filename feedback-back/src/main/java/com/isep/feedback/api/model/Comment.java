@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.ArrayList;
-import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -36,9 +34,8 @@ public class Comment   {
   @JsonProperty("number_dislike")
   private Integer numberDislike;
 
-  @JsonProperty("answers_id")
-  @Valid
-  private List<Integer> answersId = null;
+  @JsonProperty("parent_id")
+  private String parentId;
 
   public Comment id(Long id) {
     this.id = id;
@@ -180,32 +177,24 @@ public class Comment   {
     this.numberDislike = numberDislike;
   }
 
-  public Comment answersId(List<Integer> answersId) {
-    this.answersId = answersId;
-    return this;
-  }
-
-  public Comment addAnswersIdItem(Integer answersIdItem) {
-    if (this.answersId == null) {
-      this.answersId = new ArrayList<>();
-    }
-    this.answersId.add(answersIdItem);
+  public Comment parentId(String parentId) {
+    this.parentId = parentId;
     return this;
   }
 
   /**
-   * Get answersId
-   * @return answersId
+   * Get parentId
+   * @return parentId
   */
   @ApiModelProperty(value = "")
 
 
-  public List<Integer> getAnswersId() {
-    return answersId;
+  public String getParentId() {
+    return parentId;
   }
 
-  public void setAnswersId(List<Integer> answersId) {
-    this.answersId = answersId;
+  public void setParentId(String parentId) {
+    this.parentId = parentId;
   }
 
 
@@ -225,12 +214,12 @@ public class Comment   {
         Objects.equals(this.dateTime, comment.dateTime) &&
         Objects.equals(this.numberLike, comment.numberLike) &&
         Objects.equals(this.numberDislike, comment.numberDislike) &&
-        Objects.equals(this.answersId, comment.answersId);
+        Objects.equals(this.parentId, comment.parentId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, userId, courseId, content, dateTime, numberLike, numberDislike, answersId);
+    return Objects.hash(id, userId, courseId, content, dateTime, numberLike, numberDislike, parentId);
   }
 
   @Override
@@ -245,7 +234,7 @@ public class Comment   {
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
     sb.append("    numberLike: ").append(toIndentedString(numberLike)).append("\n");
     sb.append("    numberDislike: ").append(toIndentedString(numberDislike)).append("\n");
-    sb.append("    answersId: ").append(toIndentedString(answersId)).append("\n");
+    sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

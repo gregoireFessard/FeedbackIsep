@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @Validated
-@Api(value = "conversations", description = "the conversations API")
+@Api(value = "conversations", description = "the conversations API",  tags={ "messages", })
 public interface ConversationsApi {
 
     default ConversationsApiDelegate getDelegate() {
