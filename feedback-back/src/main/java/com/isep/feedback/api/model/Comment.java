@@ -1,41 +1,54 @@
 package com.isep.feedback.api.model;
 
+import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import javax.persistence.*;
 
 /**
  * Comment
  */
 
+@Entity
+@Table(name = "comments")
 public class Comment   {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name= "id", nullable = false, unique = true)
   @JsonProperty("id")
   private Long id;
 
+  @Column(name = "user_id")
   @JsonProperty("user_id")
   private Long userId;
 
+  @Column(name = "course_id")
   @JsonProperty("course_id")
   private Long courseId;
 
+  @Column(name= "content")
   @JsonProperty("content")
   private String content;
 
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "dateTime")
   @JsonProperty("dateTime")
-  private String dateTime;
+  private Date dateTime;
 
+  @Column(name = "number_like")
   @JsonProperty("number_like")
   private Integer numberLike;
 
+  @Column(name = "number_dislike")
   @JsonProperty("number_dislike")
   private Integer numberDislike;
 
+  @Column(name = "parent_id")
   @JsonProperty("parent_id")
-  private String parentId;
+  private Long parentId;
 
   public Comment id(Long id) {
     this.id = id;
@@ -117,7 +130,7 @@ public class Comment   {
     this.content = content;
   }
 
-  public Comment dateTime(String dateTime) {
+  public Comment dateTime(Date dateTime) {
     this.dateTime = dateTime;
     return this;
   }
@@ -129,11 +142,11 @@ public class Comment   {
   @ApiModelProperty(value = "")
 
 
-  public String getDateTime() {
+  public Date getDateTime() {
     return dateTime;
   }
 
-  public void setDateTime(String dateTime) {
+  public void setDateTime(Date dateTime) {
     this.dateTime = dateTime;
   }
 
@@ -177,7 +190,7 @@ public class Comment   {
     this.numberDislike = numberDislike;
   }
 
-  public Comment parentId(String parentId) {
+  public Comment parentId(Long parentId) {
     this.parentId = parentId;
     return this;
   }
@@ -189,11 +202,11 @@ public class Comment   {
   @ApiModelProperty(value = "")
 
 
-  public String getParentId() {
+  public Long getParentId() {
     return parentId;
   }
 
-  public void setParentId(String parentId) {
+  public void setParentId(Long parentId) {
     this.parentId = parentId;
   }
 

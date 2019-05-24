@@ -2,31 +2,40 @@ package com.isep.feedback.api.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import javax.persistence.*;
 
 /**
  * CourseDocument
  */
 
+@Entity
+@Table(name = "course_documents")
 public class CourseDocument   {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   @JsonProperty("id")
   private Long id;
 
+
+  @Column(name = "name")
   @JsonProperty("name")
   private String name;
 
+  @Column(name = "document")
   @JsonProperty("document")
   private String document;
 
+  @Column(name = "user_id")
   @JsonProperty("user_id")
-  private Integer userId;
+  private Long userId;
 
+  @Column(name = "course_id")
   @JsonProperty("course_id")
-  private Integer courseId;
+  private Long courseId;
 
   public CourseDocument id(Long id) {
     this.id = id;
@@ -88,7 +97,7 @@ public class CourseDocument   {
     this.document = document;
   }
 
-  public CourseDocument userId(Integer userId) {
+  public CourseDocument userId(Long userId) {
     this.userId = userId;
     return this;
   }
@@ -100,15 +109,15 @@ public class CourseDocument   {
   @ApiModelProperty(value = "")
 
 
-  public Integer getUserId() {
+  public Long getUserId() {
     return userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
-  public CourseDocument courseId(Integer courseId) {
+  public CourseDocument courseId(Long courseId) {
     this.courseId = courseId;
     return this;
   }
@@ -120,11 +129,11 @@ public class CourseDocument   {
   @ApiModelProperty(value = "")
 
 
-  public Integer getCourseId() {
+  public Long getCourseId() {
     return courseId;
   }
 
-  public void setCourseId(Integer courseId) {
+  public void setCourseId(Long courseId) {
     this.courseId = courseId;
   }
 

@@ -19,9 +19,10 @@ import java.util.logging.Logger;
 
 @EntityScan(basePackages={"com.isep.feedback.api.model"})
 
-@ComponentScan(basePackages={"com.isep.feedback.api.server","com.isep.feedback.api.model"})
+@ComponentScan(basePackages={"com.isep.feedback.api.server"})
 
-@EnableJpaRepositories("com.isep.feedback.api.repository")
+@EnableJpaRepositories(basePackages = "com.isep.feedback.api.repository")
+
 @PropertySource("classpath:application.properties")
 public class FeedBackConfig{
 

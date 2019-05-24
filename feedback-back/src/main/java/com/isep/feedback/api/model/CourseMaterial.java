@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -12,10 +14,17 @@ import javax.validation.constraints.*;
  * CourseMaterial
  */
 
+@Entity
+@Table(name = "course_materials")
 public class CourseMaterial   {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   @JsonProperty("id")
   private Long id;
 
+  @Column(name = "name")
   @JsonProperty("name")
   private String name;
 

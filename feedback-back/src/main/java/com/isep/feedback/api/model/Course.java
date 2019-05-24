@@ -1,10 +1,13 @@
 package com.isep.feedback.api.model;
 
+import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -12,21 +15,33 @@ import javax.validation.constraints.*;
  * Course
  */
 
+@Entity
+@Table(name = "courses")
 public class Course   {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   @JsonProperty("id")
   private Long id;
 
+  @Column(name = "teacher_id")
   @JsonProperty("teacher_id")
   private Long teacherId;
 
+  @Column(name = "material_id")
   @JsonProperty("material_id")
   private Long materialId;
 
+  @Column(name = "dateTime")
+  @Temporal(TemporalType.TIMESTAMP)
   @JsonProperty("dateTime")
-  private String dateTime;
+  private Date dateTime;
 
-  @JsonProperty("duration")
-  private String duration;
+  @Column(name = "dateEnd")
+  @Temporal(TemporalType.TIMESTAMP)
+  @JsonProperty("dateEnd")
+  private Date dateEnd;
 
   public Course id(Long id) {
     this.id = id;
@@ -88,7 +103,7 @@ public class Course   {
     this.materialId = materialId;
   }
 
-  public Course dateTime(String dateTime) {
+  public Course dateTime(Date dateTime) {
     this.dateTime = dateTime;
     return this;
   }
@@ -100,32 +115,32 @@ public class Course   {
   @ApiModelProperty(value = "")
 
 
-  public String getDateTime() {
+  public Date getDateTime() {
     return dateTime;
   }
 
-  public void setDateTime(String dateTime) {
+  public void setDateTime(Date dateTime) {
     this.dateTime = dateTime;
   }
 
-  public Course duration(String duration) {
-    this.duration = duration;
+  public Course dateEnd(Date dateEnd) {
+    this.dateEnd = dateEnd;
     return this;
   }
 
   /**
-   * Get duration
-   * @return duration
+   * Get dateEnd
+   * @return dateEnd
   */
   @ApiModelProperty(value = "")
 
 
-  public String getDuration() {
-    return duration;
+  public Date getDuration() {
+    return dateEnd;
   }
 
-  public void setDuration(String duration) {
-    this.duration = duration;
+  public void setDuration(Date dateEnd) {
+    this.dateEnd = dateEnd;
   }
 
 
@@ -142,12 +157,12 @@ public class Course   {
         Objects.equals(this.teacherId, course.teacherId) &&
         Objects.equals(this.materialId, course.materialId) &&
         Objects.equals(this.dateTime, course.dateTime) &&
-        Objects.equals(this.duration, course.duration);
+        Objects.equals(this.dateEnd, course.dateEnd);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, teacherId, materialId, dateTime, duration);
+    return Objects.hash(id, teacherId, materialId, dateTime, dateEnd);
   }
 
   @Override
@@ -159,7 +174,7 @@ public class Course   {
     sb.append("    teacherId: ").append(toIndentedString(teacherId)).append("\n");
     sb.append("    materialId: ").append(toIndentedString(materialId)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
-    sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
+    sb.append("    dateEnd: ").append(toIndentedString(dateEnd)).append("\n");
     sb.append("}");
     return sb.toString();
   }

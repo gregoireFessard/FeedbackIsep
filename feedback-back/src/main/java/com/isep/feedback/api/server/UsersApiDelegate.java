@@ -26,7 +26,15 @@ public interface UsersApiDelegate {
     /**
      * @see UsersApi#createUser
      */
-    default ResponseEntity<Void> createUser(User user) {
+    default ResponseEntity<User> createUser(User user) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    ApiUtil.setExampleResponse(request, "application/json", "{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"password\" : \"password\",  \"color\" : \"color\",  \"phone\" : \"phone\",  \"parent_id\" : \"parent_id\",  \"isep_id\" : 1,  \"id\" : 0,  \"avatar\" : \"avatar\",  \"enabled\" : 6,  \"email\" : \"email\",  \"username\" : \"username\"}");
+                    break;
+                }
+            }
+        });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -34,24 +42,7 @@ public interface UsersApiDelegate {
     /**
      * @see UsersApi#deleteUser
      */
-    default ResponseEntity<Void> deleteUser(String userId) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-    /**
-     * @see UsersApi#loginUser
-     */
-    default ResponseEntity<String> loginUser(String username,
-        String password) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-    /**
-     * @see UsersApi#logoutUser
-     */
-    default ResponseEntity<Void> logoutUser() {
+    default ResponseEntity<String> deleteUser(Long userId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -66,10 +57,7 @@ public interface UsersApiDelegate {
                     ApiUtil.setExampleResponse(request, "application/json", "{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"password\" : \"password\",  \"color\" : \"color\",  \"phone\" : \"phone\",  \"parent_id\" : \"parent_id\",  \"isep_id\" : 1,  \"id\" : 0,  \"avatar\" : \"avatar\",  \"enabled\" : 6,  \"email\" : \"email\",  \"username\" : \"username\"}");
                     break;
                 }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<User>  <id>123456789</id>  <username>aeiou</username>  <enabled>123</enabled>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <isep_id>123456789</isep_id>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <avatar>aeiou</avatar>  <color>aeiou</color>  <parent_id>aeiou</parent_id></User>");
-                    break;
-                }
+
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -79,15 +67,11 @@ public interface UsersApiDelegate {
     /**
      * @see UsersApi#usersGet
      */
-    default ResponseEntity<User> usersGet(String search) {
+    default ResponseEntity<List<User>> usersGet(String search) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     ApiUtil.setExampleResponse(request, "application/json", "{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"password\" : \"password\",  \"color\" : \"color\",  \"phone\" : \"phone\",  \"parent_id\" : \"parent_id\",  \"isep_id\" : 1,  \"id\" : 0,  \"avatar\" : \"avatar\",  \"enabled\" : 6,  \"email\" : \"email\",  \"username\" : \"username\"}");
-                    break;
-                }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<User>  <id>123456789</id>  <username>aeiou</username>  <enabled>123</enabled>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <isep_id>123456789</isep_id>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <avatar>aeiou</avatar>  <color>aeiou</color>  <parent_id>aeiou</parent_id></User>");
                     break;
                 }
             }
@@ -99,17 +83,14 @@ public interface UsersApiDelegate {
     /**
      * @see UsersApi#usersUserIdGet
      */
-    default ResponseEntity<User> usersUserIdGet(String userId) {
+    default ResponseEntity<User> usersUserIdGet(Long userId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     ApiUtil.setExampleResponse(request, "application/json", "{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"password\" : \"password\",  \"color\" : \"color\",  \"phone\" : \"phone\",  \"parent_id\" : \"parent_id\",  \"isep_id\" : 1,  \"id\" : 0,  \"avatar\" : \"avatar\",  \"enabled\" : 6,  \"email\" : \"email\",  \"username\" : \"username\"}");
                     break;
                 }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<User>  <id>123456789</id>  <username>aeiou</username>  <enabled>123</enabled>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <isep_id>123456789</isep_id>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <avatar>aeiou</avatar>  <color>aeiou</color>  <parent_id>aeiou</parent_id></User>");
-                    break;
-                }
+
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);

@@ -2,27 +2,34 @@ package com.isep.feedback.api.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import javax.persistence.*;
 
 /**
  * UserCourse
  */
 
+
+@Entity
+@Table(name = "user_course")
 public class UserCourse   {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   @JsonProperty("id")
-  private String id;
+  private Long id;
 
+  @Column(name = "user_id")
   @JsonProperty("user_id")
-  private String userId;
+  private Long userId;
 
+  @Column(name = "course_id")
   @JsonProperty("course_id")
-  private String courseId;
+  private Long courseId;
 
-  public UserCourse id(String id) {
+  public UserCourse id(Long id) {
     this.id = id;
     return this;
   }
@@ -34,15 +41,15 @@ public class UserCourse   {
   @ApiModelProperty(value = "")
 
 
-  public String getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public UserCourse userId(String userId) {
+  public UserCourse userId(Long userId) {
     this.userId = userId;
     return this;
   }
@@ -54,15 +61,15 @@ public class UserCourse   {
   @ApiModelProperty(value = "")
 
 
-  public String getUserId() {
+  public Long getUserId() {
     return userId;
   }
 
-  public void setUserId(String userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
-  public UserCourse courseId(String courseId) {
+  public UserCourse courseId(Long courseId) {
     this.courseId = courseId;
     return this;
   }
@@ -74,11 +81,11 @@ public class UserCourse   {
   @ApiModelProperty(value = "")
 
 
-  public String getCourseId() {
+  public Long getCourseId() {
     return courseId;
   }
 
-  public void setCourseId(String courseId) {
+  public void setCourseId(Long courseId) {
     this.courseId = courseId;
   }
 

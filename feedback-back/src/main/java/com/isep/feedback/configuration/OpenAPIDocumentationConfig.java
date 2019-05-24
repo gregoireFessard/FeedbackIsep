@@ -34,7 +34,7 @@ public class OpenAPIDocumentationConfig {
     }
 
     @Bean
-    public Docket customImplementation(ServletContext servletContext, @Value("${openapi.feedBack.base-path:/KevinTAN52/FeedBackISEP/1.0.0}") String basePath) {
+    public Docket customImplementation(ServletContext servletContext, @Value("${openapi.feedBack.base-path:/api/}") String basePath) {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                     .apis(RequestHandlerSelectors.basePackage("com.isep.feedback.api.server"))
