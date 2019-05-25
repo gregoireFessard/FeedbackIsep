@@ -1,10 +1,24 @@
 import React, { Component} from 'react'
+import Layout from '../Layout';
+import withStyles from "@material-ui/core/styles/withStyles";
 
-export default class Search extends Component {
+const styles = theme =>({
+
+})
+
+class Search extends Component {
 
     render(){
+
+        const{classes} = this.props;
+
         return(
-            <div></div>
+            <Layout>
+
+            </Layout>
         )
     }
 }
+
+
+export default withStyles(styles)(Search);

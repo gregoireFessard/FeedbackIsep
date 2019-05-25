@@ -10,13 +10,15 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Image from '../../assets/IsepPicture.jpg';
 
 const styles = theme =>({
 	root: {
 		display: 'flex',
 	},
 	main: {
-		width: 'auto',
+		width: '100%',
+		minHeight:'100vh',
 		display: 'block', // Fix IE 11 issue.
 		marginLeft: theme.spacing.unit * 3,
 		marginRight: theme.spacing.unit * 3,
@@ -25,9 +27,14 @@ const styles = theme =>({
 			marginLeft: 'auto',
 			marginRight: 'auto',
 		},
+		overflow: 'hidden',
 	},
 	backgroundHolder: {
-		backgroundImage: "backgroundImage: 'url(' + import('../../assets/IsepPicture.jpg') + ')'",
+		width: '100%',
+		minHeight:'100vh',
+		backgroundImage: `url(${Image})`,
+		backgroundSize: '100%',
+		backgroundRepeat: 'no-repeat',
 
 	},
 	paper: {
@@ -58,8 +65,8 @@ class Index extends React.Component {
 		const{classes} = this.props;
 
 		return (
-			<main className={classes.main}>
-				<div className={classes.backgroundHolder}>
+			<main className={classes.backgroundHolder}>
+				<div className={classes.main}>
 					<Paper className={classes.paper}>
 						<Typography component="h1" variant="h5">
 							Connection

@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import actions from '../actions';
 import LoginPage from '../containers/LoginPage';
 import Home from '../containers/Home';
+import Course from '../containers/Course';
+import Message from '../containers/Message';
+import Profil from '../containers/Profil';
 import { Route, Switch, Redirect } from 'react-router';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -69,6 +72,9 @@ class App extends Component {
         <Switch>
           <Route exact path="/(index.html|)/" component={LoginPage} />
           <Route exact path="/home" component={Home} />
+          <Route exact path="/course" component={Course} />
+          <Route exact path="/message" component={Message} />
+          <Route exact path="/profil" component={Profil} />
         </Switch>
       </MuiThemeProvider>
     );
