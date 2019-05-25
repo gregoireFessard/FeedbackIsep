@@ -1,35 +1,46 @@
 package com.isep.feedback.api.model;
 
+import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import javax.persistence.*;
 
 /**
  * Message
  */
 
+@Entity
+@Table(name = "messages")
 public class Message   {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   @JsonProperty("id")
   private Long id;
 
+  @Column(name = "conversation_id")
   @JsonProperty("conversation_id")
   private Long conversationId;
 
+  @Column(name= "is_from_sender")
   @JsonProperty("is_from_sender")
   private Boolean isFromSender;
 
+  @Column(name = "content")
   @JsonProperty("content")
   private String content;
 
-  @JsonProperty("read")
-  private Boolean read;
+  @Column(name = "message_read")
+  @JsonProperty("message_read")
+  private boolean messageRead;
 
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "dateTime")
   @JsonProperty("dateTime")
-  private String dateTime;
+  private Date dateTime;
 
   public Message id(Long id) {
     this.id = id;
@@ -111,27 +122,29 @@ public class Message   {
     this.content = content;
   }
 
-  public Message read(Boolean read) {
-    this.read = read;
+  public Message messageRead(boolean messageRead) {
+    this.messageRead = messageRead;
     return this;
   }
 
   /**
-   * Get read
-   * @return read
+   * Get messageRead
+   * @return messageRead
   */
   @ApiModelProperty(value = "")
 
 
-  public Boolean getRead() {
-    return read;
+  public boolean getMessageRead() {
+    return messageRead;
   }
 
-  public void setRead(Boolean read) {
-    this.read = read;
+  public void setMessageRead(Boolean messageRead) {
+    this.messageRead = messageRead;
   }
 
-  public Message dateTime(String dateTime) {
+
+
+  public Message dateTime(Date dateTime) {
     this.dateTime = dateTime;
     return this;
   }
@@ -143,11 +156,11 @@ public class Message   {
   @ApiModelProperty(value = "")
 
 
-  public String getDateTime() {
+  public Date getDateTime() {
     return dateTime;
   }
 
-  public void setDateTime(String dateTime) {
+  public void setDateTime(Date dateTime) {
     this.dateTime = dateTime;
   }
 
@@ -165,13 +178,13 @@ public class Message   {
         Objects.equals(this.conversationId, message.conversationId) &&
         Objects.equals(this.isFromSender, message.isFromSender) &&
         Objects.equals(this.content, message.content) &&
-        Objects.equals(this.read, message.read) &&
+        Objects.equals(this.messageRead, message.messageRead) &&
         Objects.equals(this.dateTime, message.dateTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, conversationId, isFromSender, content, read, dateTime);
+    return Objects.hash(id, conversationId, isFromSender, content, messageRead, dateTime);
   }
 
   @Override
@@ -183,7 +196,7 @@ public class Message   {
     sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
     sb.append("    isFromSender: ").append(toIndentedString(isFromSender)).append("\n");
     sb.append("    content: ").append(toIndentedString(content)).append("\n");
-    sb.append("    read: ").append(toIndentedString(read)).append("\n");
+    sb.append("    messageRead: ").append(toIndentedString(messageRead)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
     sb.append("}");
     return sb.toString();

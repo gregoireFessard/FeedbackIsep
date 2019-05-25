@@ -44,10 +44,6 @@ public interface ConversationsApiDelegate {
                     ApiUtil.setExampleResponse(request, "application/json", "{  \"dateTime\" : \"dateTime\",  \"read\" : true,  \"conversation_id\" : 6,  \"is_from_sender\" : true,  \"id\" : 0,  \"content\" : \"content\"}");
                     break;
                 }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<null>  <id>123456789</id>  <conversation_id>123456789</conversation_id>  <is_from_sender>true</is_from_sender>  <content>aeiou</content>  <read>true</read>  <dateTime>aeiou</dateTime></null>");
-                    break;
-                }
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -58,15 +54,11 @@ public interface ConversationsApiDelegate {
      * @see ConversationsApi#conversationsConversationIdMessagesPost
      */
     default ResponseEntity<Message> conversationsConversationIdMessagesPost(Integer conversationId,
-        Message message) {
+                                                                            Message message) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     ApiUtil.setExampleResponse(request, "application/json", "{  \"dateTime\" : \"dateTime\",  \"read\" : true,  \"conversation_id\" : 6,  \"is_from_sender\" : true,  \"id\" : 0,  \"content\" : \"content\"}");
-                    break;
-                }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<null>  <id>123456789</id>  <conversation_id>123456789</conversation_id>  <is_from_sender>true</is_from_sender>  <content>aeiou</content>  <read>true</read>  <dateTime>aeiou</dateTime></null>");
                     break;
                 }
             }
@@ -85,10 +77,7 @@ public interface ConversationsApiDelegate {
                     ApiUtil.setExampleResponse(request, "application/json", "{  \"dateTime\" : \"dateTime\",  \"from_id\" : 6,  \"subject\" : \"subject\",  \"to_id\" : 1,  \"id\" : 0,  \"messages_id\" : \"messages_id\",  \"status\" : \"status\"}");
                     break;
                 }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<null>  <id>123456789</id>  <from_id>123456789</from_id>  <to_id>123456789</to_id>  <subject>aeiou</subject>  <status>aeiou</status>  <dateTime>aeiou</dateTime>  <messages_id>aeiou</messages_id></null>");
-                    break;
-                }
+
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -105,10 +94,7 @@ public interface ConversationsApiDelegate {
                     ApiUtil.setExampleResponse(request, "application/json", "{  \"message\" : {    \"dateTime\" : \"dateTime\",    \"read\" : true,    \"conversation_id\" : 6,    \"is_from_sender\" : true,    \"id\" : 0,    \"content\" : \"content\"  },  \"conversation\" : {    \"dateTime\" : \"dateTime\",    \"from_id\" : 6,    \"subject\" : \"subject\",    \"to_id\" : 1,    \"id\" : 0,    \"messages_id\" : \"messages_id\",    \"status\" : \"status\"  }}");
                     break;
                 }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    ApiUtil.setExampleResponse(request, "application/xml", "<null></null>");
-                    break;
-                }
+
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);

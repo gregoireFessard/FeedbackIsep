@@ -24,55 +24,35 @@ import java.util.List;
 import java.util.Map;
 
 @Validated
-@Api(value = "users", description = "the users API", tags={ "user", })
+@Api(value = "users", description = "the users API")
 public interface UsersApi {
 
     default UsersApiDelegate getDelegate() {
         return new UsersApiDelegate() {};
     }
 
-    @ApiOperation(value = "Create user", nickname = "createUser", notes = "This can only be done by the logged in user.", tags={ "user", })
+    @ApiOperation(value = "Create user", nickname = "createUser", notes = "This can only be done by the logged in user.", response = User.class, tags={ "user", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
+        @ApiResponse(code = 200, message = "successful operation", response = User.class) })
     @RequestMapping(value = "/users",
+        produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Void> createUser(@ApiParam(value = "Created user object" ,required=true )  @Valid @RequestBody User user) {
+    default ResponseEntity<User> createUser(@ApiParam(value = "Created user object", required = true) @Valid @RequestBody User user) {
         return getDelegate().createUser(user);
     }
 
 
-    @ApiOperation(value = "Delete user", nickname = "deleteUser", notes = "This can only be done by the logged in user.", tags={ "user", })
+    @ApiOperation(value = "Delete user", nickname = "deleteUser", notes = "This can only be done by the logged in user.", response = String.class, tags={ "user", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "succesful operation"),
+        @ApiResponse(code = 200, message = "successful operation", response = String.class),
         @ApiResponse(code = 400, message = "Invalid userId supplied"),
         @ApiResponse(code = 404, message = "User not found") })
     @RequestMapping(value = "/users/{userId}",
+        produces = { "application/json" }, 
         method = RequestMethod.DELETE)
-    default ResponseEntity<Void> deleteUser(@ApiParam(value = "The id that needs to be deleted",required=true) @PathVariable("userId") String userId) {
+    default ResponseEntity<String> deleteUser(@ApiParam(value = "The id that needs to be deleted", required = true) @PathVariable("userId") Long userId) {
         return getDelegate().deleteUser(userId);
-    }
-
-
-    @ApiOperation(value = "Logs user into the system", nickname = "loginUser", notes = "", response = String.class, tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = String.class),
-        @ApiResponse(code = 400, message = "Invalid username/password supplied") })
-    @RequestMapping(value = "/users/login",
-        produces = { "application/json", "application/xml" }, 
-        method = RequestMethod.GET)
-    default ResponseEntity<String> loginUser(@NotNull @ApiParam(value = "The user name for login", required = true) @Valid @RequestParam(value = "username", required = true) String username,@NotNull @ApiParam(value = "The password for login in clear text", required = true) @Valid @RequestParam(value = "password", required = true) String password) {
-        return getDelegate().loginUser(username, password);
-    }
-
-
-    @ApiOperation(value = "Logs out current logged in user session", nickname = "logoutUser", notes = "", tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    @RequestMapping(value = "/users/logout",
-        method = RequestMethod.GET)
-    default ResponseEntity<Void> logoutUser() {
-        return getDelegate().logoutUser();
     }
 
 
@@ -82,23 +62,23 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "Invalid user supplied"),
         @ApiResponse(code = 404, message = "User not found") })
     @RequestMapping(value = "/users",
-        produces = { "application/json", "application/xml" }, 
+        produces = { "application/json" },
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    default ResponseEntity<User> updateUser(@ApiParam(value = "Updated user object" ,required=true )  @Valid @RequestBody User user) {
+    default ResponseEntity<User> updateUser(@ApiParam(value = "Updated user object", required = true) @Valid @RequestBody User user) {
         return getDelegate().updateUser(user);
     }
 
 
-    @ApiOperation(value = "Search an user", nickname = "usersGet", notes = "", response = User.class, tags={ "user", })
+    @ApiOperation(value = "Search an user", nickname = "usersGet", notes = "", response = User.class, responseContainer = "List", tags={ "user", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = User.class),
+        @ApiResponse(code = 200, message = "successful operation", response = User.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "Invalid username supplied"),
         @ApiResponse(code = 404, message = "User not found") })
     @RequestMapping(value = "/users",
-        produces = { "application/json", "application/xml" }, 
+        produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<User> usersGet(@NotNull @ApiParam(value = "Name of the user to search", required = true) @Valid @RequestParam(value = "search", required = true) String search) {
+    default ResponseEntity<List<User>> usersGet(@NotNull @ApiParam(value = "Name of the user to search", required = true) @Valid @RequestParam(value = "search", required = true) String search) {
         return getDelegate().usersGet(search);
     }
 
@@ -109,9 +89,9 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "Invalid userId supplied"),
         @ApiResponse(code = 404, message = "User not found") })
     @RequestMapping(value = "/users/{userId}",
-        produces = { "application/json", "application/xml" }, 
+        produces = { "application/json" },
         method = RequestMethod.GET)
-    default ResponseEntity<User> usersUserIdGet(@ApiParam(value = "The id that needs to be fetched. Use user1 for testing.",required=true) @PathVariable("userId") String userId) {
+    default ResponseEntity<User> usersUserIdGet(@ApiParam(value = "The id that needs to be fetched.", required = true) @PathVariable("userId") Long userId) {
         return getDelegate().usersUserIdGet(userId);
     }
 

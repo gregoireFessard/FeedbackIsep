@@ -41,10 +41,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
         '400':
           description: Invalid username supplied
         '404':
@@ -55,9 +54,6 @@ paths:
       summary: Create user
       description: This can only be done by the logged in user.
       operationId: createUser
-      responses:
-        default:
-          description: successful operation
       requestBody:
         content:
           application/json:
@@ -65,6 +61,13 @@ paths:
               $ref: '#/components/schemas/User'
         description: Created user object
         required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
     put:
       tags:
         - user
@@ -92,57 +95,6 @@ paths:
               $ref: '#/components/schemas/User'
         description: Updated user object
         required: true
-  /users/login:
-    get:
-      tags:
-        - user
-      summary: Logs user into the system
-      operationId: loginUser
-      parameters:
-        - name: username
-          in: query
-          description: The user name for login
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: The password for login in clear text
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
-          content:
-            application/json:
-              schema:
-                type: string
-            application/xml:
-              schema:
-                type: string
-        '400':
-          description: Invalid username/password supplied
-  /users/logout:
-    get:
-      tags:
-        - user
-      summary: Logs out current logged in user session
-      operationId: logoutUser
-      responses:
-        default:
-          description: successful operation
   '/users/{userId}':
     get:
       tags:
@@ -185,7 +137,11 @@ paths:
             type: string
       responses:
         '200':
-          description: succesful operation
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
         '400':
           description: Invalid userId supplied
         '404':
@@ -312,9 +268,6 @@ paths:
           description: successful operation
           content:
             application/json:
-              schema:
-                type: string
-            application/xml:
               schema:
                 type: string
         '404':
@@ -476,10 +429,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Comment'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Comment'
+                type: string
         '404':
           description: User, course or comment not found
   '/courses/{courseId}/comments/{commentId}/dislike':
@@ -507,10 +457,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Comment'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Comment'
+                type: string
         '404':
           description: User, course or comment not found
 
@@ -590,9 +537,6 @@ paths:
           description: successful operation
           content:
             application/json:
-              schema:
-                type: string
-            application/xml:
               schema:
                 type: string
         '404':
@@ -679,14 +623,12 @@ components:
           type: string
         password:
           type: string
-        phone:
-          type: string
         avatar:
           type: string
         color:
           type: string
         parent_id:
-          type: string
+          type: int
       xml:
         name: User
     Course:
@@ -711,7 +653,8 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          format: int64
         user_id:
           type: string
         course_id:
@@ -799,9 +742,4 @@ components:
           type: string
         dateTime:
           type: string
-        messages_id:
-          type: string
-# Added by API Auto Mocking Plugin
-servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/KevinTAN52/FeedBackISEP/1.0.0
+

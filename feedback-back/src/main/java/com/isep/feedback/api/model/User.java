@@ -2,52 +2,64 @@ package com.isep.feedback.api.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import javax.persistence.*;
 
 /**
  * User
  */
 
-public class User   {
+@Entity
+@Table(name = "users")
+public class User {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id",unique=true, nullable = false)
   @JsonProperty("id")
   private Long id;
 
+  @Column(name = "username")
   @JsonProperty("username")
   private String username;
 
+  @Column(name = "enabled")
   @JsonProperty("enabled")
-  private Integer enabled;
+  private Boolean enabled;
 
+  @Column(name = "firstname")
   @JsonProperty("firstName")
   private String firstName;
+
+  @Column(name = "lastname")
 
   @JsonProperty("lastName")
   private String lastName;
 
+  @Column(name = "isep_id")
   @JsonProperty("isep_id")
   private Long isepId;
 
+  @Column(name = "mail")
   @JsonProperty("email")
   private String email;
 
+  @Column(name = "password")
   @JsonProperty("password")
   private String password;
 
-  @JsonProperty("phone")
-  private String phone;
-
+  @Column(name = "avatar")
   @JsonProperty("avatar")
   private String avatar;
 
+  @Column(name = "color")
   @JsonProperty("color")
   private String color;
 
+  @Column(name = "parent_id")
   @JsonProperty("parent_id")
-  private String parentId;
+  private Long parentId = null;
 
   public User id(Long id) {
     this.id = id;
@@ -89,7 +101,7 @@ public class User   {
     this.username = username;
   }
 
-  public User enabled(Integer enabled) {
+  public User enabled(Boolean enabled) {
     this.enabled = enabled;
     return this;
   }
@@ -101,11 +113,11 @@ public class User   {
   @ApiModelProperty(value = "")
 
 
-  public Integer getEnabled() {
+  public Boolean getEnabled() {
     return enabled;
   }
 
-  public void setEnabled(Integer enabled) {
+  public void setEnabled(Boolean enabled) {
     this.enabled = enabled;
   }
 
@@ -209,26 +221,6 @@ public class User   {
     this.password = password;
   }
 
-  public User phone(String phone) {
-    this.phone = phone;
-    return this;
-  }
-
-  /**
-   * Get phone
-   * @return phone
-  */
-  @ApiModelProperty(value = "")
-
-
-  public String getPhone() {
-    return phone;
-  }
-
-  public void setPhone(String phone) {
-    this.phone = phone;
-  }
-
   public User avatar(String avatar) {
     this.avatar = avatar;
     return this;
@@ -269,7 +261,7 @@ public class User   {
     this.color = color;
   }
 
-  public User parentId(String parentId) {
+  public User parentId(Long parentId) {
     this.parentId = parentId;
     return this;
   }
@@ -281,11 +273,11 @@ public class User   {
   @ApiModelProperty(value = "")
 
 
-  public String getParentId() {
+  public Long getParentId() {
     return parentId;
   }
 
-  public void setParentId(String parentId) {
+  public void setParentId(Long parentId) {
     this.parentId = parentId;
   }
 
@@ -307,7 +299,6 @@ public class User   {
         Objects.equals(this.isepId, user.isepId) &&
         Objects.equals(this.email, user.email) &&
         Objects.equals(this.password, user.password) &&
-        Objects.equals(this.phone, user.phone) &&
         Objects.equals(this.avatar, user.avatar) &&
         Objects.equals(this.color, user.color) &&
         Objects.equals(this.parentId, user.parentId);
@@ -315,7 +306,7 @@ public class User   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, enabled, firstName, lastName, isepId, email, password, phone, avatar, color, parentId);
+    return Objects.hash(id, username, enabled, firstName, lastName, isepId, email, password, avatar, color, parentId);
   }
 
   @Override
@@ -331,7 +322,6 @@ public class User   {
     sb.append("    isepId: ").append(toIndentedString(isepId)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
-    sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
     sb.append("    color: ").append(toIndentedString(color)).append("\n");
     sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");

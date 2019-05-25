@@ -1,10 +1,13 @@
 package com.isep.feedback.api.model;
 
+import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -12,27 +15,37 @@ import javax.validation.constraints.*;
  * Conversation
  */
 
+@Entity
+@Table(name = "conversations")
 public class Conversation   {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   @JsonProperty("id")
   private Long id;
 
+  @Column(name = "from_id")
   @JsonProperty("from_id")
   private Long fromId;
 
+  @Column(name = "to_id")
   @JsonProperty("to_id")
   private Long toId;
 
+  @Column(name = "subject")
   @JsonProperty("subject")
   private String subject;
 
+  @Column(name = "status")
   @JsonProperty("status")
   private String status;
 
+  @Column(name = "dateTime")
+  @Temporal(TemporalType.TIMESTAMP)
   @JsonProperty("dateTime")
-  private String dateTime;
+  private Date dateTime;
 
-  @JsonProperty("messages_id")
-  private String messagesId;
 
   public Conversation id(Long id) {
     this.id = id;
@@ -134,7 +147,7 @@ public class Conversation   {
     this.status = status;
   }
 
-  public Conversation dateTime(String dateTime) {
+  public Conversation dateTime(Date dateTime) {
     this.dateTime = dateTime;
     return this;
   }
@@ -146,33 +159,20 @@ public class Conversation   {
   @ApiModelProperty(value = "")
 
 
-  public String getDateTime() {
+  public Date getDateTime() {
     return dateTime;
   }
 
-  public void setDateTime(String dateTime) {
+  public void setDateTime(Date dateTime) {
     this.dateTime = dateTime;
   }
 
-  public Conversation messagesId(String messagesId) {
-    this.messagesId = messagesId;
-    return this;
-  }
 
   /**
    * Get messagesId
    * @return messagesId
   */
   @ApiModelProperty(value = "")
-
-
-  public String getMessagesId() {
-    return messagesId;
-  }
-
-  public void setMessagesId(String messagesId) {
-    this.messagesId = messagesId;
-  }
 
 
   @Override
@@ -189,13 +189,12 @@ public class Conversation   {
         Objects.equals(this.toId, conversation.toId) &&
         Objects.equals(this.subject, conversation.subject) &&
         Objects.equals(this.status, conversation.status) &&
-        Objects.equals(this.dateTime, conversation.dateTime) &&
-        Objects.equals(this.messagesId, conversation.messagesId);
+        Objects.equals(this.dateTime, conversation.dateTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, fromId, toId, subject, status, dateTime, messagesId);
+    return Objects.hash(id, fromId, toId, subject, status, dateTime);
   }
 
   @Override
@@ -209,7 +208,6 @@ public class Conversation   {
     sb.append("    subject: ").append(toIndentedString(subject)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
-    sb.append("    messagesId: ").append(toIndentedString(messagesId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
