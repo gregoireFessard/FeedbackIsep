@@ -7,7 +7,7 @@ import Image from "../../assets/basicProfile.png";
 import Button from '@material-ui/core/Button';
 
 
-const dataEnseignant =[
+const dataEnseignants =[
     {name : 'Jean BONBON', picture : Image},
     {name : 'Antoine CANARD', picture : Image},
     {name : 'Antoine CANARD', picture : Image},
@@ -36,7 +36,7 @@ const EnseignantPanel = props =>
         </Grid>
     </Grid>
 
-class Etudiants extends React.Component{
+class Enseignants extends React.Component{
 
 
 
@@ -62,17 +62,17 @@ class Etudiants extends React.Component{
         return(
             <Layout className={"root"}>
 
-                <Grid container className={"mainPanel"} xs={10} justify={"center"} alignItems={"center"} direction={"row"} >
-                    <Grid item xs={12} justify={"center"} className={"titlePanel"}>
-                            <h1>Etudiants</h1>
+                <Grid container xs={10} className={"mainPanel"} justify={"center"} alignItems={"center"} direction={"row"} >
+                    <Grid item xs={12}  className={"titlePanel"}>
+                            <h1>Enseignants</h1>
                     </Grid>
-                    <Grid item xs={10} justify={"center"} className={'searchBarPanel'}>
-                        <SearchBar data={dataEnseignant} handler={this.handler}/>
+                    <Grid item xs={10}  className={'searchBarPanel'}>
+                        <SearchBar data={dataEnseignants} handler={this.handler}/>
                     </Grid>
-                    <Grid item  xs={10} justify={"center"} className={'resultsPanel'}>
+                    <Grid item  xs={10}  className={'resultsPanel'}>
                         {this.state.result.map((info)=>{
                         return(
-                            <Grid item xs={12} justify={"center"} className={'profilPanel'}>
+                            <Grid item xs={12} className={'profilPanel'}>
                                 <EnseignantPanel data = {info}/>
                             </Grid>
                         )
@@ -85,4 +85,4 @@ class Etudiants extends React.Component{
     }
 }
 
-export default (Etudiants)
+export default (Enseignants)
