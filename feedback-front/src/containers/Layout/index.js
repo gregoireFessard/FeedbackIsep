@@ -28,7 +28,6 @@ const styles = theme =>({
     },
 
     content: {
-        height:'auto%',
         minHeight:'100vh',
         backgroundImage: `url(${Image})`,
         backgroundRepeat: 'no-repeat',
