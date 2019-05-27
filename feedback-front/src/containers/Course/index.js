@@ -29,22 +29,28 @@ const styles = theme =>({
     comment:{
         display: 'flex',
         flexDirection: 'column',
+        width: '100%',
+
     },
 
     response:{
         display: 'flex',
         flexDirection: 'row',
         paddingLeft: '20%',
+        width: '80%',
+
     },
 
     commentHeader:{
         borderWidth:'1px',
         borderStyle: 'solid',
+        width: '100%',
     },
 
     commentContent:{
         borderWidth:'1px',
         borderStyle: 'solid',
+        width: '100%',
     },
 
     button:{
@@ -56,8 +62,8 @@ const styles = theme =>({
 })
 
 const comments = [
-    {name: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a',response: [
-            {nom: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a'},
+    {name: 'Marcel Pol',image:profilPicture,date:'date',content:'content',nbLike:'1',nbDislike:'a',response: [
+            {name: 'Marcel Pol',image:profilPicture,date:'date',content:'content',nbLike:'1',nbDislike:'a'},
         ]
     },
     {name: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a',response:[]},
@@ -111,7 +117,7 @@ class Course extends Component {
                         {comment.response.map( (response) =>{return (
                             <div className={classes.response}>
                                 <div className={classes.commentHeader}>
-                                    <img className={classes.profilPicture} src={profilPicture}></img>
+                                    <img className={classes.profilPicture} src={comment.image}></img>
                                     <Typography>
                                         {response.name}
                                     </Typography>
