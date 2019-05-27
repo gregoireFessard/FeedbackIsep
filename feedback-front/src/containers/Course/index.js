@@ -55,11 +55,20 @@ const styles = theme =>({
     },
 })
 
+const comments = [
+    {name: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a',response: [
+            {nom: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a'},
+        ]
+    },
+    {name: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a',response:[]},
+
+];
 
 
 
 
 class Course extends Component {
+
 
     render(){
 
@@ -81,74 +90,43 @@ class Course extends Component {
                             Cours de Technologie Web
                         </Typography>
                     </Paper>
-                    <Paper className={classes.paper}>
-                        <div className={classes.comment}>
-                            <div className={classes.commentHeader}>
-                                <img className={classes.profilPicture} src={profilPicture}></img>
-                                <Typography>
-                                    Marcel Pol
-                                </Typography>
-                                6 mai a 15h42
-                            </div>
-                            <div className={classes.commentContent}>
-                                <Typography>
-                                    As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
+                    {comments.map((comment)=>{
 
-                                    When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
-                                </Typography>
+                        return (
+                        <Paper className={classes.paper}>
+                            <div className={classes.comment}>
+                                <div className={classes.commentHeader}>
+                                    <img className={classes.profilPicture} src={comment.image}></img>
+                                    <Typography>
+                                        {comment.name}
+                                    </Typography>
+                                    {comment.date}
+                                </div>
+                                <div className={classes.commentContent}>
+                                    <Typography>
+                                        {comment.content}
+                                    </Typography>
+                                </div>
                             </div>
-                        </div>
-                        <div className={classes.response}>
-                            <div className={classes.commentHeader}>
-                                <img className={classes.profilPicture} src={profilPicture}></img>
-                                <Typography>
-                                    Marcel Pol
-                                </Typography>
-                                6 mai a 15h42
+                        {comment.response.map( (response) =>{return (
+                            <div className={classes.response}>
+                                <div className={classes.commentHeader}>
+                                    <img className={classes.profilPicture} src={profilPicture}></img>
+                                    <Typography>
+                                        {response.name}
+                                    </Typography>
+                                    {response.date}
+                                </div>
+                                <div className={classes.commentContent}>
+                                    <Typography>
+                                        {response.content}
+                                    </Typography>
+                                </div>
                             </div>
-                            <div className={classes.commentContent}>
-                                <Typography>
-                                    As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
+                        )})}
+                        </Paper>
 
-                                    When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
-                                </Typography>
-                            </div>
-                        </div>
-                    </Paper>
-                    <Paper className={classes.paper}>
-                        <div className={classes.comment}>
-                            <div className={classes.commentHeader}>
-                                <img className={classes.profilPicture} src={profilPicture}></img>
-                                <Typography>
-                                    Marcel Pol
-                                </Typography>
-                                6 mai a 15h42
-                            </div>
-                            <div className={classes.commentContent}>
-                                <Typography>
-                                    As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
-
-                                    When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
-                                </Typography>
-                            </div>
-                        </div>
-                        <div className={classes.response}>
-                            <div className={classes.commentHeader}>
-                                <img className={classes.profilPicture} src={profilPicture}></img>
-                                <Typography>
-                                    Marcel Pol
-                                </Typography>
-                                6 mai a 15h42
-                            </div>
-                            <div className={classes.commentContent}>
-                                <Typography>
-                                    As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
-
-                                    When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
-                                </Typography>
-                            </div>
-                        </div>
-                    </Paper>
+                    )})}
                 </Grid>
             </Layout>
         )

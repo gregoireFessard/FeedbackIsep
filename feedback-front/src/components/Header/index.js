@@ -3,29 +3,35 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
 
 
-function menu(){
-	return (
-		<Grid container direction="column" alignItems="stretch" style={{widht: '100%'}}>
 
-			<div style={{height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '20px'}}>
-				<span>Antoine Canard</span>
-			</div>
+class Header extends React.Component{
+    render() {
+        return (
+            <Grid container direction="column" alignItems="stretch" style={{widht: '100%'}}>
 
-			<Tabs
-			  variant="fullWidth"
-			  indicatorColor="secondary"
-			  textColor="secondary"
-			>
-			  <Tab label="Home" />
-			  <Tab label="Mes messages" />
-			  <Tab label="Enseignants" />
-			  <Tab label="Etudiants" />
-			</Tabs>
-		</Grid>
-	);
+                <div style={{minHeight: '60px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '20px'}}>
+                    <span>Antoine Canard</span>
+                </div>
+
+                <Tabs
+                    variant="fullWidth"
+                    indicatorColor="secondary"
+                    textColor="secondary"
+                >
+                    <Tab value={0} label="Home" href={"./Home"}/>
+                    <Tab value={1} label="Mes messages" href={"./message"}/>
+                    <Tab value={2} label="Enseignants"  href={"./enseignant"}/>
+                    <Tab value={3} label="Etudiants" href={"./etudiant"}/>
+                </Tabs>
+            </Grid>
+        );
+    }
+
 }
 
-export default menu;
+export default Header;
