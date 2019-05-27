@@ -11,7 +11,12 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Image from '../../assets/IsepPicture.jpg';
+import { Redirect } from 'react-router';
 
+const dataConnection = [
+	{login : "canard.antoine@gmail.com", mdp: "root"},
+	{login : "root" , mdp : "root" },
+]
 const styles = theme =>({
 	root: {
 		display: 'flex',
@@ -59,7 +64,49 @@ const styles = theme =>({
 
 
 
+
 class Index extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			login: '',
+			mdp : '',
+		};
+
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	handleInputChange(event) {
+		if (event.target.name === "login") {
+			this.setState({
+				login : event.target.value
+			})
+		}
+		if (event.target.name === "password") {
+			this.setState({
+				mdp : event.target.value
+			})
+		}
+	}
+
+	handleSubmit(event){
+		event.preventDefault()
+
+		dataConnection.map((info) =>{
+				if (this.state.login === info.login && this.state.mdp === info.mdp){
+					console.log("ok")
+					document.location = "/home"
+				}
+				else{
+
+				}
+			}
+		)
+	}
+
+
+
 	render() {
 
 		const{classes} = this.props;
@@ -71,14 +118,14 @@ class Index extends React.Component {
 						<Typography component="h1" variant="h5">
 							Connection
 						</Typography>
-						<form className={classes.form}>
+						<form className={classes.form} onSubmit={this.handleSubmit}>
 							<FormControl margin="normal" required fullWidth>
-								<InputLabel htmlFor="email">Nom de compte</InputLabel>
-								<Input id="email" name="email" autoComplete="email" autoFocus />
+								<InputLabel htmlFor="login">Nom de compte</InputLabel>
+								<Input id="login" name="login" autoComplete="login" autoFocus value={this.state.login} onChange={this.handleInputChange}/>
 							</FormControl>
 							<FormControl margin="normal" required fullWidth>
 								<InputLabel htmlFor="password">Mot de passe</InputLabel>
-								<Input name="password" type="password" id="password" autoComplete="current-password" />
+								<Input name="password" type="password" id="password" autoComplete="current-password" value={this.state.password} onChange={this.handleInputChange}/>
 							</FormControl>
 							<FormControlLabel
 								control={<Checkbox value="remember" color="primary" />}
