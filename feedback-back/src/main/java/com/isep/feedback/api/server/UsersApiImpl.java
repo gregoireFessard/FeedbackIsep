@@ -24,8 +24,7 @@ public class UsersApiImpl implements UsersApiDelegate{
     @Override
     public ResponseEntity<String> deleteUser(Long userId) {
         userRepo.deleteById(userId);
-        return new ResponseEntity<String>("User deleted", HttpStatus.OK)
-                ;
+        return new ResponseEntity<String>("User deleted", HttpStatus.OK);
     }
 
     @Override
