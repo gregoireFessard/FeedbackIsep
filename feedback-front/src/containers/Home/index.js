@@ -14,6 +14,7 @@ import List from "../../components/NavBar";
 const styles = theme =>({
     main : {
         display: 'flex',
+
     },
     box1 :  {
         width: '10%',

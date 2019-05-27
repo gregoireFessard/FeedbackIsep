@@ -8,31 +8,32 @@ import Image from "../../assets/IsepPicture.jpg";
 const styles = theme =>({
     main : {
         display: 'flex',
-        minHeight:'100vh',
+        backgroundImage: `url(${Image})`,
+
+        backgroundSize: '100%',
+        height : '100vh',
+
     },
 
     hc : {
         width: '100%',
         display: 'flex',
         flexFlow: 'column',
-        minHeight:'100vh',
+
     },
 
     header: {
-        height:'auto%',
+
     },
 
     sidebar: {
-        height:'auto%',
-
+        opacity : '1'
     },
 
     content: {
-        height:'auto%',
-        minHeight:'100vh',
-        backgroundImage: `url(${Image})`,
+        overflowY : 'scroll',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
+
     }
 
 

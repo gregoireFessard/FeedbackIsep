@@ -3,12 +3,14 @@ h1 {
 }
 
 .mainPanel{
-    margin: 5vh auto;
+    margin: 0 auto;
+    margin-top : 2vh;
     width : 70%;
     min-height: 70vh;
     background-color: white;
     position: relative;
-    overflow-y: auto;
+
+
 
 }
 
