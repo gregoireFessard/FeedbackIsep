@@ -71,6 +71,30 @@ const styles = theme =>({
         float:'right',
     },
 
+    comment:{
+        display: 'flex',
+        flexDirection: 'column',
+    },
+
+    response:{
+        display: 'flex',
+        flexDirection: 'row',
+    },
+
+    commentHeader:{
+        borderWidth:'1px',
+        borderStyle: 'solid',
+    },
+
+    commentContent:{
+        borderWidth:'1px',
+        borderStyle: 'solid',
+    },
+
+    button:{
+
+    },
+
 })
 
 class Home extends Component {
@@ -166,20 +190,66 @@ class Home extends Component {
                                 <Typography>
                                     Technologies Web :
                                 </Typography>
-                                <div className={classes.content}>
-                                    <div className={classes.content1}>
+                                <div className={classes.response}>
+                                    <div className={classes.commentHeader}>
                                         <img className={classes.profilPicture} src={profilPicture}></img>
-                                        M. Nguyen
-                                        Enseignant
-                                        le 6 mai à 17h22
+                                        <Typography>
+                                            Marcel Pol
+                                        </Typography>
+                                        6 mai a 15h42
                                     </div>
-                                    <div className={classes.content2}>
-                                        mon message
+                                    <div className={classes.commentContent}>
+                                        <Typography>
+                                            As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
+
+                                            When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
+                                        </Typography>
                                     </div>
+                                    <Button className={classes.button} size="small" color="primary">
+                                        voir ce message dans son contexte
+                                    </Button>
                                 </div>
-                                <Button size="small" color="primary">
-                                    voir ce message dans son contexte
-                                </Button>
+                                <div className={classes.response}>
+                                    <div className={classes.commentHeader}>
+                                        <img className={classes.profilPicture} src={profilPicture}></img>
+                                        <Typography>
+                                            Marcel Pol
+                                        </Typography>
+                                        6 mai a 15h42
+                                    </div>
+                                    <div className={classes.commentContent}>
+                                        <Typography>
+                                            As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
+
+                                            When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
+                                        </Typography>
+                                    </div>
+                                    <Button className={classes.button} size="small" color="primary">
+                                        voir ce message dans son contexte
+                                    </Button>
+                                </div>
+                                <Typography>
+                                    Genie logiciel :
+                                </Typography>
+                                <div className={classes.response}>
+                                    <div className={classes.commentHeader}>
+                                        <img className={classes.profilPicture} src={profilPicture}></img>
+                                        <Typography>
+                                            Marcel Pol
+                                        </Typography>
+                                        6 mai a 15h42
+                                    </div>
+                                    <div className={classes.commentContent}>
+                                        <Typography>
+                                            As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
+
+                                            When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
+                                        </Typography>
+                                    </div>
+                                    <Button className={classes.button} size="small" color="primary">
+                                        voir ce message dans son contexte
+                                    </Button>
+                                </div>
                             </Paper>
 
                         </Grid>
