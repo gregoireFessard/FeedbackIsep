@@ -1,0 +1,41 @@
+h1 {
+      text-align: center;
+}
+
+.mainPanel{
+    margin: 5vh auto;
+    width : 70%;
+    min-height: 70vh;
+    background-color: white;
+    position: relative;
+    overflow-y: auto;
+
+}
+
+.EnseignantPanel{
+    padding: 1%;
+    margin-top : 15px;
+    border : gray 1px solid;
+}
+
+.nameProfil{
+
+}
+.profilPanel{
+
+}
+.resultPanel{
+
+
+}
+
+.buttonSeeProfil{
+    padding-top: 2%;
+}
+
+.buttonSendMessage{
+    padding-top: 2%;
+}
+
+
+

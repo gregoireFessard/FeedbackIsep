@@ -4,10 +4,12 @@ import actions from '../actions';
 import LoginPage from '../containers/LoginPage';
 import Home from '../containers/Home';
 import Course from '../containers/Course';
+import Etudiants from '../containers/Etudiants';
 import Message from '../containers/Message';
 import Profil from '../containers/Profil';
 import { Route, Switch, Redirect } from 'react-router';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Enseignants from "./Enseignants";
 
 
 const muiTheme = createMuiTheme({
@@ -65,16 +67,18 @@ class App extends Component {
   }
 
   render() {
-    
+
 
     return (
       <MuiThemeProvider theme={muiTheme}>
         <Switch>
           <Route exact path="/(index.html|)/" component={LoginPage} />
           <Route exact path="/home" component={Home} />
-          <Route exact path="/course" component={Course} />
+          <Route exact path="/course" comnoponent={Course} />
           <Route exact path="/message" component={Message} />
           <Route exact path="/profil" component={Profil} />
+          <Route exact path="/etudiant" component={Etudiants} />
+          <Route exact path="/enseignant" component={Enseignants} />
         </Switch>
       </MuiThemeProvider>
     );
