@@ -56,7 +56,11 @@ const styles = theme =>({
 })
 
 const comment = [
-    {nom: 'Marcel Pol'},
+    {nom: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a',response: [
+            {nom: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a'},
+        ]
+    },
+    {nom: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a',response:[]},
 
 ];
 
@@ -65,6 +69,7 @@ const comment = [
 
 
 class Course extends Component {
+
 
     render(){
 

@@ -23,10 +23,10 @@ class Header extends React.Component{
                     indicatorColor="secondary"
                     textColor="secondary"
                 >
-                    <Tab label="Home" href={"./Home"}/>
-                    <Tab label="Mes messages" href={"./message"}/>
-                    <Tab label="Enseignants"  href={"./enseignant"}/>
-                    <Tab label="Etudiants" href={"./etudiant"}/>
+                    <Tab value={0} label="Home" href={"./Home"}/>
+                    <Tab value={1} label="Mes messages" href={"./message"}/>
+                    <Tab value={2} label="Enseignants"  href={"./enseignant"}/>
+                    <Tab value={3} label="Etudiants" href={"./etudiant"}/>
                 </Tabs>
             </Grid>
         );

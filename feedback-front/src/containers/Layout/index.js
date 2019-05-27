@@ -9,7 +9,6 @@ const styles = theme =>({
     main : {
         display: 'flex',
         minHeight:'100vh',
-        overflow:'hidden',
     },
 
     hc : {
@@ -17,7 +16,6 @@ const styles = theme =>({
         display: 'flex',
         flexFlow: 'column',
         minHeight:'100vh',
-        overflow:'hidden',
     },
 
     header: {
@@ -35,7 +33,6 @@ const styles = theme =>({
         backgroundImage: `url(${Image})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100%',
-        overflow:'hidden',
     }
 
 
