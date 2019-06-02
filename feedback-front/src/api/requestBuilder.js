@@ -6,3 +6,5 @@ const axiosInstance = axios.create({
     responseType: "json"
     // withCredentials: true,
 });
+
+export default axiosInstance;

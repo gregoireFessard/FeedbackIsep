@@ -23,18 +23,47 @@ const styles = theme =>({
         height: '20px',
         padding: '20px',
     },
+    color: {
+        width: '36px',
+        height: '14px',
+        borderRadius: '2px',
+        background: dataProfil[0].colorProfil,
+    },
+    swatch: {
+        padding: '5px',
+        background: '#fff',
+        borderRadius: '1px',
+        boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+        display: 'inline-block',
+        cursor: 'pointer',
+    },
+    popover: {
+        position: 'absolute',
+        zIndex: '2',
+    },
+    cover: {
+        position: 'fixed',
+        top: '0px',
+        right: '0px',
+        bottom: '0px',
+        left: '0px',
+    },
 })
+const dataProfil =[
+    {name : 'Antoine',surname : 'CANARD', email: 'antoine.canard@isep.fr', colorProfil : '#bbbbbb',profilImage  : profilPicture}
+];
+
 
 class Profil extends Component {
 
     state = {
+        name : dataProfil[0].name,
+        surname : dataProfil[0].surname,
+        email : dataProfil[0].email,
+        colorProfil : dataProfil[0].colorProfil,
+        profilImage : dataProfil[0].profilImage,
         displayColorPicker: false,
-        color: {
-            r: '241',
-            g: '112',
-            b: '19',
-            a: '1',
-        },
+
     };
 
     handleClick = () => {
@@ -46,7 +75,7 @@ class Profil extends Component {
     };
 
     handleChange = (color) => {
-        this.setState({ color: color.rgb })
+        this.setState({ colorProfil: color })
     };
 
     render(){
@@ -55,31 +84,7 @@ class Profil extends Component {
 
         const styles = reactCSS({
             'default': {
-                color: {
-                    width: '36px',
-                    height: '14px',
-                    borderRadius: '2px',
-                    background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
-                },
-                swatch: {
-                    padding: '5px',
-                    background: '#fff',
-                    borderRadius: '1px',
-                    boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-                    display: 'inline-block',
-                    cursor: 'pointer',
-                },
-                popover: {
-                    position: 'absolute',
-                    zIndex: '2',
-                },
-                cover: {
-                    position: 'fixed',
-                    top: '0px',
-                    right: '0px',
-                    bottom: '0px',
-                    left: '0px',
-                },
+
             },
         });
 
@@ -93,15 +98,16 @@ class Profil extends Component {
 
         return(
             <Layout>
+
                 <Paper className={classes.paper}>
                     <Typography>
-                        Nom: Canard
+                        Nom: {this.state.name}
                     </Typography>
                     <Typography>
-                        Prénom: Antoine
+                        Prénom: {this.state.surname}
                     </Typography>
                     <Typography>
-                        Mail: antoine.canard@isep.fr
+                        Mail: {this.state.email}
                     </Typography>
                 </Paper>
 
@@ -109,21 +115,20 @@ class Profil extends Component {
                     <Typography>
                         Couleur des messages :
                     </Typography>
-                    <div style={ styles.swatch } onClick={ this.handleClick }>
-                        <div style={ styles.color } />
+                    <div className={ classes.swatch } onClick={ this.handleClick }>
+                        <div className={ classes.color } />
                     </div>
-                    { this.state.displayColorPicker ? <div style={ styles.popover }>
-                        <div style={ styles.cover } onClick={ this.handleClose }/>
-                        <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
+                    { this.state.displayColorPicker ? <div className={ classes.popover }>
+                        <div className={ classes.cover } onClick={ this.handleClose }/>
+                        <SketchPicker color={ this.state.colorProfil} onChange={ this.handleChange } />
                     </div> : null }
                     <Typography>
                         Image de profil :
                     </Typography>
-                    <img className={classes.profilPicture} src={profilPicture}></img>
+                    <img className={classes.profilPicture} src={this.state.profilImage}/>
                     <button> change image </button>
 
                 </Paper>
-
             </Layout>
         )
     }

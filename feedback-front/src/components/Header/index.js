@@ -3,6 +3,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import './index.css';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
@@ -20,13 +21,14 @@ class Header extends React.Component{
 
                 <Tabs
                     variant="fullWidth"
-                    indicatorColor="secondary"
-                    textColor="secondary"
+                    indicatorColor="primary"
+
+
                 >
-                    <Tab value={0} label="Home" href={"./Home"}/>
-                    <Tab value={1} label="Mes messages" href={"./message"}/>
-                    <Tab value={2} label="Enseignants"  href={"./enseignant"}/>
-                    <Tab value={3} label="Etudiants" href={"./etudiant"}/>
+                    <Tab className={'headerButtonHome'} value={0} label="Home" href={"./Home"}/>
+                    <Tab className={'headerButtonMesMessages'} value={1} label="Mes messages" href={"./message"}/>
+                    <Tab className={'headerButtonEnseignants'} value={2} label="Enseignants"  href={"./enseignant"}/>
+                    <Tab className={'headerButtonEtudiants'} value={3} label="Etudiants" href={"./etudiant"}/>
                 </Tabs>
             </Grid>
         );

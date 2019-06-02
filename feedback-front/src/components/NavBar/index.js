@@ -11,8 +11,11 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import StarBorder from '@material-ui/icons/CalendarToday';
-
+import './index.css'
 const styles = theme =>({
+	listItem : {
+		color : 'white !important'
+	},
 	logo:{
 		height: '80px',
 		padding: '20px'
@@ -41,8 +44,8 @@ class NavBar extends React.Component{
 		return (
 			<List component="nav">
 				<img className={classes.logo} src={Logo}></img>
-				<ListItem button>
-					<ListItemText primary="Techno web" />
+				<ListItem button  >
+					<ListItemText primary="Techno web"  />
 				</ListItem>
 				<Divider />
 				<ListItem button divider>

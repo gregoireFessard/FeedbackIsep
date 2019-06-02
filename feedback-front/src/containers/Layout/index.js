@@ -4,21 +4,19 @@ import NavBar from '../../components/NavBar';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Image from "../../assets/IsepPicture.jpg";
-
+import './index.css'
 const styles = theme =>({
-    main : {
-        display: 'flex',
-        backgroundImage: `url(${Image})`,
 
-        backgroundSize: '100%',
-        height : '100vh',
 
-    },
+
+
+
 
     hc : {
         width: '100%',
         display: 'flex',
         flexFlow: 'column',
+
 
     },
 
@@ -27,7 +25,7 @@ const styles = theme =>({
     },
 
     sidebar: {
-        opacity : '1'
+
     },
 
     content: {
@@ -46,8 +44,8 @@ class Layout extends Component {
 
         const {classes, children} = this.props;
         return(
-            <div className={classes.main}>
-                <div className={classes.sidebar}>
+            <div className={'main'}>
+                <div className={'sidebar'}>
                     <NavBar/>
                 </div>
                 <div className={classes.hc}>
