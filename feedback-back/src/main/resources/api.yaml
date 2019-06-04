@@ -1,4 +1,4 @@
-openapi: 3.0.0
+copenapi: 3.0.0
 # Added by API Auto Mocking Plugin
 info:
   version: "1.0.0"

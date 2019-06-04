@@ -98,33 +98,138 @@ CREATE TABLE conversations
 
 INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent_id`, `enabled`)
-VALUES (NULL, 'gfessar', 'Gregoire', 'Fessar', '1', 'greg@gmail.com', '{noop}secret',
+VALUES (NULL, 'gfessar', 'Gregoire', 'Fessar', '1', 'gregoire.fessard@isep.fr', 'root',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKp8lrDQAr4FytEknomklSTAUYtGLVg1IJRC0YtoAZg+XbnGEkabgSlk6R+6AfRqAWjFoxaMGrBiLAAEAAA//8YEgdLUEr9gAAAAABJRU5ErkJggg==',
-        '#5b9033', NULL, 1);
+        '#111111', NULL, 1);
 INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent_id`, `enabled`)
-VALUES (NULL, 'ktan', 'Kevin', 'TAN', '2', 'kev@gmail.com', '{noop}secret',
+VALUES (NULL, 'ktan', 'Kevin', 'TAN', '2', 'kevin.tan@isep.fr', 'root',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGLp3T+ZgRQwLTuBJPVMJKkmA4xaMGrBqAWjFoxaQA3A+Ej8IUkaHtoJkaR+6AfRqAWjFoxaMGrBiLAAEAAA//8FnwaNkNlVEgAAAABJRU5ErkJggg==',
-        '#502fd2', NULL, 1);
+        '#222222', NULL, 1);
 INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent_id`, `enabled`)
 VALUES (NULL, 'acanard', 'Antoine', 'Canard', '3', 'kev@gmail.com', '{noop}secret',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#a6e590', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'aveloso', 'Alex', 'Veloso', '4', 'alex.veloso@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#444444', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'ccisse', 'Cameron', 'Cisse', '5', 'cameron.cisse@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#555555', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'mnguyen', 'Mathieu', 'Nguyen', '6', 'mathieu.nguyen@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#666666', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'zkaziaoul', 'Zakia', 'Kaziaoul', '7', 'zakia.kaziaoul@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#777777', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'adubernet', 'Alice', 'Dubernet', '8', 'alice.dubernet@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#888888', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'mpepineau', 'Maurice', 'Pepineau', '9', 'maurice.pepineau@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#999999', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'jleite', 'Jean Charles', 'Leite', '10', 'jeancharles.leite@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#aaaaaa', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'aplatel', 'Adriana', 'Platel', '11', 'adriana.platel@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#bbbbbb', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'eabgrall', 'Emma', 'Abgrall', '12', 'emma.abgrall@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#cccccc', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'jlemee', 'Jacky', 'Lemee', '13', 'jacky.lemee@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#dddddd', NULL, 1);
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+                     `parent_id`, `enabled`)
+VALUES (NULL, 'aadmin', 'admin', 'admin', '14', 'admin.admin@isep.fr', 'root',
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
+        '#eeeeee', NULL, 1);
 
 
 INSERT INTO `authorities` (`username`, `authority`)
 VALUES ('gfessar', 'ROLE_STUDENT');
 INSERT INTO `authorities` (`username`, `authority`)
-VALUES ('ktan', 'ROLE_ADMIN');
+VALUES ('ktan', 'ROLE_STUDENT');
 INSERT INTO `authorities` (`username`, `authority`)
-VALUES ('acanard', 'ROLE_TEACHER');
+VALUES ('acanard', 'ROLE_STUDENT');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('aveloso', 'ROLE_STUDENT');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('ccisse', 'ROLE_STUDENT');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('mnguyen', 'ROLE_TEACHER');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('zkaziaoul', 'ROLE_TEACHER');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('adubernet', 'ROLE_TEACHER');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('mpepineau', 'ROLE_TEACHER');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('jleite', 'ROLE_TEACHER');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('aplatel', 'ROLE_TEACHER');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('eabgrall', 'ROLE_TEACHER');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('jlemee', 'ROLE_TEACHER');
+INSERT INTO `authorities` (`username`, `authority`)
+VALUES ('aadmin', 'ROLE_ADMIN');
 
 INSERT INTO `course_materials` (`id`, `name`)
-VALUES (NULL, 'logiciel');
+VALUES (NULL, 'Genie logiciel');
+INSERT INTO `course_materials` (`id`, `name`)
+VALUES (NULL, 'Cybersecurite');
+INSERT INTO `course_materials` (`id`, `name`)
+VALUES (NULL, 'Architecture des SI');
+INSERT INTO `course_materials` (`id`, `name`)
+VALUES (NULL, 'Analyse Geopolitique');
+INSERT INTO `course_materials` (`id`, `name`)
+VALUES (NULL, 'Technologies Web');
+INSERT INTO `course_materials` (`id`, `name`)
+VALUES (NULL, 'Big Data');
+INSERT INTO `course_materials` (`id`, `name`)
+VALUES (NULL, 'Espagnol');
+INSERT INTO `course_materials` (`id`, `name`)
+VALUES (NULL, 'Anglais');
 
 INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
-VALUES (NULL, '2', '2019-05-21 13:00:00', '2019-05-21 16:00:00', '1');
+VALUES (NULL, '6', '2019-04-01 09:00:00', '2019-04-01 12:00:00', '5');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '8', '2019-04-01 17:30:00', '2019-04-01 19:00:00', '4');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '9', '2019-04-02 09:00:00', '2019-04-02 12:00:00', '6');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '7', '2019-04-02 13:00:00', '2019-04-02 16:00:00', '1');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '10', '2019-04-02 16:30:00', '2019-04-02 19:30:00', '3');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '11', '2019-04-03 15:15:00', '2019-04-03 17:15:00', '7');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '12', '2019-04-04 10:30:00', '2019-04-04 12:30:00', '8');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '13', '2019-04-05 09:00:00', '2019-04-05 12:00:00', '2');
 
 INSERT INTO `comments` (`id`, `user_id`, `course_id`, `content`, `date_time`, `number_like`, `number_dislike`,
                         `parent_id`)

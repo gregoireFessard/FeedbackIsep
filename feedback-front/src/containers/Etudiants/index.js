@@ -5,7 +5,8 @@ import SearchBar from '../../components/SearchBar';
 import Grid from '@material-ui/core/Grid';
 import Image from "../../assets/basicProfile.png";
 import Button from '@material-ui/core/Button';
-
+import '../../actions/users';
+import {getUsers} from "../../actions/users";
 
 const dataEtudiants =[
     {name : 'Jean BONBON', picture : Image},
@@ -19,6 +20,7 @@ const dataEtudiants =[
     {name : 'Gregoire FESSARD', picture : Image},
 ];
 
+const dataAPI = getUsers();
 const EtudiantPanel = props =>
 
     <Grid container className={'etudiantPanel'} xs={12}>
@@ -39,6 +41,9 @@ const EtudiantPanel = props =>
 class Etudiants extends React.Component{
 
 
+    componentDidMount() {
+
+    }
 
     constructor(props){
         super(props);
