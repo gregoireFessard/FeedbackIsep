@@ -242,8 +242,20 @@ INSERT INTO `messages` (`id`, `conversation_id`, `is_from_sender`, `content`, me
 VALUES (NULL, '1', true, 'vous êtes virés', true, '2019-05-21 18:08:07');
 
 INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
-VALUES (NULL, '1', '1');
+VALUES (NULL, '3', '1');
 INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
-VALUES (NULL, '2', '1');
+VALUES (NULL, '3', '2');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '3');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '4');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '5');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '6');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '7');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '8');
 
 INSERT INTO `course_documents` VALUES (NULL, 'Name Test', 'Test', '1' , '1')
