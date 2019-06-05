@@ -11,11 +11,24 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Image from '../../assets/IsepPicture.jpg';
+import App from '../../containers/App';
 import { Redirect } from 'react-router';
 
-const dataConnection = [
-	{login : "canard.antoine@gmail.com", mdp: "root"},
-	{login : "root" , mdp : "root" },
+const dataUsers = [
+	{"id":"14","username":"aadmin","firstname":"admin","lastname":"admin","isep_id":"14","mail":"admin.admin@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#eeeeee","parent_id":null,"enabled":"1"},
+	{"id":"3","username":"acanard","firstname":"Antoine","lastname":"Canard","isep_id":"3","mail":"antoine.canard@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#a6e590","parent_id":null,"enabled":"1"},
+	{"id":"8","username":"adubernet","firstname":"Alice","lastname":"Dubernet","isep_id":"8","mail":"alice.dubernet@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#888888","parent_id":null,"enabled":"1"},
+	{"id":"11","username":"aplatel","firstname":"Adriana","lastname":"Platel","isep_id":"11","mail":"adriana.platel@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#bbbbbb","parent_id":null,"enabled":"1"},
+	{"id":"4","username":"aveloso","firstname":"Alex","lastname":"Veloso","isep_id":"4","mail":"alex.veloso@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#444444","parent_id":null,"enabled":"1"},
+	{"id":"5","username":"ccisse","firstname":"Cameron","lastname":"Cisse","isep_id":"5","mail":"cameron.cisse@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#555555","parent_id":null,"enabled":"1"},
+	{"id":"12","username":"eabgrall","firstname":"Emma","lastname":"Abgrall","isep_id":"12","mail":"emma.abgrall@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#cccccc","parent_id":null,"enabled":"1"},
+	{"id":"1","username":"gfessar","firstname":"Gregoire","lastname":"Fessar","isep_id":"1","mail":"gregoire.fessard@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#111111","parent_id":null,"enabled":"1"},
+	{"id":"10","username":"jleite","firstname":"Jean Charles","lastname":"Leite","isep_id":"10","mail":"jeancharles.leite@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#aaaaaa","parent_id":null,"enabled":"1"},
+	{"id":"13","username":"jlemee","firstname":"Jacky","lastname":"Lemee","isep_id":"13","mail":"jacky.lemee@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#dddddd","parent_id":null,"enabled":"1"},
+	{"id":"2","username":"ktan","firstname":"Kevin","lastname":"TAN","isep_id":"2","mail":"kevin.tan@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#222222","parent_id":null,"enabled":"1"},
+	{"id":"6","username":"mnguyen","firstname":"Mathieu","lastname":"Nguyen","isep_id":"6","mail":"mathieu.nguyen@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#666666","parent_id":null,"enabled":"1"},
+	{"id":"9","username":"mpepineau","firstname":"Maurice","lastname":"Pepineau","isep_id":"9","mail":"maurice.pepineau@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#999999","parent_id":null,"enabled":"1"},
+	{"id":"7","username":"zkaziaoul","firstname":"Zakia","lastname":"Kaziaoul","isep_id":"7","mail":"zakia.kaziaoul@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#777777","parent_id":null,"enabled":"1"}
 ]
 const styles = theme =>({
 	root: {
@@ -69,8 +82,8 @@ class Index extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			login: '',
-			mdp : '',
+			mail: '',
+			password : '',
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -78,14 +91,14 @@ class Index extends React.Component {
 	}
 
 	handleInputChange(event) {
-		if (event.target.name === "login") {
+		if (event.target.name === "mail") {
 			this.setState({
-				login : event.target.value
+				mail : event.target.value
 			})
 		}
 		if (event.target.name === "password") {
 			this.setState({
-				mdp : event.target.value
+				password : event.target.value
 			})
 		}
 	}
@@ -93,16 +106,25 @@ class Index extends React.Component {
 	handleSubmit(event){
 		event.preventDefault()
 
-		dataConnection.map((info) =>{
-				if (this.state.login === info.login && this.state.mdp === info.mdp){
-					console.log("ok")
+		dataUsers.map((info) =>{
+			console.log(this.s)
+				if (this.state.mail === info.mail && this.state.password === info.password){
+					console.log(info)
+					sessionStorage.setItem('UserAutotentificateFirstname', info.firstname)
+					sessionStorage.setItem('UserAutotentificateLastname', info.lastname)
+					sessionStorage.setItem('UserAutotentificateUsername', info.username)
+					sessionStorage.setItem('UserAutotentificateMail', info.mail)
+					sessionStorage.setItem('UserAutotentificateId', info.id)
+					sessionStorage.setItem('UserAutotentificateIsep_id', info.isep_id)
+					sessionStorage.setItem('UserAutotentificateAvatar', info.avatar)
+					sessionStorage.setItem('UserAutotentificateColor', info.color)
+					sessionStorage.setItem('UserAutotentificateParent_id', info.parent_id)
+					sessionStorage.setItem('UserAutotentificateEnabled', info.enabled)
 					document.location = "/home"
-				}
-				else{
-
 				}
 			}
 		)
+
 	}
 
 
@@ -120,8 +142,8 @@ class Index extends React.Component {
 						</Typography>
 						<form className={classes.form} onSubmit={this.handleSubmit}>
 							<FormControl margin="normal" required fullWidth>
-								<InputLabel htmlFor="login">Nom de compte</InputLabel>
-								<Input id="login" name="login" autoComplete="login" autoFocus value={this.state.login} onChange={this.handleInputChange}/>
+								<InputLabel htmlFor="mail">Email</InputLabel>
+								<Input id="mail" name="mail" autoComplete="mail" autoFocus value={this.state.mail} onChange={this.handleInputChange}/>
 							</FormControl>
 							<FormControl margin="normal" required fullWidth>
 								<InputLabel htmlFor="password">Mot de passe</InputLabel>

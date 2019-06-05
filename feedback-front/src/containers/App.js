@@ -62,26 +62,28 @@ const muiTheme = createMuiTheme({
 
 
 class App extends Component {
-  componentDidMount() {
-
-  }
 
   render() {
 
-
-    return (
-      <MuiThemeProvider theme={muiTheme}>
-        <Switch>
+    if (sessionStorage.getItem("UserAutotentificateUsername")!= null) {
+      return (
+        <MuiThemeProvider theme={muiTheme}>
+         <Switch>
           <Route exact path="/(index.html|)/" component={LoginPage} />
-          <Route exact path="/home" component={Home} />
+          <Route exact path="/home" component={Home}  />
           <Route exact path="/course" component={Course} />
           <Route exact path="/message" component={Message} />
           <Route exact path="/profil/:IDUser" component={Profil} />
           <Route exact path="/etudiant" component={Etudiants} />
           <Route exact path="/enseignant" component={Enseignants} />
-        </Switch>
-      </MuiThemeProvider>
-    );
+         </Switch>
+        </MuiThemeProvider>
+       )
+    }else{
+      return (
+          <LoginPage/>
+      )
+    };
   }
 }
 

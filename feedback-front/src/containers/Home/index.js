@@ -120,7 +120,6 @@ class Home extends Component {
                             <Link
                                 component="button"
                                 variant="body2"
-                                color="default"
                                 underline="always"
                                 onClick={() => {
                                     alert("I'm a button.");
@@ -131,7 +130,6 @@ class Home extends Component {
                             <Link
                                 component="button"
                                 variant="body2"
-                                color="default"
                                 underline="always"
                                 onClick={() => {
                                     alert("I'm a button.");
@@ -142,7 +140,6 @@ class Home extends Component {
                             <Link
                                 component="button"
                                 variant="body2"
-                                color="default"
                                 underline="always"
                                 onClick={() => {
                                     alert("I'm a button.");
@@ -164,7 +161,6 @@ class Home extends Component {
                             <Link
                                 component="button"
                                 variant="body2"
-                                color="default"
                                 underline="always"
                                 onClick={() => {
                                     alert("I'm a button.");
