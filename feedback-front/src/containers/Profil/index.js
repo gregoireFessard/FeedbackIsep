@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import Layout from '../Layout';
 import Paper from '@material-ui/core/Paper';
-import { SketchPicker } from 'react-color';
+import { PhotoshopPicker } from 'react-color';
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from '@material-ui/core/Typography';
 import reactCSS from 'reactcss'
@@ -107,10 +107,12 @@ class Profil extends Component {
 
     handleClose = () => {
         this.setState({ displayColorPicker: false })
-    };
+        };
 
     handleChange = (color) => {
-        this.setState({ colorProfil: color })
+        this.setState({ color: color })
+
+
     };
 
     render(){
@@ -155,7 +157,7 @@ class Profil extends Component {
                     </div>
                     { this.state.displayColorPicker ? <div className={ classes.popover }>
                         <div className={ classes.cover } onClick={ this.handleClose }/>
-                        <SketchPicker color={ this.state.color} onChange={ this.handleChange } />
+                        <PhotoshopPicker color={ this.state.color} onChange={ this.handleChange } />
                     </div> : null }
                     <Typography>
                         Image de profil :

@@ -28,7 +28,7 @@ const EnseignantPanel = props =>
             <p className={"nameProfil"} > {props.data.firstname} {props.data.lastname}</p>
         </Grid>
         <Grid item xs = {3} className={"buttonSeeProfil"} >
-            <Button variant="contained" color="primary" size={"small"}    >Voir le Profil</Button>
+            <Button variant="contained" color="primary" size={"small"}  href={'../profil/'+ props.data.id}  >Voir le Profil</Button>
         </Grid>
         <Grid item xs = {3} className={"buttonSendMessage"} >
             <Button variant="contained" color="primary" size={"small"}  >Envoyer un message</Button>
