@@ -39,7 +39,7 @@ class SearchAppBar extends React.Component{
     getInfo = () => {
         const infos = [];
         this.props.data.map((info) => {
-                if(no_accent(info.name).toLowerCase().match(no_accent(this.state.query).toLowerCase())){
+                if(no_accent(info.firstname).toLowerCase().match(no_accent(this.state.query).toLowerCase()) || no_accent(info.lastname).toLowerCase().match(no_accent(this.state.query).toLowerCase())){
                     infos.push(info)
 
                 }

@@ -9,15 +9,11 @@ import '../../actions/users';
 import {getUsers} from "../../actions/users";
 
 const dataEtudiants =[
-    {name : 'Jean BONBON', picture : Image},
-    {name : 'Antoine CANARD', picture : Image},
-    {name : 'Antoine CANARD', picture : Image},
-    {name : 'Antoine CANARD', picture : Image},
-    {name : 'Antoine CANARD', picture : Image},
-    {name : 'Antoine CANARD', picture : Image},
-    {name : 'Antoine CANARD', picture : Image},
-    {name : 'KévinTAN', picture : Image},
-    {name : 'Gregoire FESSARD', picture : Image},
+    {"id":"3","username":"acanard","firstname":"Antoine","lastname":"Canard","isep_id":"3","mail":"kev@gmail.com","password":"{noop}secret","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#a6e590","parent_id":null,"enabled":"1"},
+    {"id":"4","username":"aveloso","firstname":"Alex","lastname":"Veloso","isep_id":"4","mail":"alex.veloso@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#444444","parent_id":null,"enabled":"1"},
+    {"id":"5","username":"ccisse","firstname":"Cameron","lastname":"Cisse","isep_id":"5","mail":"cameron.cisse@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#555555","parent_id":null,"enabled":"1"},
+    {"id":"1","username":"gfessar","firstname":"Gregoire","lastname":"Fessar","isep_id":"1","mail":"gregoire.fessard@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#111111","parent_id":null,"enabled":"1"},
+    {"id":"2","username":"ktan","firstname":"Kevin","lastname":"TAN","isep_id":"2","mail":"kevin.tan@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#222222","parent_id":null,"enabled":"1"},
 ];
 
 const dataAPI = getUsers();
@@ -25,10 +21,10 @@ const EtudiantPanel = props =>
 
     <Grid container className={'etudiantPanel'} xs={12}>
         <Grid item xs={3}>
-            <img className={"imgProfil"} src={props.data.picture} width={'50%'} />
+            <img className={"imgProfil"} src={props.data.avatar} width={'50%'} />
         </Grid>
         <Grid item xs={3}>
-            <p className={"nameProfil"} > {props.data.name}</p>
+            <p className={"nameProfil"} > {props.data.firstname} {props.data.lastname}</p>
         </Grid>
         <Grid item xs = {3} className={"buttonSeeProfil"} >
             <Button variant="contained" color="primary" size={"small"}    >Voir le Profil</Button>
