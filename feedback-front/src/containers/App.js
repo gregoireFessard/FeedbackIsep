@@ -76,7 +76,7 @@ class App extends Component {
           <Route exact path="/home" component={Home} />
           <Route exact path="/course" component={Course} />
           <Route exact path="/message" component={Message} />
-          <Route exact path="/profil" component={Profil} />
+          <Route exact path="/profil/:IDUser" component={Profil} />
           <Route exact path="/etudiant" component={Etudiants} />
           <Route exact path="/enseignant" component={Enseignants} />
         </Switch>

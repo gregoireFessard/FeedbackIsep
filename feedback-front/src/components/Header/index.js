@@ -25,10 +25,10 @@ class Header extends React.Component{
 
 
                 >
-                    <Tab className={'headerButtonHome'} value={0} label="Home" href={"./Home"}/>
-                    <Tab className={'headerButtonMesMessages'} value={1} label="Mes messages" href={"./message"}/>
-                    <Tab className={'headerButtonEnseignants'} value={2} label="Enseignants"  href={"./enseignant"}/>
-                    <Tab className={'headerButtonEtudiants'} value={3} label="Etudiants" href={"./etudiant"}/>
+                    <Tab className={'headerButtonHome'} value={0} label="Home" href={"../Home"}/>
+                    <Tab className={'headerButtonMesMessages'} value={1} label="Mes messages" href={"../message"}/>
+                    <Tab className={'headerButtonEnseignants'} value={2} label="Enseignants"  href={"../enseignant"}/>
+                    <Tab className={'headerButtonEtudiants'} value={3} label="Etudiants" href={"../etudiant"}/>
                 </Tabs>
             </Grid>
         );
