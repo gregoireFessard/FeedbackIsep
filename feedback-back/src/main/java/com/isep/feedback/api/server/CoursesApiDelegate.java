@@ -3,15 +3,12 @@ package com.isep.feedback.api.server;
 import com.isep.feedback.api.model.Comment;
 import com.isep.feedback.api.model.Course;
 import com.isep.feedback.api.model.CourseDocument;
-import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**

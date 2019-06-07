@@ -8,10 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
-public class UsersApiImpl implements UsersApiDelegate{
+public class UsersApiImpl implements UsersApiDelegate {
 
     @Autowired
     UserRepo userRepo;
@@ -34,11 +35,34 @@ public class UsersApiImpl implements UsersApiDelegate{
 
     @Override
     public ResponseEntity<List<User>> usersGet(String search) {
-        return new ResponseEntity<List<User>>(userRepo.findAll(), HttpStatus.OK);
+        if(search == null){
+            List<User> users = userRepo.findAll();
+            User user = null;
+            for(int i = 0; i < users.size(); i++){
+                user = users.get(i);
+                user.setPassword(null);
+                users.set(i, user);
+            }
+            return new ResponseEntity<List<User>>(userRepo.findAll(), HttpStatus.OK);
+        }
+        else{
+            List<User> users = userRepo.findAll();
+            users = users.stream().filter(e -> e.getFirstName().toUpperCase().contains(search.toUpperCase()) || e.getLastName().toUpperCase().contains(search.toUpperCase())).collect(Collectors.toList());
+            User user = null;
+            for(int i = 0; i < users.size(); i++){
+                user = users.get(i);
+                user.setPassword(null);
+                users.set(i, user);
+            }
+            return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+        }
+
     }
 
     @Override
     public ResponseEntity<User> usersUserIdGet(Long userId) {
-        return new ResponseEntity<User>(userRepo.getOne(userId), HttpStatus.OK);
+        User user = userRepo.getOne(userId);
+        user.setPassword(null);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 }

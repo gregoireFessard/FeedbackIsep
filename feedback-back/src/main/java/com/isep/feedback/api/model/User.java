@@ -1,6 +1,8 @@
 package com.isep.feedback.api.model;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -12,6 +14,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 
   @Id
@@ -23,6 +26,7 @@ public class User {
   @Column(name = "username")
   @JsonProperty("username")
   private String username;
+
 
   @Column(name = "enabled")
   @JsonProperty("enabled")
@@ -56,6 +60,7 @@ public class User {
   @Column(name = "color")
   @JsonProperty("color")
   private String color;
+
 
   @Column(name = "parent_id")
   @JsonProperty("parent_id")

@@ -1,6 +1,9 @@
 package com.isep.feedback.api.model;
 
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -13,6 +16,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_course")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserCourse   {
 
   @Id
@@ -21,17 +25,23 @@ public class UserCourse   {
   @JsonProperty("id")
   private Long id;
 
-  @Column(name = "user_id")
-  @JsonProperty("user_id")
-  private Long userId;
+  @JsonProperty("user")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  private User user;
 
-  @Column(name = "course_id")
-  @JsonProperty("course_id")
-  private Long courseId;
+  @JsonProperty("course")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "course_id")
+  private Course course;
+
 
   public UserCourse id(Long id) {
     this.id = id;
     return this;
+  }
+
+  public UserCourse() {
   }
 
   /**
@@ -49,10 +59,27 @@ public class UserCourse   {
     this.id = id;
   }
 
-  public UserCourse userId(Long userId) {
+  public User getUser() {
+    user.setPassword(null);
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Course getCourse() {
+    return course;
+  }
+
+  public void setCourse(Course course) {
+    this.course = course;
+  }
+
+  /*public UserCourse userId(Long userId) {
     this.userId = userId;
     return this;
-  }
+  }*/
 
   /**
    * Get userId
@@ -61,24 +88,24 @@ public class UserCourse   {
   @ApiModelProperty(value = "")
 
 
-  public Long getUserId() {
+  /*public Long getUserId() {
     return userId;
   }
 
   public void setUserId(Long userId) {
     this.userId = userId;
-  }
+  }*/
 
-  public UserCourse courseId(Long courseId) {
+  /*public UserCourse courseId(Long courseId) {
     this.courseId = courseId;
     return this;
-  }
+  }*/
 
   /**
    * Get courseId
    * @return courseId
   */
-  @ApiModelProperty(value = "")
+  /*@ApiModelProperty(value = "")
 
 
   public Long getCourseId() {
@@ -87,7 +114,7 @@ public class UserCourse   {
 
   public void setCourseId(Long courseId) {
     this.courseId = courseId;
-  }
+  }*/
 
 
   @Override
@@ -100,13 +127,13 @@ public class UserCourse   {
     }
     UserCourse userCourse = (UserCourse) o;
     return Objects.equals(this.id, userCourse.id) &&
-        Objects.equals(this.userId, userCourse.userId) &&
-        Objects.equals(this.courseId, userCourse.courseId);
+        Objects.equals(this.user, userCourse.user) &&
+        Objects.equals(this.course, userCourse.course);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, userId, courseId);
+    return Objects.hash(id, user, course);
   }
 
   @Override
@@ -115,8 +142,8 @@ public class UserCourse   {
     sb.append("class UserCourse {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    courseId: ").append(toIndentedString(courseId)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(user)).append("\n");
+    sb.append("    courseId: ").append(toIndentedString(course)).append("\n");
     sb.append("}");
     return sb.toString();
   }

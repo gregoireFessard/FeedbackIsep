@@ -2,6 +2,8 @@ package com.isep.feedback.api.model;
 
 import java.util.Date;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -17,6 +19,7 @@ import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "courses")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Course   {
 
   @Id
@@ -25,13 +28,16 @@ public class Course   {
   @JsonProperty("id")
   private Long id;
 
-  @Column(name = "teacher_id")
-  @JsonProperty("teacher_id")
-  private Long teacherId;
 
-  @Column(name = "material_id")
-  @JsonProperty("material_id")
-  private Long materialId;
+  @JsonProperty("teacher")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "teacher_id")
+  private User user;
+
+  @JsonProperty("material")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "material_id")
+  private CourseMaterial material;
 
   @Column(name = "dateTime")
   @Temporal(TemporalType.TIMESTAMP)
@@ -42,6 +48,9 @@ public class Course   {
   @Temporal(TemporalType.TIMESTAMP)
   @JsonProperty("dateEnd")
   private Date dateEnd;
+
+  public Course() {
+  }
 
   public Course id(Long id) {
     this.id = id;
@@ -63,16 +72,41 @@ public class Course   {
     this.id = id;
   }
 
-  public Course teacherId(Long teacherId) {
+  /*public Course teacherId(Long teacherId) {
     this.teacherId = teacherId;
     return this;
+  }*/
+
+  public User getUser() {
+    user.setPassword(null);
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Course(User user) {
+    this.user = user;
+  }
+
+  public CourseMaterial getMaterial() {
+    return material;
+  }
+
+  public void setMaterial(CourseMaterial material) {
+    this.material = material;
+  }
+
+  public Course(CourseMaterial material) {
+    this.material = material;
   }
 
   /**
    * Get teacherId
    * @return teacherId
   */
-  @ApiModelProperty(value = "")
+  /*@ApiModelProperty(value = "")
 
 
   public Long getTeacherId() {
@@ -81,12 +115,12 @@ public class Course   {
 
   public void setTeacherId(Long teacherId) {
     this.teacherId = teacherId;
-  }
+  }*/
 
-  public Course materialId(Long materialId) {
+  /*public Course materialId(Long materialId) {
     this.materialId = materialId;
     return this;
-  }
+  }*/
 
   /**
    * Get materialId
@@ -95,13 +129,13 @@ public class Course   {
   @ApiModelProperty(value = "")
 
 
-  public Long getMaterialId() {
+  /*public Long getMaterialId() {
     return materialId;
   }
 
   public void setMaterialId(Long materialId) {
     this.materialId = materialId;
-  }
+  }*/
 
   public Course dateTime(Date dateTime) {
     this.dateTime = dateTime;
@@ -154,15 +188,15 @@ public class Course   {
     }
     Course course = (Course) o;
     return Objects.equals(this.id, course.id) &&
-        Objects.equals(this.teacherId, course.teacherId) &&
-        Objects.equals(this.materialId, course.materialId) &&
+        Objects.equals(this.user, course.user) &&
+        Objects.equals(this.material, course.material) &&
         Objects.equals(this.dateTime, course.dateTime) &&
         Objects.equals(this.dateEnd, course.dateEnd);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, teacherId, materialId, dateTime, dateEnd);
+    return Objects.hash(id, user, material, dateTime, dateEnd);
   }
 
   @Override
@@ -171,8 +205,8 @@ public class Course   {
     sb.append("class Course {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    teacherId: ").append(toIndentedString(teacherId)).append("\n");
-    sb.append("    materialId: ").append(toIndentedString(materialId)).append("\n");
+    sb.append("    teacherId: ").append(toIndentedString(user)).append("\n");
+    sb.append("    materialId: ").append(toIndentedString(material)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
     sb.append("    dateEnd: ").append(toIndentedString(dateEnd)).append("\n");
     sb.append("}");

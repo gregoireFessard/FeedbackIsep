@@ -29,17 +29,22 @@ public class CourseDocument   {
   @JsonProperty("document")
   private String document;
 
-  @Column(name = "user_id")
-  @JsonProperty("user_id")
-  private Long userId;
+  @JsonProperty("user")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  private User user;
 
-  @Column(name = "course_id")
-  @JsonProperty("course_id")
-  private Long courseId;
+  @JsonProperty("course")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "course_id")
+  private Course course;
 
   public CourseDocument id(Long id) {
     this.id = id;
     return this;
+  }
+
+  public CourseDocument() {
   }
 
   /**
@@ -47,6 +52,7 @@ public class CourseDocument   {
    * @return id
   */
   @ApiModelProperty(value = "")
+
 
 
   public Long getId() {
@@ -97,9 +103,34 @@ public class CourseDocument   {
     this.document = document;
   }
 
-  public CourseDocument userId(Long userId) {
+  /*public CourseDocument userId(Long userId) {
     this.userId = userId;
     return this;
+  }*/
+
+  public User getUser() {
+    user.setPassword(null);
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Course getCourse() {
+    return course;
+  }
+
+  public void setCourse(Course course) {
+    this.course = course;
+  }
+
+  public CourseDocument(User user) {
+    this.user = user;
+  }
+
+  public CourseDocument(Course course) {
+    this.course = course;
   }
 
   /**
@@ -109,24 +140,24 @@ public class CourseDocument   {
   @ApiModelProperty(value = "")
 
 
-  public Long getUserId() {
+  /*public Long getUserId() {
     return userId;
   }
 
   public void setUserId(Long userId) {
     this.userId = userId;
-  }
+  }*/
 
-  public CourseDocument courseId(Long courseId) {
+  /*public CourseDocument courseId(Long courseId) {
     this.courseId = courseId;
     return this;
-  }
+  }*/
 
   /**
    * Get courseId
    * @return courseId
   */
-  @ApiModelProperty(value = "")
+  /*@ApiModelProperty(value = "")
 
 
   public Long getCourseId() {
@@ -135,7 +166,7 @@ public class CourseDocument   {
 
   public void setCourseId(Long courseId) {
     this.courseId = courseId;
-  }
+  }*/
 
 
   @Override
@@ -150,13 +181,13 @@ public class CourseDocument   {
     return Objects.equals(this.id, courseDocument.id) &&
         Objects.equals(this.name, courseDocument.name) &&
         Objects.equals(this.document, courseDocument.document) &&
-        Objects.equals(this.userId, courseDocument.userId) &&
-        Objects.equals(this.courseId, courseDocument.courseId);
+        Objects.equals(this.user, courseDocument.user) &&
+        Objects.equals(this.course, courseDocument.course);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, document, userId, courseId);
+    return Objects.hash(id, name, document, user, course);
   }
 
   @Override
@@ -167,8 +198,8 @@ public class CourseDocument   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    document: ").append(toIndentedString(document)).append("\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    courseId: ").append(toIndentedString(courseId)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(user)).append("\n");
+    sb.append("    courseId: ").append(toIndentedString(course)).append("\n");
     sb.append("}");
     return sb.toString();
   }

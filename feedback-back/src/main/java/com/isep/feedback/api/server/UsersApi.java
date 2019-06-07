@@ -71,14 +71,14 @@ public interface UsersApi {
 
 
     @ApiOperation(value = "Search an user", nickname = "usersGet", notes = "", response = User.class, responseContainer = "List", tags={ "user", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "successful operation", response = User.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "Invalid username supplied"),
         @ApiResponse(code = 404, message = "User not found") })
     @RequestMapping(value = "/users",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<List<User>> usersGet(@NotNull @ApiParam(value = "Name of the user to search", required = true) @Valid @RequestParam(value = "search", required = true) String search) {
+    default ResponseEntity<List<User>> usersGet(@ApiParam(value = "Name of the user to search", required = false) @Valid @RequestParam(value = "search", required = false) String search) {
         return getDelegate().usersGet(search);
     }
 

@@ -8,22 +8,17 @@ package com.isep.feedback.api.server;
 import com.isep.feedback.api.model.Comment;
 import com.isep.feedback.api.model.Course;
 import com.isep.feedback.api.model.CourseDocument;
+import com.isep.feedback.api.model.UserCourse;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.List;
-import java.util.Map;
 
 @Validated
 @Api(tags={ "comment", })
@@ -143,9 +138,9 @@ public interface CoursesApi {
     }
 
 
-    @ApiOperation(value = "Get user's courses", nickname = "coursesGet", notes = "Get user's courses", response = Course.class, responseContainer = "List", tags={ "course", })
+    @ApiOperation(value = "Get user's courses", nickname = "coursesGet", notes = "Get user's courses", response = UserCourse.class, responseContainer = "List", tags={ "course", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Course.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "successful operation", response = UserCourse.class, responseContainer = "List"),
         @ApiResponse(code = 404, message = "User not found") })
     @RequestMapping(value = "/courses",
         produces = { "application/json" },

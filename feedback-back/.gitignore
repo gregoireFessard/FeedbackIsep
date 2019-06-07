@@ -29,3 +29,5 @@ HELP.md
 .vscode/
 openapi-gen/
 /bin/
+
+src/main/resources/application.properties
