@@ -11,6 +11,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Image from '../../assets/IsepPicture.jpg';
+import Link from '@material-ui/core/Link';
 import App from '../../containers/App';
 import { Redirect } from 'react-router';
 
@@ -55,6 +56,14 @@ const styles = theme =>({
 		backgroundRepeat: 'no-repeat',
 
 	},
+	error: {
+
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		color : 'red'
+
+	},
 	paper: {
 		marginTop: theme.spacing.unit * 8,
 		display: 'flex',
@@ -79,13 +88,16 @@ const styles = theme =>({
 
 
 class Index extends React.Component {
+	state = {
+		mail: '',
+		password : '',
+		connectionRefused : "false",
+	}
+
+
 	constructor(props) {
 		super(props);
-		this.state = {
-			mail: '',
-			password : '',
-		};
-
+		this.setState({connectionRefused : "false",})
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -105,11 +117,9 @@ class Index extends React.Component {
 
 	handleSubmit(event){
 		event.preventDefault()
-
 		dataUsers.map((info) =>{
-			console.log(this.s)
 				if (this.state.mail === info.mail && this.state.password === info.password){
-					console.log(info)
+					this.setState({connectionRefused : "false"})
 					sessionStorage.setItem('UserAutotentificateFirstname', info.firstname)
 					sessionStorage.setItem('UserAutotentificateLastname', info.lastname)
 					sessionStorage.setItem('UserAutotentificateUsername', info.username)
@@ -124,7 +134,7 @@ class Index extends React.Component {
 				}
 			}
 		)
-
+		this.setState({connectionRefused : "true"})
 	}
 
 
@@ -132,41 +142,92 @@ class Index extends React.Component {
 	render() {
 
 		const{classes} = this.props;
+		if(this.state.connectionRefused === "false") {
+			return (
 
-		return (
-			<main className={classes.backgroundHolder}>
-				<div className={classes.main}>
-					<Paper className={classes.paper}>
-						<Typography component="h1" variant="h5">
-							Connection
-						</Typography>
-						<form className={classes.form} onSubmit={this.handleSubmit}>
-							<FormControl margin="normal" required fullWidth>
-								<InputLabel htmlFor="mail">Email</InputLabel>
-								<Input id="mail" name="mail" autoComplete="mail" autoFocus value={this.state.mail} onChange={this.handleInputChange}/>
-							</FormControl>
-							<FormControl margin="normal" required fullWidth>
-								<InputLabel htmlFor="password">Mot de passe</InputLabel>
-								<Input name="password" type="password" id="password" autoComplete="current-password" value={this.state.password} onChange={this.handleInputChange}/>
-							</FormControl>
-							<FormControlLabel
-								control={<Checkbox value="remember" color="primary" />}
-								label="Se souvenir de moi"
-							/>
-							<Button
-								type="submit"
-								fullWidth
-								variant="contained"
-								color="primary"
-								className={classes.submit}
-							>
-								Se connecter
-							</Button>
-						</form>
-					</Paper>
-				</div>
-			</main>
-		);
+				<main className={classes.backgroundHolder}>
+					<div className={classes.main}>
+						<Paper className={classes.paper}>
+							<Typography component="h1" variant="h5">
+								Connection
+							</Typography>
+							<form className={classes.form} onSubmit={this.handleSubmit}>
+								<FormControl margin="normal" required fullWidth>
+									<InputLabel htmlFor="mail">Email</InputLabel>
+									<Input id="mail" name="mail" autoComplete="mail" autoFocus value={this.state.mail}
+										   onChange={this.handleInputChange}/>
+								</FormControl>
+								<FormControl margin="normal" required fullWidth>
+									<InputLabel htmlFor="password">Mot de passe</InputLabel>
+									<Input name="password" type="password" id="password" autoComplete="current-password"
+										   value={this.state.password} onChange={this.handleInputChange}/>
+								</FormControl>
+								<FormControlLabel
+									control={<Checkbox value="remember" color="primary"/>}
+									label="Se souvenir de moi"
+								/>
+								<Link href={"./motDePasseOublie"} className={classes.link}>
+									Mot de passe oublié
+								</Link>
+								<Button
+									type="submit"
+									fullWidth
+									variant="contained"
+									color="primary"
+									className={classes.submit}
+								>
+									Se connecter
+								</Button>
+							</form>
+						</Paper>
+					</div>
+				</main>
+			);
+		}
+		else if(this.state.connectionRefused === "true") {
+			return (
+				<main className={classes.backgroundHolder}>
+					<div className={classes.main}>
+						<Paper className={classes.paper}>
+							<Typography component="h1" variant="h5">
+								Connection
+							</Typography>
+							<Typography className={classes.error} >
+								<strong>Connexion refusée</strong>
+							</Typography>
+							<form className={classes.form} onSubmit={this.handleSubmit}>
+								<FormControl margin="normal" required fullWidth>
+									<InputLabel htmlFor="mail">Email</InputLabel>
+									<Input id="mail" name="mail" autoComplete="mail" autoFocus value={this.state.mail}
+										   onChange={this.handleInputChange}/>
+								</FormControl>
+								<FormControl margin="normal" required fullWidth>
+									<InputLabel htmlFor="password">Mot de passe</InputLabel>
+									<Input name="password" type="password" id="password" autoComplete="current-password"
+										   value={this.state.password} onChange={this.handleInputChange}/>
+								</FormControl>
+								<FormControlLabel
+									control={<Checkbox value="remember" color="primary"/>}
+									label="Se souvenir de moi"
+								/>
+								<Link href={"./motDePasseOublie"} className={classes.link}>
+									Mot de passe oublié
+								</Link>
+								<Button
+									type="submit"
+									fullWidth
+									variant="contained"
+									color="primary"
+									className={classes.submit}
+								>
+									Se connecter
+								</Button>
+							</form>
+						</Paper>
+					</div>
+				</main>
+			)
+		}
 
 	}
 }

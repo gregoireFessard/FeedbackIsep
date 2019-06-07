@@ -108,7 +108,7 @@ VALUES (NULL, 'ktan', 'Kevin', 'TAN', '2', 'kevin.tan@isep.fr', 'root',
         '#222222', NULL, 1);
 INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent_id`, `enabled`)
-VALUES (NULL, 'acanard', 'Antoine', 'Canard', '3', 'kev@gmail.com', '{noop}secret',
+VALUES (NULL, 'acanard', 'Antoine', 'Canard', '3', 'antoine.canard@isep.fr', 'root',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#a6e590', NULL, 1);
 INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
