@@ -9,6 +9,7 @@ import store from './store';
 import { history } from './history';
 
 ReactDOM.render(
+
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <App />

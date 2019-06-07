@@ -92,7 +92,7 @@ public interface UsersApi {
         produces = { "application/json" },
         method = RequestMethod.GET)
     default ResponseEntity<User> usersUserIdGet(@ApiParam(value = "The id that needs to be fetched.", required = true) @PathVariable("userId") Long userId) {
-        return getDelegate().usersUserIdGet(userId);
+            return getDelegate().usersUserIdGet(userId);
     }
 
 }
