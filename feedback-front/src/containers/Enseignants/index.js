@@ -5,6 +5,7 @@ import SearchBar from '../../components/SearchBar';
 import Grid from '@material-ui/core/Grid';
 import Image from "../../assets/basicProfile.png";
 import Button from '@material-ui/core/Button';
+import ModalSendMessage from '../../components/ModalSendMessage'
 
 
 const dataEnseignants =[
@@ -31,7 +32,7 @@ const EnseignantPanel = props =>
             <Button variant="contained" color="primary" size={"small"}  href={'../profil/'+ props.data.id}  >Voir le Profil</Button>
         </Grid>
         <Grid item xs = {3} className={"buttonSendMessage"} >
-            <Button variant="contained" color="primary" size={"small"}  >Envoyer un message</Button>
+            {ModalSendMessage(props.data)}
         </Grid>
     </Grid>
 

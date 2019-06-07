@@ -7,6 +7,7 @@ import Image from "../../assets/basicProfile.png";
 import Button from '@material-ui/core/Button';
 import '../../actions/users';
 import {getUsers} from "../../actions/users";
+import ModalSendMessage from "../../components/ModalSendMessage";
 
 const dataEtudiants =[
     {"id":"3","username":"acanard","firstname":"Antoine","lastname":"Canard","isep_id":"3","mail":"kev@gmail.com","password":"{noop}secret","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#a6e590","parent_id":null,"enabled":"1"},
@@ -30,7 +31,7 @@ const EtudiantPanel = props =>
             <Button variant="contained" color="primary" size={"small"}  href={'../profil/'+ props.data.id}  >Voir le Profil</Button>
         </Grid>
         <Grid item xs = {3} className={"buttonSendMessage"} >
-            <Button variant="contained" color="primary" size={"small"}  >Envoyer un message</Button>
+            {ModalSendMessage(props.data)}
         </Grid>
     </Grid>
 
