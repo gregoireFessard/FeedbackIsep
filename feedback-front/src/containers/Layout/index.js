@@ -1,10 +1,11 @@
 import React, { Component} from 'react';
 import Header from '../../components/Header';
-import NavBar from '../../components/NavBar';
+import SideBar from '../../components/SideBar';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Image from "../../assets/IsepPicture.jpg";
 import './index.css'
+import SideBar from "../../components/SideBar";
 const styles = theme =>({
 
 
@@ -46,7 +47,7 @@ class Layout extends Component {
         return(
             <div className={'main'}>
                 <div className={'sidebar'}>
-                    <NavBar/>
+                    <SideBar/>
                 </div>
                 <div className={classes.hc}>
                     <div className={classes.header}>

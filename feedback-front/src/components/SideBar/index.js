@@ -9,9 +9,30 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Logo from '../../assets/IsepLogo.svg';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import StarBorder from '@material-ui/icons/CalendarToday';
+
 import './index.css'
+
+const dataUserCourses = [
+	{"id":"1","user_id":"3","course_id":"1"},
+	{"id":"2","user_id":"3","course_id":"2"},
+	{"id":"3","user_id":"3","course_id":"3"},
+	{"id":"4","user_id":"3","course_id":"4"},
+	{"id":"5","user_id":"3","course_id":"5"},
+	{"id":"6","user_id":"3","course_id":"6"},
+	{"id":"7","user_id":"3","course_id":"7"},
+	{"id":"8","user_id":"3","course_id":"8"}
+]
+const dataCourseMaterials = [
+	{"id":"1","name":"Genie logiciel"},
+	{"id":"2","name":"Cybersecurite"},
+	{"id":"3","name":"Architecture des SI"},
+	{"id":"4","name":"Analyse Geopolitique"},
+	{"id":"5","name":"Technologies Web"},
+	{"id":"6","name":"Big Data"},
+	{"id":"7","name":"Espagnol"},
+	{"id":"8","name":"Anglais"}
+]
+
 const styles = theme =>({
 	listItem : {
 		color : 'white !important'
@@ -26,12 +47,13 @@ const styles = theme =>({
 })
 
 
-class NavBar extends React.Component{
+class SideBar extends React.Component{
 
 
 
 	state = {
 		open: false,
+		dataCourseMaterials : {}
 	};
 
 	handleClick = () => {
@@ -75,4 +97,4 @@ class NavBar extends React.Component{
 		);
 	}
 }
-export default withStyles(styles)(NavBar);
+export default withStyles(styles)(SideBar);
