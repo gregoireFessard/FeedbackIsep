@@ -41,10 +41,10 @@ const styles = theme =>({
 
     },
     box1 :  {
-        width: '10%',
+        width: '20%',
         minHeight: '80px',
         float:'right',
-        margin:'5%',
+        marginRight:'5%',
     },
     box2 :  {
         width: '60%',
@@ -53,13 +53,14 @@ const styles = theme =>({
         margin:'5%',
     },
     box3 :  {
-        width: '60%',
+        width: '90%',
         margin:'5%',
         minHeight:'100vh',
         backgrundColor:'red',
     },
     message: {
-        width: '100%',
+        width: '90%',
+        marginBottom : '5%'
     },
 
     paper1 : {
@@ -145,45 +146,22 @@ class Home extends Component {
             <Layout className={classes.main}>
                 <div className={classes.box1}>
                     <Paper className={classes.paper1}>
-                        <Grid
-                            container
-                            direction="column"
-                            justify="center"
-                            alignItems="center"
-                        >
-                            <Typography>
-                                Liens ISEP
-                            </Typography>
-                            <Link
-                                component="button"
-                                variant="body2"
-                                underline="always"
-                                onClick={() => {
-                                    alert("I'm a button.");
-                                }}
-                            >
-                                Hyperplanning
-                            </Link>
-                            <Link
-                                component="button"
-                                variant="body2"
-                                underline="always"
-                                onClick={() => {
-                                    alert("I'm a button.");
-                                }}
-                            >
-                                Moodle
-                            </Link>
-                            <Link
-                                component="button"
-                                variant="body2"
-                                underline="always"
-                                onClick={() => {
-                                    alert("I'm a button.");
-                                }}
-                            >
-                                weberp
-                            </Link>
+                        <Grid container
+                              direction="column"
+                              justify="center"
+                              alignItems="center">
+                            <Grid item xs >
+                                <Link href={'https://www.isep.fr/'}>Site ISEP</Link>
+                            </Grid>
+                            <Grid item xs >
+                                <Link href={'https://educ.isep.fr/moodle/'}>Moodle</Link>
+                            </Grid>
+                            <Grid item xs >
+                                <Link href={'http://planning.isep.fr/'}>Hyperplanning</Link>
+                            </Grid>
+                            <Grid item xs >
+                                <Link href={'./profil/'+sessionStorage.getItem("UserAutotentificateId")}>Mon profil</Link>
+                            </Grid>
                         </Grid>
                     </Paper>
                 </div>
@@ -196,12 +174,9 @@ class Home extends Component {
                             alignItems="center"
                         >
                             <Link
-                                component="button"
+                                href={'./message'}
                                 variant="body2"
                                 underline="always"
-                                onClick={() => {
-                                    alert("I'm a button.");
-                                }}
                             >
                                 Vous avez x messages non lus : Consulter mes messages
                             </Link>
@@ -210,14 +185,14 @@ class Home extends Component {
                 </div>
 
                 <div className={classes.box3}>
-                    <Paper className={classes.paper2}>
+                    <Paper>
                         <Grid
                             container
                             direction="column"
                             justify="center"
                             alignItems="center"
                         >
-                            <Typography variant="h3">
+                            <Typography variant="h4" style={{'margin' : '3%'}}>
                                 Derniers messages des professeurs
                             </Typography>
                             <Paper className={classes.message}>
