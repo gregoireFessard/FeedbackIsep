@@ -31,7 +31,7 @@ const EtudiantPanel = props =>
             <Button variant="contained" color="primary" size={"small"}  href={'../profil/'+ props.data.id}  >Voir le Profil</Button>
         </Grid>
         <Grid item xs = {3} className={"buttonSendMessage"} >
-            {ModalSendMessage(props.data)}
+            {ModalSendMessage(props.data, this.dataConversations)}
         </Grid>
     </Grid>
 
@@ -39,14 +39,19 @@ class Etudiants extends React.Component{
 
 
     componentDidMount() {
-
+        this.setState({isLoading: true});
+        fetch('http://localhost:8082/api/conversations')
+            .then(response => response.json())
+            .then(data => this.setState({dataConversations : data}))
+            .then(data => console.log(this.state.dataConversations[this.state.dataConversations.length-1]));
     }
 
     constructor(props){
         super(props);
         this.handler = this.handler.bind(this)
         this.state = {
-            result: []
+            result: [],
+            dataConversations : {}
         }
     }
 

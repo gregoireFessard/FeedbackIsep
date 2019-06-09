@@ -9,7 +9,7 @@ import profilPicture from '../../assets/basicProfile.png';
 
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import List from "../../components/NavBar";
+
 
 
 const dataUserCourses = [

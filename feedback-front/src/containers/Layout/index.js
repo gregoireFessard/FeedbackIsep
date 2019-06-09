@@ -5,7 +5,7 @@ import SideBar from '../../components/SideBar';
 import withStyles from "@material-ui/core/styles/withStyles";
 import Image from "../../assets/IsepPicture.jpg";
 import './index.css'
-import SideBar from "../../components/SideBar";
+
 const styles = theme =>({
 
 

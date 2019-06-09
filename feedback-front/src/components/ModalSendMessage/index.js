@@ -24,7 +24,7 @@ function getModalStyle() {
 
 
 
-function ModalSendMessage(dataReceiver) {
+function ModalSendMessage(dataReceiver, dataConversations) {
     const [open, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState("");
 
@@ -43,7 +43,24 @@ function ModalSendMessage(dataReceiver) {
     }
 
     const handleSubmit = () =>{
-        //Envoie message a la bdd
+
+        const dataPostMessage = {
+            "conversation": {
+                "dateTime": new Date(),
+                "from_id": sessionStorage.getItem("UserAutotentificateId"),
+                "status": "string",
+                "subject": "string",
+                "to_id": dataReceiver.id
+            },
+            "message": {
+                "content": this.state.message,
+                "conversation_id": null,
+                "dateTime": new Date(),
+                "id": 0,
+                "is_from_sender": true,
+                "message_read": true
+            }
+        }
     }
 
     return (
