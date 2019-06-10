@@ -11,6 +11,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Reply from '@material-ui/icons/Reply';
 
 import withStyles from "@material-ui/core/styles/withStyles";
+import axios from "axios";
+import NotReadMessageHome from "../../components/NotReadMessageHome";
 const styles = theme =>({
 
     main: {
@@ -26,14 +28,80 @@ const styles = theme =>({
         overflowY: 'scroll',
     },
 
-    subject: {
-       color:'red', // temporaire
-    },
+
 
 
 })
+const MessagePanel = props =>
+    <ExpansionPanel square>
+        <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
+            <Typography>{props.firstName} {props.lastName}</Typography>
+            <Typography style={{'color' : 'red'}}>{props.subject}</Typography>
+            <Reply/>
+            <DeleteIcon/>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+            <Typography>
+                {props.message}
+            </Typography>
+        </ExpansionPanelDetails>
+    </ExpansionPanel>
 
 class Message extends Component {
+    state = {
+        dataMessages : []
+    }
+
+    async findCreateData() {
+        var dataConversations = []
+        const listIpConversationsSender = []
+        const listIpConversationsReceiver = []
+
+        await axios.get('/api/conversations')
+            .then(data => { dataConversations = data.data})
+
+        dataConversations.map((infoConversations) =>{
+            if( infoConversations.from_id == sessionStorage.getItem("UserAutotentificateId")){
+                var dataPushed = {
+                    firstName : "",
+                    lastName : "",
+                    subject : "",
+                    message : ""
+                };
+
+               dataPushed.subject = infoConversations.subject;
+
+
+                axios.get('/api/users/' + infoConversations.to_id)
+                    .then(data => {
+                       dataPushed.firstName = data.data.firstName;
+                        dataPushed.lastName = data.data.lastName
+                    })
+
+                axios.get('/api/conversations/'+ infoConversations.id +'/messages')
+                    .then(data => {
+                        data.data.map((info) =>{
+                            if(info.message_read === false && info.is_from_sender ===false){
+                                dataPushed.message = info.content
+                            }
+                        })
+                    })
+
+
+                this.state.dataMessages.push(dataPushed)
+            }
+            if( infoConversations.to_id == sessionStorage.getItem("UserAutotentificateId")){
+                listIpConversationsReceiver.push(infoConversations.id)
+            }
+        })
+
+        console.log(this.state.dataMessages)
+
+    }
+
+    componentDidMount() {
+        this.findCreateData()
+    }
 
     render(){
 
@@ -50,67 +118,9 @@ class Message extends Component {
                         justify="center"
                         alignItems="center"
                     >
-                        <ExpansionPanel square>
-                            <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                                <Typography>Pierre Fer</Typography>
-                                <Typography className={classes.subject}>sujet du message</Typography>
-                                <Reply/>
-                                <DeleteIcon/>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        <ExpansionPanel square>
-                            <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                                <Typography>Pierre Fer</Typography>
-                                <Typography className={classes.subject}>sujet du message</Typography>
-                                <Reply/>
-                                <DeleteIcon/>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        <ExpansionPanel square>
-                            <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                                <Typography>Pierre Fer</Typography>
-                                <Typography className={classes.subject}>sujet du message</Typography>
-                                <Reply/>
-                                <DeleteIcon/>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        <ExpansionPanel square>
-                            <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                                <Typography>Pierre Fer</Typography>
-                                <Typography className={classes.subject}>sujet du message</Typography>
-                                <Reply/>
-                                <DeleteIcon/>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
+                        {this.state.dataMessages.map((info) =>{
 
+                        })}
                     </Grid>
                 </Paper>
 

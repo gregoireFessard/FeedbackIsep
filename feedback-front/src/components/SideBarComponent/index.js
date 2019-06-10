@@ -34,7 +34,6 @@ class SideBarComponent extends React.Component{
             }
     };
     render() {
-        console.log(this.state.data.dataCourse)
 
         return(
             <div>

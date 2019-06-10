@@ -1,0 +1,43 @@
+.box3{
+    width: 90%;
+    margin: 5%;
+    min-height : 100vh;
+}
+
+.message{
+    width: 90%;
+    margin-bottom : 5%
+}
+
+
+.profilPicture{
+    height: 20px;
+    padding: 20px;
+}
+
+.content{
+}
+
+.messageContext{
+    float: right
+}
+
+.comment {
+    display: flex;
+    flex-direction: column
+}
+
+.response{
+    display: flex;
+    flex-direction: row
+}
+
+.commentHeader{
+    border-width: 1px;
+    border-style: solid
+}
+
+.commentContent{
+    border-width: 1px;
+    border-style: solid
+}

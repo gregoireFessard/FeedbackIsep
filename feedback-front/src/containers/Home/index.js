@@ -7,11 +7,43 @@ import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import profilPicture from '../../assets/basicProfile.png';
 import axios from 'axios';
+import LastMessageHome from '../../components/LastMessageHome'
+import NotReadMessageHome from '../../components/NotReadMessageHome'
 
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
+const dataLastMessageCourse = [
+    {"nameMaterial" : "cybersécurité",
+        "data" : [
+            {
+                "user" :   {"id":"1","username":"gfessar","firstname":"Gregoire","lastname":"Fessar","isep_id":"1","mail":"gregoire.fessard@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#111111","parent_id":null,"enabled":"1"},
+                "comment" :{"id":"1","user_id":"1","course_id":"1","content":"Ce cOuRs eSt nUL. jAiMe pAs","date_time":"2019-05-21 13:02:00","number_like":"35","number_dislike":"0","parent_id":null},
+            }
+            ],
 
+    },
+    {"nameMaterial" : "Génie Logiciel",
+        "data" : [
+            {
+                "user" :   {"id":"1","username":"gfessar","firstname":"Gregoire","lastname":"Fessar","isep_id":"1","mail":"gregoire.fessard@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#111111","parent_id":null,"enabled":"1"},
+                "comment" :{"id":"1","user_id":"1","course_id":"1","content":"Ce cOuRs eSt nUL. jAiMe pAs","date_time":"2019-05-21 13:02:00","number_like":"35","number_dislike":"0","parent_id":null},
+            }
+            ],
+
+    },
+    {"nameMaterial" : "technoWeb",
+        "data" : [
+            {
+                "user" :   {"id":"1","username":"gfessar","firstname":"Gregoire","lastname":"Fessar","isep_id":"1","mail":"gregoire.fessard@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#111111","parent_id":null,"enabled":"1"},
+                "comment" :{"id":"1","user_id":"1","course_id":"1","content":"Ce cOuRs eSt nUL. jAiMe pAs","date_time":"2019-05-21 13:02:00","number_like":"35","number_dislike":"0","parent_id":null},
+            }
+            ],
+
+    }
+
+
+    ]
 
 const dataUserCourses = [
     {"id":"1","user_id":"3","course_id":"1"},
@@ -21,8 +53,34 @@ const dataUserCourses = [
     {"id":"5","user_id":"3","course_id":"5"},
     {"id":"6","user_id":"3","course_id":"6"},
     {"id":"7","user_id":"3","course_id":"7"},
-    {"id":"8","user_id":"3","course_id":"8"}
+    {"id":"8","user_id":"3","course_id":"8"},
+    {"id":"9","user_id":"3","course_id":"9"},
+    {"id":"10","user_id":"3","course_id":"10"},
+    {"id":"11","user_id":"3","course_id":"11"},
+    {"id":"12","user_id":"3","course_id":"12"},
+    {"id":"13","user_id":"3","course_id":"13"},
+    {"id":"14","user_id":"3","course_id":"14"},
+    {"id":"15","user_id":"3","course_id":"15"},
+    {"id":"16","user_id":"3","course_id":"16"},
+    {"id":"17","user_id":"3","course_id":"17"},
+    {"id":"18","user_id":"3","course_id":"18"},
+    {"id":"19","user_id":"3","course_id":"19"},
+    {"id":"20","user_id":"3","course_id":"20"},
+    {"id":"21","user_id":"3","course_id":"21"},
+    {"id":"22","user_id":"3","course_id":"22"},
+    {"id":"23","user_id":"3","course_id":"23"},
+    {"id":"24","user_id":"3","course_id":"24"},
+    {"id":"25","user_id":"3","course_id":"25"},
+    {"id":"26","user_id":"3","course_id":"26"},
+    {"id":"27","user_id":"3","course_id":"27"},
+    {"id":"28","user_id":"3","course_id":"28"},
+    {"id":"29","user_id":"3","course_id":"29"},
+    {"id":"30","user_id":"3","course_id":"30"},
+    {"id":"31","user_id":"3","course_id":"31"},
+    {"id":"32","user_id":"3","course_id":"32"}
 ]
+
+
 
 
 
@@ -44,16 +102,7 @@ const styles = theme =>({
         alignItems: 'center',
         margin:'5%',
     },
-    box3 :  {
-        width: '90%',
-        margin:'5%',
-        minHeight:'100vh',
-        backgrundColor:'red',
-    },
-    message: {
-        width: '90%',
-        marginBottom : '5%'
-    },
+
 
     paper1 : {
         marginTop: theme.spacing.unit * 8,
@@ -63,66 +112,42 @@ const styles = theme =>({
         padding: `${theme.spacing.unit * 1}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     },
 
-    paper2 : {
-        marginTop: theme.spacing.unit * 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-    },
 
-    profilPicture:{
-        height: '20px',
-        padding: '20px',
-    },
-    content: {
-        backgroundColor:'green',
-    },
-    content1: {
-        backgroundColor:'blue',
-    },
-    content2: {
-        backgroundColor:'red',
-    },
-
-    messageContext:{
-        float:'right',
-    },
-
-    comment:{
-        display: 'flex',
-        flexDirection: 'column',
-    },
-
-    response:{
-        display: 'flex',
-        flexDirection: 'row',
-    },
-
-    commentHeader:{
-        borderWidth:'1px',
-        borderStyle: 'solid',
-    },
-
-    commentContent:{
-        borderWidth:'1px',
-        borderStyle: 'solid',
-    },
-
-    button:{
-
-    },
 
 })
 
 class Home extends Component {
 
     state = {
-        dataUser : {}
+        dataUser : {},
+        dataLastMessageCourse : dataLastMessageCourse,
+        dataCourse : {},
+        dataUserCourses : dataUserCourses,
+
+    }
+    async findCreateData(){
+        const  dataUserCoursesGlobal = []
+        const dataLastMessageCourse = []
+        await axios.get('/api/courses')
+            .then(data => this.setState({dataCourse : data.data}))
+
+        console.log(this.state.d)
+        //recup les cours de l'utilisateur connecté qui ne se sont pas encore déroulé (comparaison date)
+        this.state.dataCourse.map((infoCourse) =>{
+                this.state.dataUserCourses.map((infoUserCourse)=>{
+                    if(infoUserCourse.course_id == infoCourse.id){
+                            dataUserCoursesGlobal.push(infoCourse)
+                    }
+                })
+            }
+        )
+
+        this.setState({dataUserCoursesGlobal : dataUserCoursesGlobal})
     }
 
-
-
+    componentDidMount() {
+        this.findCreateData()
+    }
 
 
     render(){
@@ -151,107 +176,8 @@ class Home extends Component {
                         </Grid>
                     </Paper>
                 </div>
-                <div className={classes.box2}>
-                    <Paper className={classes.paper1}>
-                        <Grid
-                            container
-                            direction="column"
-                            justify="center"
-                            alignItems="center"
-                        >
-                            <Link
-                                href={'./message'}
-                                variant="body2"
-                                underline="always"
-                            >
-                                Vous avez x messages non lus : Consulter mes messages
-                            </Link>
-                        </Grid>
-                    </Paper>
-                </div>
-
-                <div className={classes.box3}>
-                    <Paper>
-                        <Grid
-                            container
-                            direction="column"
-                            justify="center"
-                            alignItems="center"
-                        >
-                            <Typography variant="h4" style={{'margin' : '3%'}}>
-                                Derniers messages des professeurs
-                            </Typography>
-                            <Paper className={classes.message}>
-                                <Typography>
-                                    Technologies Web :
-                                </Typography>
-                                <div className={classes.response}>
-                                    <div className={classes.commentHeader}>
-                                        <img className={classes.profilPicture} src={profilPicture}></img>
-                                        <Typography>
-                                            Marcel Pol
-                                        </Typography>
-                                        6 mai a 15h42
-                                    </div>
-                                    <div className={classes.commentContent}>
-                                        <Typography>
-                                            As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
-
-                                            When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
-                                        </Typography>
-                                    </div>
-                                    <Button className={classes.button} size="small" color="primary">
-                                        voir ce message dans son contexte
-                                    </Button>
-                                </div>
-                                <div className={classes.response}>
-                                    <div className={classes.commentHeader}>
-                                        <img className={classes.profilPicture} src={profilPicture}></img>
-                                        <Typography>
-                                            Marcel Pol
-                                        </Typography>
-                                        6 mai a 15h42
-                                    </div>
-                                    <div className={classes.commentContent}>
-                                        <Typography>
-                                            As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
-
-                                            When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
-                                        </Typography>
-                                    </div>
-                                    <Button className={classes.button} size="small" color="primary">
-                                        voir ce message dans son contexte
-                                    </Button>
-                                </div>
-                                <Typography>
-                                    Genie logiciel :
-                                </Typography>
-                                <div className={classes.response}>
-                                    <div className={classes.commentHeader}>
-                                        <img className={classes.profilPicture} src={profilPicture}></img>
-                                        <Typography>
-                                            Marcel Pol
-                                        </Typography>
-                                        6 mai a 15h42
-                                    </div>
-                                    <div className={classes.commentContent}>
-                                        <Typography>
-                                            As explained in this blog post, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!
-
-                                            When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
-                                        </Typography>
-                                    </div>
-                                    <Button className={classes.button} size="small" color="primary">
-                                        voir ce message dans son contexte
-                                    </Button>
-                                </div>
-                            </Paper>
-
-                        </Grid>
-
-                    </Paper>
-                </div>
-
+                <NotReadMessageHome/>
+                <LastMessageHome data = {this.state.dataLastMessageCourse}/>
             </Layout>
         )
     }
