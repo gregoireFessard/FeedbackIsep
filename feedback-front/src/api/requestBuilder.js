@@ -3,7 +3,9 @@ import { host } from '../config'
 
 const axiosInstance = axios.create({
     baseURL: host,
-    responseType: "json"
+    responseType: "json",
+
+
     // withCredentials: true,
 });
 

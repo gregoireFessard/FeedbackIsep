@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import '../../actions/users';
 import {getUsers} from "../../actions/users";
 import ModalSendMessage from "../../components/ModalSendMessage";
+import axios from "axios";
 
 const dataEtudiants =[
     {"id":"3","username":"acanard","firstname":"Antoine","lastname":"Canard","isep_id":"3","mail":"kev@gmail.com","password":"{noop}secret","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#a6e590","parent_id":null,"enabled":"1"},
@@ -31,19 +32,22 @@ const EtudiantPanel = props =>
             <Button variant="contained" color="primary" size={"small"}  href={'../profil/'+ props.data.id}  >Voir le Profil</Button>
         </Grid>
         <Grid item xs = {3} className={"buttonSendMessage"} >
-            {ModalSendMessage(props.data, this.dataConversations)}
+            {ModalSendMessage(props.data, props.dataConversations)}
         </Grid>
     </Grid>
 
 class Etudiants extends React.Component{
 
-
+    async getConversationsData(){
+        await axios.get('/api/conversations')
+            .then(data => this.setState({dataConversations : data.data}))
+    }
     componentDidMount() {
         this.setState({isLoading: true});
-        fetch('http://localhost:8082/api/conversations')
-            .then(response => response.json())
-            .then(data => this.setState({dataConversations : data}))
-            .then(data => console.log(this.state.dataConversations[this.state.dataConversations.length-1]));
+        this.getConversationsData()
+
+
+
     }
 
     constructor(props){
@@ -80,7 +84,7 @@ class Etudiants extends React.Component{
                         {this.state.result.map((info)=>{
                         return(
                             <Grid item xs={12} justify={"center"} className={'profilPanel'}>
-                                <EtudiantPanel data = {info}/>
+                                <EtudiantPanel data = {info} dataConversations={this.state.dataConversations}/>
                             </Grid>
                         )
                         })}

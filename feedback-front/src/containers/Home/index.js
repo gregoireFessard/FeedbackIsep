@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import profilPicture from '../../assets/basicProfile.png';
+import axios from 'axios';
 
 
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -22,16 +23,7 @@ const dataUserCourses = [
     {"id":"7","user_id":"3","course_id":"7"},
     {"id":"8","user_id":"3","course_id":"8"}
 ]
-const dataCourseMaterials = [
-    {"id":"1","name":"Genie logiciel"},
-    {"id":"2","name":"Cybersecurite"},
-    {"id":"3","name":"Architecture des SI"},
-    {"id":"4","name":"Analyse Geopolitique"},
-    {"id":"5","name":"Technologies Web"},
-    {"id":"6","name":"Big Data"},
-    {"id":"7","name":"Espagnol"},
-    {"id":"8","name":"Anglais"}
-]
+
 
 
 
@@ -126,22 +118,16 @@ const styles = theme =>({
 class Home extends Component {
 
     state = {
-        dataCourse : {},
         dataUser : {}
     }
 
-    componentDidMount() {
-        this.setState({isLoading: true});
-        fetch('http://localhost:8082/api/courses')
-            .then(response => response.json())
-            .then(data => this.setState({dataCourse : data}));
-    }
+
+
 
 
     render(){
 
         const{classes} = this.props;
-        console.log(this.state.dataCourse[0])
         return(
             <Layout className={classes.main}>
                 <div className={classes.box1}>

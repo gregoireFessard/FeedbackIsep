@@ -231,6 +231,57 @@ VALUES (NULL, '12', '2019-04-04 10:30:00', '2019-04-04 12:30:00', '8');
 INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
 VALUES (NULL, '13', '2019-04-05 09:00:00', '2019-04-05 12:00:00', '2');
 
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '6', '2019-06-10 09:00:00', '2019-06-10 12:00:00', '5');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '8', '2019-06-10 17:30:00', '2019-06-10 19:00:00', '4');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '9', '2019-06-11 09:00:00', '2019-06-11 12:00:00', '6');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '7', '2019-06-11 13:00:00', '2019-06-11 16:00:00', '1');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '10', '2019-06-11 16:30:00', '2019-06-11 19:30:00', '3');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '11', '2019-06-12 15:15:00', '2019-06-12 17:15:00', '7');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '12', '2019-06-13 10:30:00', '2019-06-13 12:30:00', '8');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '13', '2019-06-14 09:00:00', '2019-06-14 12:00:00', '2');
+
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '6', '2019-06-17 09:00:00', '2019-06-17 12:00:00', '5');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '8', '2019-06-17 17:30:00', '2019-06-17 19:00:00', '4');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '9', '2019-06-18 09:00:00', '2019-06-18 12:00:00', '6');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '7', '2019-06-18 13:00:00', '2019-06-18 16:00:00', '1');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '10', '2019-06-18 16:30:00', '2019-06-18 19:30:00', '3');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '11', '2019-06-19 15:15:00', '2019-06-19 17:15:00', '7');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '12', '2019-06-20 10:30:00', '2019-06-20 12:30:00', '8');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '13', '2019-06-21 09:00:00', '2019-06-21 12:00:00', '2');
+
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '6', '2019-06-24 09:00:00', '2019-06-24 12:00:00', '5');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '8', '2019-06-24 17:30:00', '2019-06-24 19:00:00', '4');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '9', '2019-06-25 09:00:00', '2019-06-25 12:00:00', '6');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '7', '2019-06-25 13:00:00', '2019-06-25 16:00:00', '1');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '10', '2019-06-25 16:30:00', '2019-06-25 19:30:00', '3');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '11', '2019-06-26 15:15:00', '2019-06-26 17:15:00', '7');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '12', '2019-06-27 10:30:00', '2019-06-27 12:30:00', '8');
+INSERT INTO `courses` (`id`, `teacher_id`, `date_time`, `date_end`, `material_id`)
+VALUES (NULL, '13', '2019-06-28 09:00:00', '2019-06-28 12:00:00', '2');
+
 INSERT INTO `comments` (`id`, `user_id`, `course_id`, `content`, `date_time`, `number_like`, `number_dislike`,
                         `parent_id`)
 VALUES (NULL, '1', '1', 'Ce cOuRs eSt nUL. jAiMe pAs', '2019-05-21 13:02:00', '35', '0', NULL);
@@ -257,5 +308,56 @@ INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
 VALUES (NULL, '3', '7');
 INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
 VALUES (NULL, '3', '8');
+
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '9');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '10');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '11');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '12');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '13');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '14');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '15');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '16');
+
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '17');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '18');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '19');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '20');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '21');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '22');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '23');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '24');
+
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '25');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '26');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '27');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '28');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '29');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '30');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '31');
+INSERT INTO `user_course` (`id`, `user_id`, `course_id`)
+VALUES (NULL, '3', '32');
 
 INSERT INTO `course_documents` VALUES (NULL, 'Name Test', 'Test', '1' , '1')

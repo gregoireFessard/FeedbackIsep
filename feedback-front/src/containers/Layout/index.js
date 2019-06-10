@@ -29,11 +29,6 @@ const styles = theme =>({
 
     },
 
-    content: {
-        overflowY : 'scroll',
-        backgroundRepeat: 'no-repeat',
-
-    }
 
 
 })
@@ -49,11 +44,11 @@ class Layout extends Component {
                 <div className={'sidebar'}>
                     <SideBar/>
                 </div>
-                <div className={classes.hc}>
+                <div className={'hc'}>
                     <div className={classes.header}>
                         <Header/>
                     </div>
-                    <div className={classes.content}>
+                    <div className={'content'}>
                         {children}
                     </div>
                 </div>
