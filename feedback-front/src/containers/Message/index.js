@@ -12,7 +12,8 @@ import Reply from '@material-ui/icons/Reply';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import axios from "axios";
-import NotReadMessageHome from "../../components/NotReadMessageHome";
+import './index.css'
+import {Alert} from "antd";
 const styles = theme =>({
 
     main: {
@@ -33,75 +34,98 @@ const styles = theme =>({
 
 })
 const MessagePanel = props =>
-    <ExpansionPanel square>
+    <ExpansionPanel square className={"panel"}>
         <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-            <Typography>{props.firstName} {props.lastName}</Typography>
-            <Typography style={{'color' : 'red'}}>{props.subject}</Typography>
-            <Reply/>
-            <DeleteIcon/>
+            <Typography>{props.data[4].firstName} {props.data[5].lastName} </Typography>
+            <Typography>Object : {props.data[3].subject} </Typography><br/>
+            <Typography>{new Date(Date.parse(props.data[2].dateTime)).toDateString()}</Typography>
+            <Reply values={props.data[0].id}/>
+            <DeleteIcon values={props.data[0].id}/>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
             <Typography>
-                {props.message}
+                {props.data[1].content}
             </Typography>
         </ExpansionPanelDetails>
     </ExpansionPanel>
 
 class Message extends Component {
     state = {
-        dataMessages : []
+        dataMessages : [],
+        dataConversations : [],
+        data : []
     }
 
-    async findCreateData() {
-        var dataConversations = []
-        const listIpConversationsSender = []
-        const listIpConversationsReceiver = []
 
-        await axios.get('/api/conversations')
-            .then(data => { dataConversations = data.data})
-
-        dataConversations.map((infoConversations) =>{
-            if( infoConversations.from_id == sessionStorage.getItem("UserAutotentificateId")){
-                var dataPushed = {
-                    firstName : "",
-                    lastName : "",
-                    subject : "",
-                    message : ""
-                };
-
-               dataPushed.subject = infoConversations.subject;
-
-
-                axios.get('/api/users/' + infoConversations.to_id)
-                    .then(data => {
-                       dataPushed.firstName = data.data.firstName;
-                        dataPushed.lastName = data.data.lastName
-                    })
-
-                axios.get('/api/conversations/'+ infoConversations.id +'/messages')
-                    .then(data => {
-                        data.data.map((info) =>{
-                            if(info.message_read === false && info.is_from_sender ===false){
-                                dataPushed.message = info.content
-                            }
-                        })
-                    })
-
-
-                this.state.dataMessages.push(dataPushed)
-            }
-            if( infoConversations.to_id == sessionStorage.getItem("UserAutotentificateId")){
-                listIpConversationsReceiver.push(infoConversations.id)
-            }
-        })
-
-        console.log(this.state.dataMessages)
-
-    }
 
     componentDidMount() {
-        this.findCreateData()
+        this.findMessagesConverseationToId()
     }
+
+    async findUser(data, idUser){
+        await axios.get('/api/users/' + idUser)
+            .then(dataUser => {
+                data.push({firstName : dataUser.data.firstName})
+                data.push({lastName : dataUser.data.lastName})
+            })
+
+        this.setState({
+            dataMessages: this.state.dataMessages.concat([data])
+        })
+    }
+    async findDataToId(id, idUser , dataSubject){
+        await axios.get('/api/conversations/'+ id + '/messages')
+            .then(data => {
+                data.data.map((info) => {
+                    if (info.message_read == false && info.is_from_sender == true) {
+                        var dataToId  = []
+
+                        dataToId.push({id : info.id})
+                        dataToId.push({content : info.content})
+                        dataToId.push({dateTime : info.dateTime})
+                        dataToId.push({subject : dataSubject})
+                        this.findUser(dataToId, idUser)
+                    }
+                })
+            })
+    }
+
+    async findDataFromId(id , idUser, dataSubject){
+        await axios.get('/api/conversations/'+ id + '/messages')
+            .then(data => {
+                data.data.map((info) => {
+                    if (info.message_read == false && info.is_from_sender == false) {
+                       var dataFromId  = []
+                        dataFromId.push({id : info.id})
+                        dataFromId.push({content : info.content})
+                        dataFromId.push({dateTime : info.dateTime})
+                        dataFromId.push({subject : dataSubject})
+                        this.findUser(dataFromId, idUser)
+                    }
+                })
+            })
+
+    }
+
+
+     async findMessagesConverseationToId(){
+        const dataMessage = []
+         const dataConversations = []
+         await axios.get('/api/conversations')
+             .then(data => {dataConversations.push(data.data)})
+
+        console.log(dataConversations[0])
+        dataConversations[0].map((infoConversations) =>{
+            if( infoConversations.to_id == sessionStorage.getItem("UserAutotentificateId")) {
+                this.findDataToId(infoConversations.id, infoConversations.to_id, infoConversations.subject)
+            }
+            if( infoConversations.from_id == sessionStorage.getItem("UserAutotentificateId")) {
+                this.findDataFromId(infoConversations.id, infoConversations.from_id, infoConversations.subject)
+            }
+    })
+
+    }
+
 
     render(){
 
@@ -118,8 +142,11 @@ class Message extends Component {
                         justify="center"
                         alignItems="center"
                     >
-                        {this.state.dataMessages.map((info) =>{
-
+                        {this.state.dataMessages.map((data) => {
+                            console.log(data)
+                            return(
+                                <MessagePanel data = {data}/>
+                                )
                         })}
                     </Grid>
                 </Paper>
