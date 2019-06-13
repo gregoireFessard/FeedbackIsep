@@ -10,10 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,14 +45,20 @@ public class ConversationsApiImpl implements ConversationsApiDelegate {
     }
 
     @Override
-    public ResponseEntity<List<Conversation>> conversationsGet() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List <User> users = userRepo.findAll();
-        users = users.stream().filter(e -> e.getUsername().toUpperCase().contains(authentication.getName().toUpperCase())).collect(Collectors.toList());
+    public ResponseEntity<List<Conversation>> conversationsGet(Integer userId) {
         List<Conversation> conversations = conversationRepo.findAll();
-        if(users.size() > 0){
-            Long user_id = users.get(0).getId();
-            conversations = conversations.stream().filter(e -> e.getFrom().getId() == user_id || e.getTo().getId() == user_id).collect(Collectors.toList());
+        if (userId == null) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            List <User> users = userRepo.findAll();
+            users = users.stream().filter(e -> e.getUsername().toUpperCase().contains(authentication.getName().toUpperCase())).collect(Collectors.toList());
+
+            if(users.size() > 0){
+                Long user_id = users.get(0).getId();
+                conversations = conversations.stream().filter(e -> e.getFrom().getId() == user_id || e.getTo().getId() == user_id).collect(Collectors.toList());
+            }
+
+        } else{
+            conversations = conversations.stream().filter(e -> e.getFrom().getId() == Long.valueOf(userId) || e.getTo().getId() == Long.valueOf(userId)).collect(Collectors.toList());
         }
         return new ResponseEntity<List<Conversation>>(conversations, HttpStatus.OK);
     }

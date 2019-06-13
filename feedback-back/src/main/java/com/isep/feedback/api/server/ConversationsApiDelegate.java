@@ -4,15 +4,12 @@ import com.isep.feedback.api.model.Conversation;
 import com.isep.feedback.api.model.InlineObject;
 import com.isep.feedback.api.model.InlineResponse200;
 import com.isep.feedback.api.model.Message;
-import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -85,8 +82,9 @@ public interface ConversationsApiDelegate {
 
     /**
      * @see ConversationsApi#conversationsGet
+     * @param userId
      */
-    default ResponseEntity<List<Conversation>> conversationsGet() {
+    default ResponseEntity<List<Conversation>> conversationsGet(Integer userId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

@@ -90,17 +90,30 @@ public class CoursesApiImpl implements CoursesApiDelegate{
     }
 
     @Override
-    public ResponseEntity<List<Course>> coursesGet() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List <User> users = userRepo.findAll();
-        users = users.stream().filter(e -> e.getUsername().toUpperCase().contains(authentication.getName().toUpperCase())).collect(Collectors.toList());
+    public ResponseEntity<List<Course>> coursesGet(Integer userId) {
+        List<Course> res = new ArrayList<>();
         List<Course> courses = new ArrayList<>();
-        if(users.size() > 0){
-            courses = users.get(0).getCourses();
-        } else{
-            courses = courseRepo.findAll();
+        if(userId == null){
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            List <User> users = userRepo.findAll();
+            users = users.stream().filter(e -> e.getUsername().toUpperCase().contains(authentication.getName().toUpperCase())).collect(Collectors.toList());
+
+            if(users.size() > 0){
+                courses = users.get(0).getCourses();
+            } else{
+                courses = courseRepo.findAll();
+            }
+        }else{
+            User user = userRepo.findById(Long.valueOf(userId)).orElse(new User());
+            courses = user.getCourses();
         }
-        return new ResponseEntity<List<Course>>(courses, HttpStatus.OK);
+
+        for(int i = 0; i<courses.size(); i++){
+            Course temp = courses.get(i);
+            temp.setUsers(null);
+            res.add(temp);
+        }
+        return new ResponseEntity<List<Course>>(res, HttpStatus.OK);
     }
 
     @Override

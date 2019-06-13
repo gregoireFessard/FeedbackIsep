@@ -11,10 +11,7 @@ import com.isep.feedback.api.model.CourseDocument;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -144,9 +141,11 @@ public interface CoursesApi {
     @RequestMapping(value = "/courses",
         produces = { "application/json" },
         method = RequestMethod.GET)
-    default ResponseEntity<List<Course>> coursesGet() {
-        return getDelegate().coursesGet();
+    default ResponseEntity<List<Course>> coursesGet(@ApiParam(value = "id of the user", required = false) @Valid @RequestParam(value = "id", required = false) Integer userId) {
+        return getDelegate().coursesGet(userId);
     }
+
+
 
 
     @ApiOperation(value = "Create a course", nickname = "coursesPost", notes = "Create a course", response = Course.class, tags={ "course", })

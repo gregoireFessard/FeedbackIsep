@@ -41,6 +41,7 @@ public class UsersApiImpl implements UsersApiDelegate {
             for(int i = 0; i < users.size(); i++){
                 user = users.get(i);
                 user.setPassword(null);
+                user.setCourses(null);
                 users.set(i, user);
             }
             return new ResponseEntity<List<User>>(userRepo.findAll(), HttpStatus.OK);
@@ -52,6 +53,7 @@ public class UsersApiImpl implements UsersApiDelegate {
             for(int i = 0; i < users.size(); i++){
                 user = users.get(i);
                 user.setPassword(null);
+                user.setCourses(null);
                 users.set(i, user);
             }
             return new ResponseEntity<List<User>>(users, HttpStatus.OK);
@@ -63,6 +65,7 @@ public class UsersApiImpl implements UsersApiDelegate {
     public ResponseEntity<User> usersUserIdGet(Long userId) {
         User user = userRepo.getOne(userId);
         user.setPassword(null);
+        user.setCourses(null);
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 }

@@ -89,8 +89,8 @@ public interface ConversationsApi {
     @RequestMapping(value = "/conversations",
         produces = { "application/json" },
         method = RequestMethod.GET)
-    default ResponseEntity<List<Conversation>> conversationsGet() {
-        return getDelegate().conversationsGet();
+    default ResponseEntity<List<Conversation>> conversationsGet(@ApiParam(value = "id of the user", required = false) @Valid @RequestParam(value = "id", required = false) Integer userId) {
+        return getDelegate().conversationsGet(userId);
     }
 
 

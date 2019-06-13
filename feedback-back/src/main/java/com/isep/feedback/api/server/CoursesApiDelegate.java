@@ -159,8 +159,9 @@ public interface CoursesApiDelegate {
 
     /**
      * @see CoursesApi#coursesGet
+     * @param userId
      */
-    default ResponseEntity<List<Course>> coursesGet() {
+    default ResponseEntity<List<Course>> coursesGet(Integer userId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
