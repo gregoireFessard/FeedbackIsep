@@ -23,24 +23,35 @@ function getModalStyle() {
 }
 
 async function add(dataConversations, dataReceiver, message, subject) {
-    console.log(message)
+    var from_user={}
+    var to_user = {}
+    await axios.get('/api/users/'+sessionStorage.getItem("UserAutotentificateId"))
+        .then(data => from_user = data.data)
+    await axios.get('/api/users/'+dataReceiver.id)
+        .then(data => to_user = data.data)
+
+    const conversation = {
+        "dateTime": new Date(),
+        "from": from_user,
+        "status": "string",
+        "subject": subject.subject,
+        "to": to_user
+    }
+
+
     const idConversation = dataConversations[dataConversations.length -1].id +1
     const dataPostMessage = {
-        "conversation": {
-            "dateTime": new Date(),
-            "from_id": sessionStorage.getItem("UserAutotentificateId"),
-            "status": "string",
-            "subject": subject.subject,
-            "to_id": dataReceiver.id
-        },
+        "conversation": conversation,
         "message": {
             "content": message.message,
-            "conversation_id": idConversation ,
+            "conversation_id": 1 ,
             "dateTime": new Date(),
+            "conversation" : conversation,
             "is_from_sender": true,
             "message_read": true
         }
     }
+    console.log(dataPostMessage)
     axios.post('/api/conversations' , dataPostMessage)
         .then(function (response) {
             console.log(response);
@@ -71,7 +82,7 @@ function ModalSendMessage(dataReceiver, dataConversations) {
         if (event.target.name === "subject") {
             setSubject(event.target.value)
         }
-
+        add(dataConversations, dataReceiver, {message}, {subject})
     }
 
     const handleSubmit = () =>{

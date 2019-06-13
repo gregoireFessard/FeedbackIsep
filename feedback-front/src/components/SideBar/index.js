@@ -69,32 +69,33 @@ class SideBar extends React.Component{
 
 	state = {
 		dataCourse : {},
-		dataUserCourses : dataUserCourses,
+		dataUserCourses : [],
 		dataUserCoursesGlobal : [],
 		dataSideBar : []
 	};
-
+	async findDataUserCourse(){
+		var dataUserCourse = []
+		await axios.get('/api/courses?id='+sessionStorage.getItem("UserAutotentificateId"))
+			.then(data => dataUserCourse.push(data.data))
+		this.setState({dataUserCourses : dataUserCourse[0]})
+		console.log(this.state.dataUserCourses)
+	}
 
 	async findCreateData(){
+		await this.findDataUserCourse()
 		const  dataUserCoursesGlobal = []
 		const dataSideBar = []
-		await axios.get('/api/courses')
-			.then(data => this.setState({dataCourse : data.data}))
+		console.log(this.state.dataUserCourses)
 
 
 		//recup les cours de l'utilisateur connecté qui ne se sont pas encore déroulé (comparaison date)
-		this.state.dataCourse.map((infoCourse) =>{
-				this.state.dataUserCourses.map((infoUserCourse)=>{
-					if(infoUserCourse.course_id == infoCourse.id){
-						const TimeStampStartCourse = Date.parse(infoCourse.dateTime)
-						if(Date.now()>= TimeStampStartCourse){
-							dataUserCoursesGlobal.push(infoCourse)
-						}
 
-					}
-				})
+		this.state.dataUserCourses.map((infoUserCourse)=> {
+			const TimeStampStartCourse = Date.parse(infoUserCourse.dateTime)
+			if (Date.now() >= TimeStampStartCourse) {
+				dataUserCoursesGlobal.push(infoUserCourse)
 			}
-		)
+		})
 
 		//Créer un tableau matière des cours de l'utilisateur ses trois prochains cours
 		dataUserCoursesGlobal.map((infoUserCoursesGlobal =>{
@@ -132,7 +133,6 @@ class SideBar extends React.Component{
 			<List component="nav">
 			<img className={classes.logo} src={Logo}></img>
 		{this.state.dataSideBar.map((info)=>{
-			console.log("ok")
 			return(
 				<div>
 				<SideBarComponent data = {info}/>

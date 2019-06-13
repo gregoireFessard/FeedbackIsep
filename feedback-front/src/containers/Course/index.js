@@ -62,15 +62,237 @@ const styles = theme =>({
 })
 
 const comments = [
-    {name: 'Marcel Pol',image:profilPicture,date:'date',content:'content',nbLike:'1',nbDislike:'a',response: [
-            {name: 'Marcel Pol',image:profilPicture,date:'date',content:'content',nbLike:'1',nbDislike:'a'},
-        ]
+    {
+        "content": "Ceci est un commentaire de cours",
+        "course": {
+            "dateEnd": "2019-06-13T23:07:18.969Z",
+            "dateTime": "2019-06-13T23:07:18.969Z",
+            "duration": "2019-06-13T23:07:18.969Z",
+            "id": 0,
+            "material": {
+                "id": 0,
+                "name": "string",
+                "users": [
+                    null
+                ]
+            },
+            "teacher": {
+                "avatar": "string",
+                "color": "string",
+                "courses": [
+                    null
+                ],
+                "email": "string",
+                "enabled": true,
+                "firstName": "string",
+                "id": 0,
+                "isep_id": 0,
+                "lastName": "string",
+                "materials": [
+                    {
+                        "id": 0,
+                        "name": "string",
+                        "users": [
+                            null
+                        ]
+                    }
+                ],
+                "password": "string",
+                "status": "string",
+                "teacher_courses": [
+                    null
+                ],
+                "username": "string"
+            },
+            "users": [
+                {
+                    "avatar": "string",
+                    "color": "string",
+                    "courses": [
+                        null
+                    ],
+                    "email": "string",
+                    "enabled": true,
+                    "firstName": "string",
+                    "id": 0,
+                    "isep_id": 0,
+                    "lastName": "string",
+                    "materials": [
+                        {
+                            "id": 0,
+                            "name": "string",
+                            "users": [
+                                null
+                            ]
+                        }
+                    ],
+                    "password": "string",
+                    "status": "string",
+                    "teacher_courses": [
+                        null
+                    ],
+                    "username": "string"
+                }
+            ]
+        },
+        "dateTime": "2019-06-13T23:07:18.969Z",
+        "id": 1,
+        "number_dislike": 0,
+        "number_like": 0,
+        "parent_id": 0,
+        "user": {
+            "avatar": "string",
+            "color": "string",
+            "courses": [
+                null
+            ],
+            "email": "string",
+            "enabled": true,
+            "firstName": "string",
+            "id": 0,
+            "isep_id": 0,
+            "lastName": "string",
+            "materials": [
+                {
+                    "id": 0,
+                    "name": "string",
+                    "users": [
+                        null
+                    ]
+                }
+            ],
+            "password": "string",
+            "status": "string",
+            "teacher_courses": [
+                null
+            ],
+            "username": "string"
+        }
     },
-    {name: 'Marcel Pol',image:'link',date:'date',content:'content',nbLike:'1',nbDislike:'a',response:[]},
-
+    {
+        "content": "Ceci est un commentaire de cours",
+        "course": {
+            "dateEnd": "2019-06-13T23:07:18.969Z",
+            "dateTime": "2019-06-13T23:07:18.969Z",
+            "duration": "2019-06-13T23:07:18.969Z",
+            "id": 0,
+            "material": {
+                "id": 0,
+                "name": "string",
+                "users": [
+                    null
+                ]
+            },
+            "teacher": {
+                "avatar": "string",
+                "color": "string",
+                "courses": [
+                    null
+                ],
+                "email": "string",
+                "enabled": true,
+                "firstName": "string",
+                "id": 0,
+                "isep_id": 0,
+                "lastName": "string",
+                "materials": [
+                    {
+                        "id": 0,
+                        "name": "string",
+                        "users": [
+                            null
+                        ]
+                    }
+                ],
+                "password": "string",
+                "status": "string",
+                "teacher_courses": [
+                    null
+                ],
+                "username": "string"
+            },
+            "users": [
+                {
+                    "avatar": "string",
+                    "color": "string",
+                    "courses": [
+                        null
+                    ],
+                    "email": "string",
+                    "enabled": true,
+                    "firstName": "string",
+                    "id": 0,
+                    "isep_id": 0,
+                    "lastName": "string",
+                    "materials": [
+                        {
+                            "id": 0,
+                            "name": "string",
+                            "users": [
+                                null
+                            ]
+                        }
+                    ],
+                    "password": "string",
+                    "status": "string",
+                    "teacher_courses": [
+                        null
+                    ],
+                    "username": "string"
+                }
+            ]
+        },
+        "dateTime": "2019-06-13T23:07:18.969Z",
+        "id": 2,
+        "number_dislike": 0,
+        "number_like": 0,
+        "parent_id": 1,
+        "user": {
+            "avatar": "string",
+            "color": "string",
+            "courses": [
+                null
+            ],
+            "email": "string",
+            "enabled": true,
+            "firstName": "string",
+            "id": 0,
+            "isep_id": 0,
+            "lastName": "string",
+            "materials": [
+                {
+                    "id": 0,
+                    "name": "string",
+                    "users": [
+                        null
+                    ]
+                }
+            ],
+            "password": "string",
+            "status": "string",
+            "teacher_courses": [
+                null
+            ],
+            "username": "string"
+        }
+    }
 ];
 
-
+const comment_panel = (props) =>
+    <div className={"comment"}>
+        <div className={"commentHeader"}>
+            <img className={"profilPicture"} src={props.data.user.avatar}></img>
+            <Typography>
+                {props.data.user.firstname} {props.data.user.lastname}
+            </Typography>
+            {props.data.dateTime}
+        </div>
+        <div className={"commentContent"}>
+            <Typography>
+                {props.data.content}
+            </Typography>
+        </div>
+    </div>
 
 
 class Course extends Component {
@@ -100,20 +322,7 @@ class Course extends Component {
 
                         return (
                         <Paper className={classes.paper}>
-                            <div className={classes.comment}>
-                                <div className={classes.commentHeader}>
-                                    <img className={classes.profilPicture} src={comment.image}></img>
-                                    <Typography>
-                                        {comment.name}
-                                    </Typography>
-                                    {comment.date}
-                                </div>
-                                <div className={classes.commentContent}>
-                                    <Typography>
-                                        {comment.content}
-                                    </Typography>
-                                </div>
-                            </div>
+
                         {comment.response.map( (response) =>{return (
                             <div className={classes.response}>
                                 <div className={classes.commentHeader}>
