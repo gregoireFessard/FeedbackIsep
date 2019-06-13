@@ -1,9 +1,6 @@
 package com.isep.feedback.api.server;
 
-import com.isep.feedback.api.model.Comment;
-import com.isep.feedback.api.model.Course;
-import com.isep.feedback.api.model.CourseDocument;
-import com.isep.feedback.api.model.User;
+import com.isep.feedback.api.model.*;
 import com.isep.feedback.api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -110,9 +107,13 @@ public class CoursesApiImpl implements CoursesApiDelegate{
 
         for(int i = 0; i<courses.size(); i++){
             Course temp = courses.get(i);
-            temp.setUsers(null);
+            temp.setUsers(new ArrayList<>());
+            CourseMaterial tempMaterial = temp.getMaterial();
+            tempMaterial.setUsers(new ArrayList<>());
+            temp.setMaterial(tempMaterial);
             res.add(temp);
         }
+
         return new ResponseEntity<List<Course>>(res, HttpStatus.OK);
     }
 

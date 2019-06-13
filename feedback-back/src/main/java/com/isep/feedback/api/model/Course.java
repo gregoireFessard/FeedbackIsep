@@ -247,6 +247,7 @@ public class Course   {
     sb.append("    materialId: ").append(toIndentedString(material)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
     sb.append("    dateEnd: ").append(toIndentedString(dateEnd)).append("\n");
+    sb.append("    users: ").append(toIndentedString(users)).append("\n");
     sb.append("}");
     return sb.toString();
   }
