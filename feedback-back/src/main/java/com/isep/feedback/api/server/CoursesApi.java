@@ -8,7 +8,6 @@ package com.isep.feedback.api.server;
 import com.isep.feedback.api.model.Comment;
 import com.isep.feedback.api.model.Course;
 import com.isep.feedback.api.model.CourseDocument;
-import com.isep.feedback.api.model.UserCourse;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -138,9 +137,9 @@ public interface CoursesApi {
     }
 
 
-    @ApiOperation(value = "Get user's courses", nickname = "coursesGet", notes = "Get user's courses", response = UserCourse.class, responseContainer = "List", tags={ "course", })
+    @ApiOperation(value = "Get user's courses", nickname = "coursesGet", notes = "Get user's courses", response = Course.class, responseContainer = "List", tags={ "course", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = UserCourse.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "successful operation", response = Course.class, responseContainer = "List"),
         @ApiResponse(code = 404, message = "User not found") })
     @RequestMapping(value = "/courses",
         produces = { "application/json" },

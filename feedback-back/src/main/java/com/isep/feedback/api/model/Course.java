@@ -1,7 +1,9 @@
 package com.isep.feedback.api.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,12 +32,12 @@ public class Course   {
 
 
   @JsonProperty("teacher")
-  @OneToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "teacher_id")
-  private User user;
+  private User teacher;
 
   @JsonProperty("material")
-  @OneToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "material_id")
   private CourseMaterial material;
 
@@ -49,12 +51,40 @@ public class Course   {
   @JsonProperty("dateEnd")
   private Date dateEnd;
 
+
+  @Column(name= "users")
+  @JsonProperty("users")
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
+  private List<User> users;
+
   public Course() {
+  }
+
+  public Course(CourseMaterial material, Date dateTime, Date dateEnd) {
+    this.material = material;
+    this.dateTime = dateTime;
+    this.dateEnd = dateEnd;
+  }
+
+
+  public Course(User teacher, CourseMaterial material, Date dateTime, Date dateEnd) {
+    this.teacher = teacher;
+    this.material = material;
+    this.dateTime = dateTime;
+    this.dateEnd = dateEnd;
   }
 
   public Course id(Long id) {
     this.id = id;
     return this;
+  }
+
+  public List<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(List<User> users) {
+    this.users = users;
   }
 
   /**
@@ -77,7 +107,7 @@ public class Course   {
     return this;
   }*/
 
-  public User getUser() {
+  /*public User getUser() {
     user.setPassword(null);
     return user;
   }
@@ -88,6 +118,14 @@ public class Course   {
 
   public Course(User user) {
     this.user = user;
+  }*/
+
+  public User getTeacher() {
+    return teacher;
+  }
+
+  public void setTeacher(User teacher) {
+    this.teacher = teacher;
   }
 
   public CourseMaterial getMaterial() {
@@ -188,7 +226,7 @@ public class Course   {
     }
     Course course = (Course) o;
     return Objects.equals(this.id, course.id) &&
-        Objects.equals(this.user, course.user) &&
+        Objects.equals(this.teacher, course.teacher) &&
         Objects.equals(this.material, course.material) &&
         Objects.equals(this.dateTime, course.dateTime) &&
         Objects.equals(this.dateEnd, course.dateEnd);
@@ -196,7 +234,7 @@ public class Course   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, user, material, dateTime, dateEnd);
+    return Objects.hash(id, teacher, material, dateTime, dateEnd);
   }
 
   @Override
@@ -205,7 +243,7 @@ public class Course   {
     sb.append("class Course {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    teacherId: ").append(toIndentedString(user)).append("\n");
+    sb.append("    teacherId: ").append(toIndentedString(teacher)).append("\n");
     sb.append("    materialId: ").append(toIndentedString(material)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
     sb.append("    dateEnd: ").append(toIndentedString(dateEnd)).append("\n");

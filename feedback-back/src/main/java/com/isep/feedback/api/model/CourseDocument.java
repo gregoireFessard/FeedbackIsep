@@ -31,12 +31,12 @@ public class CourseDocument   {
 
   @JsonProperty("user")
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
+  @JoinColumn(name = "user")
   private User user;
 
   @JsonProperty("course")
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "course_id")
+  @JoinColumn(name = "course")
   private Course course;
 
   public CourseDocument id(Long id) {

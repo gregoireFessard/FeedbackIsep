@@ -1,10 +1,13 @@
 package com.isep.feedback.api.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+
 
 import javax.persistence.*;
 
@@ -62,14 +65,87 @@ public class User {
   private String color;
 
 
-  @Column(name = "parent_id")
-  @JsonProperty("parent_id")
-  private Long parentId = null;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "parent")
+  @JsonProperty("parent")
+  private User parent = null;
+
+  @Column(name = "materials")
+  @JsonProperty("materials")
+  @ManyToMany(fetch = FetchType.LAZY)
+  /*@JoinTable(name="user_materials",
+          joinColumns=@JoinColumn(name="user_id", referencedColumnName="id"),
+          inverseJoinColumns=@JoinColumn(name="material_id", referencedColumnName="id"))*/
+  private List<CourseMaterial> materials = new ArrayList<>();
+
+  @Column(name= "courses")
+  @JsonProperty("courses")
+  /*@JoinTable(name="user_materials",
+          joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
+          inverseJoinColumns=@JoinColumn(name="course_id", referencedColumnName="id"))*/
+  @ManyToMany(fetch = FetchType.LAZY)
+  private List<Course> courses;
+
+  @Column(name= "teacher_courses")
+  @JsonProperty("teacher_courses")
+  /*@JoinTable(name="user_materials",
+          joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
+          inverseJoinColumns=@JoinColumn(name="course_id", referencedColumnName="id"))*/
+  @ManyToMany(fetch = FetchType.LAZY)
+  private List<Course> teacher_courses;
 
   public User id(Long id) {
     this.id = id;
     return this;
   }
+
+  public User(String username, Boolean enabled, String firstName, String lastName, Long isepId, String email, String password, String avatar, String color, User parent) {
+    this.username = username;
+    this.enabled = enabled;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.isepId = isepId;
+    this.email = email;
+    this.password = password;
+    this.avatar = avatar;
+    this.color = color;
+    this.parent = parent;
+
+  }
+
+  public User() {
+  }
+
+  public List<Course> getTeacher_courses() {
+    return teacher_courses;
+  }
+
+  public void setTeacher_courses(List<Course> teacher_courses) {
+    this.teacher_courses = teacher_courses;
+  }
+
+  public List<CourseMaterial> getMaterials() {
+    return materials;
+  }
+
+  public void setMaterials(List<CourseMaterial> materials) {
+    this.materials = materials;
+  }
+
+  public List<Course> getCourses() {
+    return courses;
+  }
+
+  public void setCourses(List<Course> courses) {
+    this.courses = courses;
+  }
+
+  public List<CourseMaterial> addMaterial(CourseMaterial material){
+    materials.add(material);
+    return materials;
+  }
+
+
 
   /**
    * Get id
@@ -266,9 +342,17 @@ public class User {
     this.color = color;
   }
 
-  public User parentId(Long parentId) {
+  /*public User parentId(Long parentId) {
     this.parentId = parentId;
     return this;
+  }*/
+
+  public User getParent() {
+    return parent;
+  }
+
+  public void setParent(User parent) {
+    this.parent = parent;
   }
 
   /**
@@ -278,13 +362,13 @@ public class User {
   @ApiModelProperty(value = "")
 
 
-  public Long getParentId() {
+  /*public Long getParentId() {
     return parentId;
   }
 
   public void setParentId(Long parentId) {
     this.parentId = parentId;
-  }
+  }*/
 
 
   @Override
@@ -306,12 +390,13 @@ public class User {
         Objects.equals(this.password, user.password) &&
         Objects.equals(this.avatar, user.avatar) &&
         Objects.equals(this.color, user.color) &&
-        Objects.equals(this.parentId, user.parentId);
+        Objects.equals(this.materials, user.materials) &&
+        Objects.equals(this.parent, user.parent);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, enabled, firstName, lastName, isepId, email, password, avatar, color, parentId);
+    return Objects.hash(id, username, enabled, firstName, lastName, isepId, email, password, avatar, color, parent);
   }
 
   @Override
@@ -329,7 +414,8 @@ public class User {
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
     sb.append("    color: ").append(toIndentedString(color)).append("\n");
-    sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");
+    sb.append("    parentId: ").append(toIndentedString(parent)).append("\n");
+    sb.append("    materials: ").append(toIndentedString(materials)).append("\n");
     sb.append("}");
     return sb.toString();
   }

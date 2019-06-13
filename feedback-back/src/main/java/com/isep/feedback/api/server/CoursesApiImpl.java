@@ -3,17 +3,12 @@ package com.isep.feedback.api.server;
 import com.isep.feedback.api.model.Comment;
 import com.isep.feedback.api.model.Course;
 import com.isep.feedback.api.model.CourseDocument;
-import com.isep.feedback.api.model.UserCourse;
-import com.isep.feedback.api.repository.CommentRepo;
-import com.isep.feedback.api.repository.CourseDocumentRepo;
-import com.isep.feedback.api.repository.CourseRepo;
-import com.isep.feedback.api.repository.UserCourseRepo;
+import com.isep.feedback.api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,8 +24,10 @@ public class CoursesApiImpl implements CoursesApiDelegate{
     @Autowired
     CourseRepo courseRepo;
 
+
+
     @Autowired
-    UserCourseRepo userCourseRepo;
+    UserRepo userRepo;
 
     @Override
     public ResponseEntity<String> coursesCourseIdCommentsCommentIdDislikePost(Integer courseId, Integer commentId) {
@@ -61,7 +58,7 @@ public class CoursesApiImpl implements CoursesApiDelegate{
     @Override
     public ResponseEntity<List<Comment>> coursesCourseIdCommentsGet(Integer courseId) {
         List<Comment> comments = commentRepo.findAll();
-        comments = comments.stream().filter(e -> e.getCourseId() == Long.valueOf(courseId)).collect(Collectors.toList());
+        comments = comments.stream().filter(e -> e.getCourse().getId() == Long.valueOf(courseId)).collect(Collectors.toList());
         return new ResponseEntity<List<Comment>>(comments, HttpStatus.OK);
     }
 
@@ -90,13 +87,14 @@ public class CoursesApiImpl implements CoursesApiDelegate{
 
     @Override
     public ResponseEntity<List<Course>> coursesGet() {
-        int user_id = 3;
+        /*int user_id = 3;
         List<UserCourse> userCourses = userCourseRepo.findAll();
         userCourses = userCourses.stream().filter(e -> e.getUser().getId() == user_id).collect(Collectors.toList());
         List<Course> courses = new ArrayList<>();
         for(int i = 0; i < userCourses.size(); i++){
             courses.add(userCourses.get(i).getCourse());
-        }
+        }*/
+        List<Course> courses = userRepo.getOne(Long.valueOf(3)).getCourses();
 
         return new ResponseEntity<List<Course>>(courses, HttpStatus.OK);
     }

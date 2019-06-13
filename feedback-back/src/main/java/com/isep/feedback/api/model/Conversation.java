@@ -25,13 +25,15 @@ public class Conversation   {
   @JsonProperty("id")
   private Long id;
 
-  @Column(name = "from_id")
-  @JsonProperty("from_id")
-  private Long fromId;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "`from`")
+  @JsonProperty("from")
+  private User from;
 
-  @Column(name = "to_id")
-  @JsonProperty("to_id")
-  private Long toId;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "`to`")
+  @JsonProperty("to")
+  private User to;
 
   @Column(name = "subject")
   @JsonProperty("subject")
@@ -52,6 +54,23 @@ public class Conversation   {
     return this;
   }
 
+
+  public User getFrom() {
+    return from;
+  }
+
+  public void setFrom(User from) {
+    this.from = from;
+  }
+
+  public User getTo() {
+    return to;
+  }
+
+  public void setTo(User to) {
+    this.to = to;
+  }
+
   /**
    * Get id
    * @return id
@@ -67,19 +86,19 @@ public class Conversation   {
     this.id = id;
   }
 
-  public Conversation fromId(Long fromId) {
+  /*public Conversation from(Long fromId) {
     this.fromId = fromId;
     return this;
-  }
+  }*/
 
   /**
    * Get fromId
    * @return fromId
   */
-  @ApiModelProperty(value = "")
+  /*@ApiModelProperty(value = "")*/
 
 
-  public Long getFromId() {
+  /*public Long getFromId() {
     return fromId;
   }
 
@@ -90,13 +109,13 @@ public class Conversation   {
   public Conversation toId(Long toId) {
     this.toId = toId;
     return this;
-  }
+  }*/
 
   /**
    * Get toId
    * @return toId
   */
-  @ApiModelProperty(value = "")
+  /*@ApiModelProperty(value = "")
 
 
   public Long getToId() {
@@ -105,7 +124,7 @@ public class Conversation   {
 
   public void setToId(Long toId) {
     this.toId = toId;
-  }
+  }*/
 
   public Conversation subject(String subject) {
     this.subject = subject;
@@ -185,8 +204,8 @@ public class Conversation   {
     }
     Conversation conversation = (Conversation) o;
     return Objects.equals(this.id, conversation.id) &&
-        Objects.equals(this.fromId, conversation.fromId) &&
-        Objects.equals(this.toId, conversation.toId) &&
+        Objects.equals(this.from, conversation.from) &&
+        Objects.equals(this.to, conversation.to) &&
         Objects.equals(this.subject, conversation.subject) &&
         Objects.equals(this.status, conversation.status) &&
         Objects.equals(this.dateTime, conversation.dateTime);
@@ -194,7 +213,7 @@ public class Conversation   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, fromId, toId, subject, status, dateTime);
+    return Objects.hash(id, from, to, subject, status, dateTime);
   }
 
   @Override
@@ -203,8 +222,8 @@ public class Conversation   {
     sb.append("class Conversation {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    fromId: ").append(toIndentedString(fromId)).append("\n");
-    sb.append("    toId: ").append(toIndentedString(toId)).append("\n");
+    sb.append("    fromId: ").append(toIndentedString(from)).append("\n");
+    sb.append("    toId: ").append(toIndentedString(to)).append("\n");
     sb.append("    subject: ").append(toIndentedString(subject)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");

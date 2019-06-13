@@ -15,6 +15,7 @@ import javax.validation.constraints.*;
  */
 
 public class InlineObject   {
+
   @JsonProperty("conversation")
   private Conversation conversation = null;
 

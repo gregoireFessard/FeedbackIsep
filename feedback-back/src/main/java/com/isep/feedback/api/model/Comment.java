@@ -21,13 +21,15 @@ public class Comment   {
   @JsonProperty("id")
   private Long id;
 
-  @Column(name = "user_id")
-  @JsonProperty("user_id")
-  private Long userId;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user")
+  @JsonProperty("user")
+  private User user;
 
-  @Column(name = "course_id")
-  @JsonProperty("course_id")
-  private Long courseId;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "course")
+  @JsonProperty("course")
+  private Course course;
 
   @Column(name= "content")
   @JsonProperty("content")
@@ -55,6 +57,9 @@ public class Comment   {
     return this;
   }
 
+  public Comment() {
+  }
+
   /**
    * Get id
    * @return id
@@ -70,9 +75,25 @@ public class Comment   {
     this.id = id;
   }
 
-  public Comment userId(Long userId) {
+  /*public Comment userId(Long userId) {
     this.userId = userId;
     return this;
+  }*/
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Course getCourse() {
+    return course;
+  }
+
+  public void setCourse(Course course) {
+    this.course = course;
   }
 
   /**
@@ -82,7 +103,7 @@ public class Comment   {
   @ApiModelProperty(value = "")
 
 
-  public Long getUserId() {
+ /* public Long getUserId() {
     return userId;
   }
 
@@ -93,13 +114,13 @@ public class Comment   {
   public Comment courseId(Long courseId) {
     this.courseId = courseId;
     return this;
-  }
+  }*/
 
   /**
    * Get courseId
    * @return courseId
   */
-  @ApiModelProperty(value = "")
+  /*@ApiModelProperty(value = "")
 
 
   public Long getCourseId() {
@@ -113,13 +134,15 @@ public class Comment   {
   public Comment content(String content) {
     this.content = content;
     return this;
-  }
+  }*/
+
+
 
   /**
    * Get content
    * @return content
   */
-  @ApiModelProperty(value = "")
+  /*@ApiModelProperty(value = "")*/
 
 
   public String getContent() {
@@ -221,8 +244,8 @@ public class Comment   {
     }
     Comment comment = (Comment) o;
     return Objects.equals(this.id, comment.id) &&
-        Objects.equals(this.userId, comment.userId) &&
-        Objects.equals(this.courseId, comment.courseId) &&
+        Objects.equals(this.user, comment.user) &&
+        Objects.equals(this.course, comment.course) &&
         Objects.equals(this.content, comment.content) &&
         Objects.equals(this.dateTime, comment.dateTime) &&
         Objects.equals(this.numberLike, comment.numberLike) &&
@@ -232,7 +255,7 @@ public class Comment   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, userId, courseId, content, dateTime, numberLike, numberDislike, parentId);
+    return Objects.hash(id, user, course, content, dateTime, numberLike, numberDislike, parentId);
   }
 
   @Override
@@ -241,8 +264,8 @@ public class Comment   {
     sb.append("class Comment {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    courseId: ").append(toIndentedString(courseId)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(user)).append("\n");
+    sb.append("    courseId: ").append(toIndentedString(course)).append("\n");
     sb.append("    content: ").append(toIndentedString(content)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
     sb.append("    numberLike: ").append(toIndentedString(numberLike)).append("\n");

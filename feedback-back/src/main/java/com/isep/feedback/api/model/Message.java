@@ -21,9 +21,10 @@ public class Message   {
   @JsonProperty("id")
   private Long id;
 
-  @Column(name = "conversation_id")
-  @JsonProperty("conversation_id")
-  private Long conversationId;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "conversation")
+  @JsonProperty("conversation")
+  private Conversation conversation;
 
   @Column(name= "is_from_sender")
   @JsonProperty("is_from_sender")
@@ -62,9 +63,21 @@ public class Message   {
     this.id = id;
   }
 
-  public Message conversationId(Long conversationId) {
+ /* public Message conversationId(Long conversationId) {
     this.conversationId = conversationId;
     return this;
+  }*/
+
+  public Message(Conversation conversation) {
+    this.conversation = conversation;
+  }
+
+  public Conversation getConversation() {
+    return conversation;
+  }
+
+  public void setConversation(Conversation conversation) {
+    this.conversation = conversation;
   }
 
   /**
@@ -74,13 +87,15 @@ public class Message   {
   @ApiModelProperty(value = "")
 
 
-  public Long getConversationId() {
+  /*public Long getConversationId() {
     return conversationId;
   }
 
   public void setConversationId(Long conversationId) {
     this.conversationId = conversationId;
-  }
+  }*/
+
+
 
   public Message isFromSender(Boolean isFromSender) {
     this.isFromSender = isFromSender;
@@ -175,7 +190,7 @@ public class Message   {
     }
     Message message = (Message) o;
     return Objects.equals(this.id, message.id) &&
-        Objects.equals(this.conversationId, message.conversationId) &&
+        Objects.equals(this.conversation, message.conversation) &&
         Objects.equals(this.isFromSender, message.isFromSender) &&
         Objects.equals(this.content, message.content) &&
         Objects.equals(this.messageRead, message.messageRead) &&
@@ -184,7 +199,7 @@ public class Message   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, conversationId, isFromSender, content, messageRead, dateTime);
+    return Objects.hash(id, conversation, isFromSender, content, messageRead, dateTime);
   }
 
   @Override
@@ -193,7 +208,7 @@ public class Message   {
     sb.append("class Message {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
+    sb.append("    conversationId: ").append(toIndentedString(conversation)).append("\n");
     sb.append("    isFromSender: ").append(toIndentedString(isFromSender)).append("\n");
     sb.append("    content: ").append(toIndentedString(content)).append("\n");
     sb.append("    messageRead: ").append(toIndentedString(messageRead)).append("\n");

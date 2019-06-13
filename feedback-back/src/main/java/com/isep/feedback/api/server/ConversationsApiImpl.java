@@ -34,7 +34,7 @@ public class ConversationsApiImpl implements ConversationsApiDelegate {
     @Override
     public ResponseEntity<List<Message>> conversationsConversationIdMessagesGet(Integer conversationId) {
         List<Message> messages = messageRepo.findAll();
-        messages = messages.stream().filter(e -> e.getConversationId() == Long.valueOf(conversationId)).collect(Collectors.toList());
+        messages = messages.stream().filter(e -> e.getConversation().getId() == Long.valueOf(conversationId)).collect(Collectors.toList());
         return new ResponseEntity<List<Message>>(messages, HttpStatus.OK);
     }
 

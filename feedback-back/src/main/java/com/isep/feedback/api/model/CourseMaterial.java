@@ -1,5 +1,7 @@
 package com.isep.feedback.api.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -31,9 +33,34 @@ public class CourseMaterial   {
   @JsonProperty("name")
   private String name;
 
+  @Column(name= "users")
+  @JsonProperty("users")
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
+  private List<User> users = new ArrayList<>();
+
+  public CourseMaterial() {
+  }
+
   public CourseMaterial id(Long id) {
     this.id = id;
     return this;
+  }
+
+  public CourseMaterial(String name) {
+    this.name = name;
+  }
+
+  public List<User> getUsers() {
+    return users;
+  }
+
+  public List<User> addUser(User user){
+    this.users.add(user);
+    return users;
+  }
+
+  public void setUsers(List<User> users) {
+    this.users = users;
   }
 
   /**
