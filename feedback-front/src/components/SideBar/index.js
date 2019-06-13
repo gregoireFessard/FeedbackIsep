@@ -130,19 +130,19 @@ class SideBar extends React.Component{
 		const { classes } = this.props
 		return (
 			<List component="nav">
-				<img className={classes.logo} src={Logo}></img>
-				{this.state.dataSideBar.map((info)=>{
-					console.log("ok")
-					return(
-						<div>
-							<SideBarComponent data = {info}/>
-							<Divider/>
-						</div>
-					)
-				})}
+			<img className={classes.logo} src={Logo}></img>
+		{this.state.dataSideBar.map((info)=>{
+			console.log("ok")
+			return(
+				<div>
+				<SideBarComponent data = {info}/>
+			<Divider/>
+			</div>
+		)
+		})}
 
-			</List>
-		);
+	</List>
+	);
 	}
 }
 export default withStyles(styles)(SideBar);
