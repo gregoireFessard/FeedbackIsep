@@ -46,6 +46,9 @@ public class User {
   @JsonProperty("lastName")
   private String lastName;
 
+  @JsonProperty("status")
+  private String status;
+
   @Column(name = "isep_id")
   @JsonProperty("isep_id")
   private Long isepId;
@@ -147,7 +150,13 @@ public class User {
     return materials;
   }
 
+  public String getStatus() {
+    return status;
+  }
 
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
   /**
    * Get id

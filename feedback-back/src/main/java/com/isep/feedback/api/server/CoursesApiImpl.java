@@ -94,7 +94,12 @@ public class CoursesApiImpl implements CoursesApiDelegate{
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List <User> users = userRepo.findAll();
         users = users.stream().filter(e -> e.getUsername().toUpperCase().contains(authentication.getName().toUpperCase())).collect(Collectors.toList());
-        List<Course> courses = users.get(0).getCourses();
+        List<Course> courses = new ArrayList<>();
+        if(users.size() > 0){
+            courses = users.get(0).getCourses();
+        } else{
+            courses = courseRepo.findAll();
+        }
         return new ResponseEntity<List<Course>>(courses, HttpStatus.OK);
     }
 

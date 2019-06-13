@@ -51,10 +51,11 @@ public class ConversationsApiImpl implements ConversationsApiDelegate {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List <User> users = userRepo.findAll();
         users = users.stream().filter(e -> e.getUsername().toUpperCase().contains(authentication.getName().toUpperCase())).collect(Collectors.toList());
-        Long user_id = users.get(0).getId();
         List<Conversation> conversations = conversationRepo.findAll();
-        conversations = conversations.stream().filter(e -> e.getFrom().getId() == user_id || e.getTo().getId() == user_id).collect(Collectors.toList());
-
+        if(users.size() > 0){
+            Long user_id = users.get(0).getId();
+            conversations = conversations.stream().filter(e -> e.getFrom().getId() == user_id || e.getTo().getId() == user_id).collect(Collectors.toList());
+        }
         return new ResponseEntity<List<Conversation>>(conversations, HttpStatus.OK);
     }
 
