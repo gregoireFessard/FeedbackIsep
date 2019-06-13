@@ -57,6 +57,17 @@ public interface ConversationsApi {
         return getDelegate().conversationsConversationIdMessagesGet(conversationId);
     }
 
+    @ApiOperation(value = "Change the status of a message", nickname = "conversationsConversationIdMessagesUpdate", notes = "Change the status of a message", response = Message.class, tags={ "messages", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Message.class),
+            @ApiResponse(code = 404, message = "conversation not found") })
+    @RequestMapping(value = "/conversations/{conversationId}/messages/{messageId}",
+            produces = { "application/json" },
+            method = RequestMethod.PUT)
+    default ResponseEntity<Message> conversationsConversationIdMessagesUpdate(@ApiParam(value = "id of the conversation", required = true) @PathVariable("conversationId") Integer conversationId, @ApiParam(value = "id of the message", required = true) @PathVariable("messageId") Integer messageId) {
+        return getDelegate().conversationsConversationIdMessagesUpdate(conversationId, messageId);
+    }
+
 
     @ApiOperation(value = "Reply to a conversation", nickname = "conversationsConversationIdMessagesPost", notes = "Reply to a conversation", response = Message.class, tags={ "messages", })
     @ApiResponses(value = { 

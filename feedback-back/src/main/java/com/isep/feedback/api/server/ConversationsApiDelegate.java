@@ -51,6 +51,22 @@ public interface ConversationsApiDelegate {
     }
 
     /**
+     * @see ConversationsApi#conversationsConversationIdMessagesGet
+     */
+    default ResponseEntity<Message> conversationsConversationIdMessagesUpdate(Integer conversationId, Integer messageId) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    ApiUtil.setExampleResponse(request, "application/json", "{  \"dateTime\" : \"dateTime\",  \"read\" : true,  \"conversation_id\" : 6,  \"is_from_sender\" : true,  \"id\" : 0,  \"content\" : \"content\"}");
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+    /**
      * @see ConversationsApi#conversationsConversationIdMessagesPost
      */
     default ResponseEntity<Message> conversationsConversationIdMessagesPost(Integer conversationId,

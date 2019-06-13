@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "messages")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Message   {
 
   @Id
@@ -46,6 +48,9 @@ public class Message   {
   public Message id(Long id) {
     this.id = id;
     return this;
+  }
+
+  public Message() {
   }
 
   /**
