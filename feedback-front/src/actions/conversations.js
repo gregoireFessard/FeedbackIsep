@@ -19,3 +19,5 @@ export const postConversations = (data) => {
 export const deleteConversations = (data) => {
     return {type: DELETE_CONVERSATIONS, payload: data}
 }
+
+export default postConversations()

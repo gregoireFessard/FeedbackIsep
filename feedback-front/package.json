@@ -11,6 +11,7 @@
     "connected-react-router": "^6.0.0",
     "fusioncharts": "^3.13.4",
     "history": "^4.7.2",
+    "http-proxy-middleware": "^0.19.1",
     "jquery": "^3.3.1",
     "moment": "^2.23.0",
     "numeral": "^2.0.6",
@@ -56,5 +57,6 @@
     "jsdoc-react-proptypes": "^1.0.3",
     "minami": "^1.2.3",
     "redux-logger": "^3.0.6"
-  }
+  },
+  "proxy": "http://localhost:8082/api"
 }

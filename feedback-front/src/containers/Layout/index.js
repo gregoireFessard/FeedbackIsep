@@ -1,10 +1,11 @@
 import React, { Component} from 'react';
 import Header from '../../components/Header';
-import NavBar from '../../components/NavBar';
+import SideBar from '../../components/SideBar';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Image from "../../assets/IsepPicture.jpg";
 import './index.css'
+
 const styles = theme =>({
 
 
@@ -28,11 +29,6 @@ const styles = theme =>({
 
     },
 
-    content: {
-        overflowY : 'scroll',
-        backgroundRepeat: 'no-repeat',
-
-    }
 
 
 })
@@ -46,13 +42,13 @@ class Layout extends Component {
         return(
             <div className={'main'}>
                 <div className={'sidebar'}>
-                    <NavBar/>
+                    <SideBar/>
                 </div>
-                <div className={classes.hc}>
+                <div className={'hc'}>
                     <div className={classes.header}>
                         <Header/>
                     </div>
-                    <div className={classes.content}>
+                    <div className={'content'}>
                         {children}
                     </div>
                 </div>
