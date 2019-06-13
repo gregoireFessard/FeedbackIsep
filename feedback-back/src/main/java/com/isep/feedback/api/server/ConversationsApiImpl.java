@@ -1,14 +1,14 @@
 package com.isep.feedback.api.server;
 
-import com.isep.feedback.api.model.Conversation;
-import com.isep.feedback.api.model.InlineObject;
-import com.isep.feedback.api.model.InlineResponse200;
-import com.isep.feedback.api.model.Message;
+import com.isep.feedback.api.model.*;
 import com.isep.feedback.api.repository.ConversationRepo;
 import com.isep.feedback.api.repository.MessageRepo;
+import com.isep.feedback.api.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -24,6 +24,9 @@ public class ConversationsApiImpl implements ConversationsApiDelegate {
 
     @Autowired
     MessageRepo messageRepo;
+
+    @Autowired
+    UserRepo userRepo;
 
     @Override
     public ResponseEntity<String> conversationsConversationIdDelete(Integer conversationId) {
@@ -45,7 +48,14 @@ public class ConversationsApiImpl implements ConversationsApiDelegate {
 
     @Override
     public ResponseEntity<List<Conversation>> conversationsGet() {
-        return new ResponseEntity<List<Conversation>>(conversationRepo.findAll(), HttpStatus.OK);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List <User> users = userRepo.findAll();
+        users = users.stream().filter(e -> e.getUsername().toUpperCase().contains(authentication.getName().toUpperCase())).collect(Collectors.toList());
+        Long user_id = users.get(0).getId();
+        List<Conversation> conversations = conversationRepo.findAll();
+        conversations = conversations.stream().filter(e -> e.getFrom().getId() == user_id || e.getTo().getId() == user_id).collect(Collectors.toList());
+
+        return new ResponseEntity<List<Conversation>>(conversations, HttpStatus.OK);
     }
 
     @Override
@@ -54,5 +64,12 @@ public class ConversationsApiImpl implements ConversationsApiDelegate {
         inlineResponse200.setConversation(conversationRepo.save(inlineObject.getConversation()));
         inlineResponse200.setMessage(messageRepo.save(inlineObject.getMessage()));
         return new ResponseEntity<InlineResponse200>(inlineResponse200, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Message> conversationsConversationIdMessagesUpdate(Integer conversationId, Integer messageId) {
+        Message message = messageRepo.findById(Long.valueOf(messageId)).orElse(null);
+        message.setMessageRead(true);
+        return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
 }

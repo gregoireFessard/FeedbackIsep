@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 
@@ -33,6 +35,11 @@ import java.util.List;
 @ComponentScan(basePackages = { "com.isep.feedback.configuration"})
 
 public class FeedBackApplicationRun implements CommandLineRunner {
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Autowired
     UserRepo userRepo;
@@ -64,29 +71,33 @@ public class FeedBackApplicationRun implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        /*BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        System.out.println(bCryptPasswordEncoder.encode("root"));*/
+/*
         CourseMaterial courseMaterial1 = new CourseMaterial("Genie logiciel");
 
         User user1 = new User("gfessar", true, "Gregoire", "Fessar", Long.valueOf(1), "gregoire.fessard@isep.fr", "{noop}root", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGLp3T+ZgRQwLTuBJPVMJKkmA4xaMGrBqAWjFoxaQA3A+Ej8IUkaHtoJkaR+6AfRqAWjFoxaMGrBiLAAEAAA//8FnwaNkNlVEgAAAABJRU5ErkJggg==", "#111111", null);
 
-        SimpleDateFormat formatter=new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+        SimpleDateFormat formatter=new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");*/
 
         //courseMaterial1.addUser(user1);
         //user1.addMaterial(courseMaterial1);
 
-        courseMaterialRepo.save(courseMaterial1);
+        /*courseMaterialRepo.save(courseMaterial1);
         courseMaterialRepo.save(new CourseMaterial("Cybersecurite"));
         courseMaterialRepo.save(new CourseMaterial("Architecture des SI"));
         courseMaterialRepo.save(new CourseMaterial("Analyse Geopolitique"));
         courseMaterialRepo.save(new CourseMaterial("Technologies Web"));
         courseMaterialRepo.save(new CourseMaterial("Big Data"));
         courseMaterialRepo.save(new CourseMaterial("Espagnol"));
-        courseMaterialRepo.save(new CourseMaterial("Anglais"));
+        courseMaterialRepo.save(new CourseMaterial("Anglais"));*/
 
         //List<CourseMaterial> courseMaterial1 = new ArrayList<CourseMaterial>();
 
         //courseMaterial1.add(em.getReference(CourseMaterial.class, 0));
 
-        userRepo.save(user1);
+        /*userRepo.save(user1);
         userRepo.save(new User("ktan", true, "Kevin", "Tan", Long.valueOf(2), "kevin.tan@isep.fr", "{noop}root", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGLp3T+ZgRQwLTuBJPVMJKkmA4xaMGrBqAWjFoxaQA3A+Ej8IUkaHtoJkaR+6AfRqAWjFoxaMGrBiLAAEAAA//8FnwaNkNlVEgAAAABJRU5ErkJggg==", "#222222", null));
         userRepo.save(new User("acanard", true, "Antoine", "Canard", Long.valueOf(3), "antoine.canard@isep.fr", "{noop}root", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGLp3T+ZgRQwLTuBJPVMJKkmA4xaMGrBqAWjFoxaQA3A+Ej8IUkaHtoJkaR+6AfRqAWjFoxaMGrBiLAAEAAA//8FnwaNkNlVEgAAAABJRU5ErkJggg==", "#a6e590", null));
         userRepo.save(new User("aveloso", true, "Alex", "Veloso", Long.valueOf(4), "alex.veloso@isep.fr", "{noop}root", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGLp3T+ZgRQwLTuBJPVMJKkmA4xaMGrBqAWjFoxaQA3A+Ej8IUkaHtoJkaR+6AfRqAWjFoxaMGrBiLAAEAAA//8FnwaNkNlVEgAAAABJRU5ErkJggg==", "#444444", null));
@@ -112,7 +123,7 @@ public class FeedBackApplicationRun implements CommandLineRunner {
         //courseRepo.save(new Course(userRepo.findById(Long.valueOf(12)).orElse(new User()),courseMaterialRepo.findById(Long.valueOf(8)).orElse(new CourseMaterial()),new Date("2019-04-04 10:30:00"), new Date("2019-04-04 12:30:00")));
         //courseRepo.save(new Course(userRepo.findById(Long.valueOf(13)).orElse(new User()),courseMaterialRepo.findById(Long.valueOf(2)).orElse(new CourseMaterial()),new Date("2019-04-05 09:00:00"), new Date("2019-04-05 12:00:00")));
 
-        //userRepo.save(userRepo.findById(Long.valueOf(3)).orElse(null).set);
+        //userRepo.save(userRepo.findById(Long.valueOf(3)).orElse(null).set);*/
 
     }
 }

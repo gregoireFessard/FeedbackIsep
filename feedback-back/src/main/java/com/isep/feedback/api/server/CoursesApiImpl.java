@@ -3,12 +3,16 @@ package com.isep.feedback.api.server;
 import com.isep.feedback.api.model.Comment;
 import com.isep.feedback.api.model.Course;
 import com.isep.feedback.api.model.CourseDocument;
+import com.isep.feedback.api.model.User;
 import com.isep.feedback.api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,15 +91,10 @@ public class CoursesApiImpl implements CoursesApiDelegate{
 
     @Override
     public ResponseEntity<List<Course>> coursesGet() {
-        /*int user_id = 3;
-        List<UserCourse> userCourses = userCourseRepo.findAll();
-        userCourses = userCourses.stream().filter(e -> e.getUser().getId() == user_id).collect(Collectors.toList());
-        List<Course> courses = new ArrayList<>();
-        for(int i = 0; i < userCourses.size(); i++){
-            courses.add(userCourses.get(i).getCourse());
-        }*/
-        List<Course> courses = userRepo.getOne(Long.valueOf(3)).getCourses();
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List <User> users = userRepo.findAll();
+        users = users.stream().filter(e -> e.getUsername().toUpperCase().contains(authentication.getName().toUpperCase())).collect(Collectors.toList());
+        List<Course> courses = users.get(0).getCourses();
         return new ResponseEntity<List<Course>>(courses, HttpStatus.OK);
     }
 
