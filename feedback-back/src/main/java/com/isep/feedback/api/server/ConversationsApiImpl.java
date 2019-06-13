@@ -66,8 +66,12 @@ public class ConversationsApiImpl implements ConversationsApiDelegate {
     @Override
     public ResponseEntity<InlineResponse200> conversationsPost(InlineObject inlineObject) {
         InlineResponse200 inlineResponse200 = new InlineResponse200();
-        inlineResponse200.setConversation(conversationRepo.save(inlineObject.getConversation()));
-        inlineResponse200.setMessage(messageRepo.save(inlineObject.getMessage()));
+        Conversation conversation = conversationRepo.save(inlineObject.getConversation());
+        inlineResponse200.setConversation(conversation);
+        Message message = inlineObject.getMessage();
+        message.setConversation(conversation);
+        message = messageRepo.save(message);
+        inlineResponse200.setMessage(message);
         return new ResponseEntity<InlineResponse200>(inlineResponse200, HttpStatus.OK);
     }
 

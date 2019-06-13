@@ -48,6 +48,7 @@ public class CoursesApiImpl implements CoursesApiDelegate{
 
     @Override
     public ResponseEntity<Comment> coursesCourseIdCommentsCommentIdPost(Integer courseId, Integer commentId, Comment comment) {
+
         return new ResponseEntity<Comment>(commentRepo.save(comment), HttpStatus.OK);
     }
 
@@ -60,6 +61,11 @@ public class CoursesApiImpl implements CoursesApiDelegate{
     public ResponseEntity<List<Comment>> coursesCourseIdCommentsGet(Integer courseId) {
         List<Comment> comments = commentRepo.findAll();
         comments = comments.stream().filter(e -> e.getCourse().getId() == Long.valueOf(courseId)).collect(Collectors.toList());
+        for(int i =0; i<comments.size(); i++){
+            Comment temp = comments.get(i);
+            temp.setCourse(null);
+            comments.set(i, temp);
+        }
         return new ResponseEntity<List<Comment>>(comments, HttpStatus.OK);
     }
 
