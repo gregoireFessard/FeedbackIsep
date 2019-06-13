@@ -1,42 +1,41 @@
-/*DROP DATABASE IF EXISTS `feedbackisep`;
+DROP DATABASE IF EXISTS `feedbackisep`;
 
-CREATE DATABASE feedbackisep;*/
+CREATE DATABASE feedbackisep;
 USE feedbackisep;
 
-/*DELETE FROM users;*/
-/*CREATE TABLE `users`
+CREATE TABLE `users`
 (
   id        bigint UNIQUE KEY AUTO_INCREMENT,
   username  varchar(255),
   firstname varchar(255) NOT NULL,
   lastname  varchar(255) NOT NULL,
+  status varchar(255),
   isep_id   bigint          NOT NULL,
   mail      varchar(255) NOT NULL,
   password  varchar(255) NOT NULL,
   avatar    varchar(255),
   color     varchar(255),
-  parent_id bigint,
+  parent bigint,
   enabled   boolean   NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
-*/
 
-/*DROP TABLE IF EXISTS `authorities`;
+
+DROP TABLE IF EXISTS `authorities`;
 CREATE TABLE `authorities`
 (
   `username`  varchar(255) NOT NULL,
   `authority` varchar(255) NOT NULL,
-  UNIQUE KEY `authorities_idx_1` (`username`, `authority`)
-  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES users (username)
+  UNIQUE KEY `authorities_idx_1` (`username`, `authority`),
+  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES users (`username`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = latin1;*/
-/*
+  DEFAULT CHARSET = latin1;
+
 CREATE TABLE users_courses
 (
-  id        bigint PRIMARY KEY AUTO_INCREMENT,
-  user_id   bigint NOT NULL,
-  course_id bigint NOT NULL
+  users_id   bigint NOT NULL,
+  courses_id bigint NOT NULL
 
 );
 
@@ -54,8 +53,8 @@ CREATE TABLE course_documents
   id        bigint PRIMARY KEY AUTO_INCREMENT,
   name      VARCHAR(255) NOT NULL,
   document  VARCHAR(255) NOT NULL,
-  user_id   bigint  NOT NULL,
-  course_id bigint  NOT NULL
+  user   bigint  NOT NULL,
+  course bigint  NOT NULL
 );
 
 CREATE TABLE course_materials
@@ -67,8 +66,8 @@ CREATE TABLE course_materials
 CREATE TABLE `comments`
 (
   id             bigint PRIMARY KEY AUTO_INCREMENT,
-  user_id        bigint          NOT NULL,
-  course_id      bigint          NOT NULL,
+  user        bigint          NOT NULL,
+  course      bigint          NOT NULL,
   content        VARCHAR(255) NOT NULL,
   date_time     datetime     NOT NULL,
   number_like    int,
@@ -80,7 +79,7 @@ CREATE TABLE `comments`
 CREATE TABLE messages
 (
   id             bigint PRIMARY KEY AUTO_INCREMENT,
-  conversation_id bigint          NOT NULL,
+  conversation bigint          NOT NULL,
   is_from_sender  boolean      NOT NULL,
   content         VARCHAR(255) NOT NULL,
   message_read          boolean      NOT NULL,
@@ -90,81 +89,81 @@ CREATE TABLE messages
 CREATE TABLE conversations
 (
   id         bigint PRIMARY KEY AUTO_INCREMENT,
-  from_id    bigint          NOT NULL,
-  to_id      bigint          NOT NULL,
+  `from`    bigint          NOT NULL,
+  `to`      bigint          NOT NULL,
   subject    VARCHAR(255) NOT NULL,
   status     VARCHAR(255) NOT NULL,
   date_time datetime     NOT NULL
 );
-*/
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'gfessar', 'Gregoire', 'Fessar', '1', 'gregoire.fessard@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'gfessar', 'Gregoire', 'Fessar', 'student','1', 'gregoire.fessard@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKp8lrDQAr4FytEknomklSTAUYtGLVg1IJRC0YtoAZg+XbnGEkabgSlk6R+6AfRqAWjFoxaMGrBiLAAEAAA//8YEgdLUEr9gAAAAABJRU5ErkJggg==',
         '#111111', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'ktan', 'Kevin', 'TAN', '2', 'kevin.tan@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'ktan', 'Kevin', 'TAN', 'student','2', 'kevin.tan@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGLp3T+ZgRQwLTuBJPVMJKkmA4xaMGrBqAWjFoxaQA3A+Ej8IUkaHtoJkaR+6AfRqAWjFoxaMGrBiLAAEAAA//8FnwaNkNlVEgAAAABJRU5ErkJggg==',
         '#222222', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'acanard', 'Antoine', 'Canard', '3', 'antoine.canard@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'acanard', 'Antoine', 'Canard', 'student','3', 'antoine.canard@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#a6e590', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'aveloso', 'Alex', 'Veloso', '4', 'alex.veloso@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'aveloso', 'Alex', 'Veloso', 'student','4', 'alex.veloso@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#444444', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'ccisse', 'Cameron', 'Cisse', '5', 'cameron.cisse@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'ccisse', 'Cameron', 'Cisse', 'student','5', 'cameron.cisse@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#555555', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'mnguyen', 'Mathieu', 'Nguyen', '6', 'mathieu.nguyen@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'mnguyen', 'Mathieu', 'Nguyen','teacher', '6', 'mathieu.nguyen@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#666666', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'zkaziaoul', 'Zakia', 'Kaziaoul', '7', 'zakia.kaziaoul@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'zkaziaoul', 'Zakia', 'Kaziaoul', 'teacher','7', 'zakia.kaziaoul@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#777777', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'adubernet', 'Alice', 'Dubernet', '8', 'alice.dubernet@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'adubernet', 'Alice', 'Dubernet', 'teacher','8', 'alice.dubernet@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#888888', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'mpepineau', 'Maurice', 'Pepineau', '9', 'maurice.pepineau@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'mpepineau', 'Maurice', 'Pepineau', 'teacher','9', 'maurice.pepineau@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#999999', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'jleite', 'Jean Charles', 'Leite', '10', 'jeancharles.leite@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'jleite', 'Jean Charles', 'Leite', 'teacher','10', 'jeancharles.leite@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#aaaaaa', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'aplatel', 'Adriana', 'Platel', '11', 'adriana.platel@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'aplatel', 'Adriana', 'Platel', 'teacher','11', 'adriana.platel@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#bbbbbb', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'eabgrall', 'Emma', 'Abgrall', '12', 'emma.abgrall@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'eabgrall', 'Emma', 'Abgrall', 'teacher','12', 'emma.abgrall@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#cccccc', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'jlemee', 'Jacky', 'Lemee', '13', 'jacky.lemee@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'jlemee', 'Jacky', 'Lemee', 'teacher','13', 'jacky.lemee@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#dddddd', NULL, 1);
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `isep_id`, `mail`, `password`, `avatar`, `color`,
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `status`,`isep_id`, `mail`, `password`, `avatar`, `color`,
                      `parent`, `enabled`)
-VALUES (NULL, 'aadmin', 'admin', 'admin', '14', 'admin.admin@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
+VALUES (NULL, 'aadmin', 'admin', 'admin', 'teacher','14', 'admin.admin@isep.fr', '{bcrypt}$2a$10$rAAV9h2YROT29TvBcDu86eNyf5g5e9R1GGB25RHreYfUNdM1Jzwai',
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==',
         '#eeeeee', NULL, 1);
 
