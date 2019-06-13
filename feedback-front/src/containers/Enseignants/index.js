@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Image from "../../assets/basicProfile.png";
 import Button from '@material-ui/core/Button';
 import ModalSendMessage from '../../components/ModalSendMessage'
+import axios from "axios";
 
 
 const dataEnseignants =[
@@ -32,19 +33,25 @@ const EnseignantPanel = props =>
             <Button variant="contained" color="primary" size={"small"}  href={'../profil/'+ props.data.id}  >Voir le Profil</Button>
         </Grid>
         <Grid item xs = {3} className={"buttonSendMessage"} >
-            {ModalSendMessage(props.data)}
+            {ModalSendMessage(props.data, props.dataConversations)}
         </Grid>
     </Grid>
 
 class Enseignants extends React.Component{
+    async getConversationsData(){
+        await axios.get('/api/conversations')
+            .then(data => this.setState({dataConversations : data.data}))
+    }
 
-
-
+    componentDidMount() {
+        this.getConversationsData()
+    }
     constructor(props){
         super(props);
         this.handler = this.handler.bind(this)
         this.state = {
-            result: []
+            result: [],
+            dataConversations : {}
         }
     }
 
@@ -73,7 +80,7 @@ class Enseignants extends React.Component{
                         {this.state.result.map((info)=>{
                         return(
                             <Grid item xs={12} className={'profilPanel'}>
-                                <EnseignantPanel data = {info}/>
+                                <EnseignantPanel data = {info} dataConversations={this.state.dataConversations}/>
                             </Grid>
                         )
                         })}

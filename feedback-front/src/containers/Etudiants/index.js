@@ -42,12 +42,10 @@ class Etudiants extends React.Component{
         await axios.get('/api/conversations')
             .then(data => this.setState({dataConversations : data.data}))
     }
+
+
     componentDidMount() {
-        this.setState({isLoading: true});
         this.getConversationsData()
-
-
-
     }
 
     constructor(props){

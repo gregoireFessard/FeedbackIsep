@@ -22,7 +22,7 @@ function getModalStyle() {
     };
 }
 
-async function add(dataConversations, dataReceiver, message) {
+async function add(dataConversations, dataReceiver, message, subject) {
     console.log(message)
     const idConversation = dataConversations[dataConversations.length -1].id +1
     const dataPostMessage = {
@@ -30,7 +30,7 @@ async function add(dataConversations, dataReceiver, message) {
             "dateTime": new Date(),
             "from_id": sessionStorage.getItem("UserAutotentificateId"),
             "status": "string",
-            "subject": "string",
+            "subject": subject.subject,
             "to_id": dataReceiver.id
         },
         "message": {
@@ -54,6 +54,7 @@ async function add(dataConversations, dataReceiver, message) {
 function ModalSendMessage(dataReceiver, dataConversations) {
     const [open, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState("");
+    const [subject, setSubject] = React.useState("");
 
     const handleOpen = () => {
         setOpen(true);
@@ -67,11 +68,14 @@ function ModalSendMessage(dataReceiver, dataConversations) {
         if (event.target.name === "message") {
             setMessage(event.target.value)
         }
+        if (event.target.name === "subject") {
+            setSubject(event.target.value)
+        }
 
     }
 
     const handleSubmit = () =>{
-        add(dataConversations, dataReceiver, {message})
+        add(dataConversations, dataReceiver, {message}, {subject})
 
     }
 
@@ -90,6 +94,9 @@ function ModalSendMessage(dataReceiver, dataConversations) {
                     </Typography>
                     <FormControl margin="normal" required className={"formControlReceiver"}>
                         <label id="receiver" name="receiver" >Destinataire : {dataReceiver.firstname + " " + dataReceiver.lastname}</label>
+                    </FormControl>
+                    <FormControl margin="normal" required className={"formControlReceiver"}>
+                        <input type="text" name="subject" placeholder=" Object : " value={subject} onChange={handleInputChange}/>
                     </FormControl>
                     <FormControl margin="normal" required className={"formControlMessage"}>
                         <textarea name="message" id="message" autoFocus
