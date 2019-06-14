@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles"
 import './index.css'
+import {Button} from "@material-ui/core";
 
 
 
@@ -16,27 +17,31 @@ const styles = theme =>({
         marginTop: theme.spacing.unit * 8,
         display: 'flex',
         flexDirection: 'column',
+
         padding: `${theme.spacing.unit * 1}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-        width: '70%',
+        width: '60%',
     },
 
 
 })
 
 const MaterialPanel =(props)=>
-    <div className={"comment"}>
-        <div className={"commentHeader"}>
-            <img className={"profilPicture"} src={props.data.user.avatar}></img>
+    <div className={"commentGlobal"}>
+        <Typography variant="h6" align={"center"}>
+            {props.data.material.name} : cours du {new Date(Date.parse(props.data.dateTime)).toDateString()}
+        </Typography>
+        <div className={"commentHeaderGlobal"}>
+
+            <img className={"profilPictureGlobal"} src={props.data.teacher.avatar}></img>
             <Typography>
-                {props.data.user.firstName} {props.data.user.lastName}
+                Professeur : {props.data.teacher.firstName} {props.data.teacher.lastName}
             </Typography>
-            { new Date(Date.parse(props.data.dateTime)).toDateString()}
-        </div>
-        <div className={"commentContent"}>
             <Typography>
-                {props.data.content}
+                Date : { new Date(Date.parse(props.data.dateTime)).toDateString()}
             </Typography>
+
         </div>
+        <Button href={'../course/'+props.data.id}>Accéder aux commentaires du cours</Button>
 
     </div>
 class GlobalPageCourse extends React.Component{
@@ -82,6 +87,14 @@ class GlobalPageCourse extends React.Component{
                             {this.state.name_material}
                         </Typography>
                     </Paper>
+                        {this.state.data_course.map((info)=>{
+                            return(
+                                <Paper className={classes.paper}>
+                                    <MaterialPanel data = {info}/>
+                                </Paper>
+                            )
+                        })}
+
                 </Grid>
             </Layout>
         )

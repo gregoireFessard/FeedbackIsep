@@ -122,32 +122,12 @@ class Home extends Component {
         dataUser : {},
         dataLastMessageCourse : dataLastMessageCourse,
         dataCourse : {},
-        dataUserCourses : dataUserCourses,
+        dataUserCourses : [],
+        dataMaterials : [],
+        comments : []
 
     }
-    async findCreateData(){
-        const  dataUserCoursesGlobal = []
-        const dataLastMessageCourse = []
-        await axios.get('/api/courses')
-            .then(data => this.setState({dataCourse : data.data}))
 
-        console.log(this.state.d)
-        //recup les cours de l'utilisateur connecté qui ne se sont pas encore déroulé (comparaison date)
-        this.state.dataCourse.map((infoCourse) =>{
-                this.state.dataUserCourses.map((infoUserCourse)=>{
-                    if(infoUserCourse.course_id == infoCourse.id){
-                            dataUserCoursesGlobal.push(infoCourse)
-                    }
-                })
-            }
-        )
-
-        this.setState({dataUserCoursesGlobal : dataUserCoursesGlobal})
-    }
-
-    componentDidMount() {
-        this.findCreateData()
-    }
 
 
     render(){

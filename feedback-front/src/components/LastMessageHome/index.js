@@ -10,20 +10,20 @@ import './index.css'
 
 
 const MessagePanel = (props) =>
-    <div className={"response"}>
-        <div className={"commentHeader"}>
-            <img className={"profilPicture"} src={props.data.user.avatar}></img>
+    <div className={"responseHome"}>
+        <div className={"commentHeaderHome"}>
+            <img className={"profilPictureHome"} src={props.data.user.avatar}></img>
             <Typography>
                 {props.data.user.firstname} {props.data.user.lastname}
             </Typography>
             {props.data.comment.dateTime}
         </div>
-        <div className={"commentContent"}>
+        <div className={"commentContentHome"}>
             <Typography>
                 {props.data.comment.content}
             </Typography>
         </div>
-        <Button className={"button"} size="small" color="primary">
+        <Button className={"buttonHome"} size="small" color="primary">
             voir ce message dans son contexte
         </Button>
     </div>
@@ -52,7 +52,7 @@ class LastMessageHome extends React.Component{
                         <Typography variant="h4" style={{'margin' : '3%'}}>
                             Derniers messages des professeurs
                         </Typography>
-                        <Paper className={"message"}>
+                        <Paper className={"messageHome"}>
                             {this.state.data.map((infoGlobal)=>{
                                 return(
                                     <div>

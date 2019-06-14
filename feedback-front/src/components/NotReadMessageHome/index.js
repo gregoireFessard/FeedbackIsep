@@ -46,10 +46,10 @@ class NotReadMessageHome extends React.Component{
         const listIpConversationsSender = []
         const listIpConversationsReceiver = []
 
-        await axios.get('/api/conversations/'+sessionStorage.getItem("UserAutotentificateId"))
-            .then(data => { data.map((info)=>{
-                listIpConversationsSender.push(info.id)
-            })}).then(console.log(listIpConversationsSender))
+        await axios.get('/api/conversations?id='+sessionStorage.getItem("UserAutotentificateId"))
+            .then(data => this.setState({dataConversations : data.data}))
+
+
 
 
 

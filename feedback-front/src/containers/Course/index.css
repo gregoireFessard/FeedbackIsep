@@ -2,7 +2,7 @@
 .answer{
     width: 80%;
     align-self: flex-end;
-    margin-bottom : 10px
+    
 }
 .avatar{
     height : 20px;
@@ -30,7 +30,7 @@
     justify-content: center;
 }
 
-.commentHeader{
+.commentHeaderGlobal{
     border-width: 1px;
     border-style: solid;
     width: 30%;

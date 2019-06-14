@@ -11,8 +11,6 @@ import './index.css'
 import {Button} from "@material-ui/core";
 import axios from "axios";
 import ModalComment from "../../components/ModalComment";
-import LikeButton from "../../components/LikeButton"
-
 
 
 const styles = theme =>({
@@ -66,8 +64,8 @@ const CommentPanel = (props) =>
             </Typography>
         </div>
         <div className={"likeDislike"}>
-            <Button  name="like" ><img src={Like} width={'30px'} style={{'margin-right' : '10%'}}/></Button>{props.data.number_like}
-            <Button  name="dislike" ><img src={Dislike} width={'30px'} style={{'margin-right' : '10%'}}/></Button>{props.data.number_dislike}
+            <Button  name="like" ><img src={Like} width={'30px'} /></Button>{props.data.number_like}
+            <Button  name="dislike" ><img src={Dislike} width={'30px'} /></Button>{props.data.number_dislike}
         </div>
     </div>
 

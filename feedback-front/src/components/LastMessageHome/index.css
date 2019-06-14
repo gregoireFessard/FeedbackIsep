@@ -4,40 +4,43 @@
     min-height : 100vh;
 }
 
-.message{
+.messageHome{
     width: 90%;
     margin-bottom : 5%
 }
 
 
-.profilPicture{
+.profilPictureHome{
     height: 20px;
     padding: 20px;
 }
 
-.content{
+.contentHome{
 }
 
-.messageContext{
+.messageContextHome{
     float: right
 }
 
-.comment {
+.commentHome{
     display: flex;
     flex-direction: column
 }
 
-.response{
+.responseHome{
     display: flex;
-    flex-direction: row
+    flex-direction: row;
+    width : 100%
 }
 
-.commentHeader{
+.commentHeaderHome{
     border-width: 1px;
-    border-style: solid
+    border-style: solid;
+    width : 25%
 }
 
-.commentContent{
+.commentContentHome{
     border-width: 1px;
-    border-style: solid
+    border-style: solid;
+    width : 50%
 }

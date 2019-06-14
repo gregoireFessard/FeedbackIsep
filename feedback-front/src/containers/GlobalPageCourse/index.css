@@ -13,10 +13,11 @@
     overflow-y: scroll
 }
 
-.comment{
+.commentGlobal{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
+    align-items: center;
 }
 .buttonSeeComment{
     width : 20%;
@@ -38,6 +39,7 @@
 .commentContent{
     border-width: 1px;
     border-style: solid;
+
     width: 100%;
 }
 .likeDislike{

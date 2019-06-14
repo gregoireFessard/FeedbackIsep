@@ -49,7 +49,7 @@ async function add(dataConversations, dataReceiver, message, subject) {
             "dateTime": new Date(),
             "conversation" : conversation,
             "is_from_sender": true,
-            "message_read": true
+            "message_read": false
         }
     }
     await axios.post('/api/conversations' , dataPostMessage)
@@ -104,7 +104,7 @@ function ModalSendMessage(dataReceiver, dataConversations) {
                         Envoyer un message
                     </Typography>
                     <FormControl margin="normal" required className={"formControlReceiver"}>
-                        <label id="receiver" name="receiver" >Destinataire : {dataReceiver.firstname + " " + dataReceiver.lastname}</label>
+                        <label id="receiver" name="receiver" >Destinataire : {dataReceiver.firstName + " " + dataReceiver.lastName}</label>
                     </FormControl>
                     <FormControl margin="normal" required className={"formControlReceiver"}>
                         <input type="text" name="subject" placeholder=" Object : " value={subject} onChange={handleInputChange}/>
