@@ -48,7 +48,9 @@ public class CoursesApiImpl implements CoursesApiDelegate{
 
     @Override
     public ResponseEntity<Comment> coursesCourseIdCommentsCommentIdPost(Integer courseId, Integer commentId, Comment comment) {
-
+        Comment res = commentRepo.save(comment);
+        res.setCourse(null);
+        res.setUser(null);
         return new ResponseEntity<Comment>(commentRepo.save(comment), HttpStatus.OK);
     }
 
@@ -64,6 +66,7 @@ public class CoursesApiImpl implements CoursesApiDelegate{
         for(int i =0; i<comments.size(); i++){
             Comment temp = comments.get(i);
             temp.setCourse(null);
+            temp.setUser(null);
             comments.set(i, temp);
         }
         return new ResponseEntity<List<Comment>>(comments, HttpStatus.OK);
