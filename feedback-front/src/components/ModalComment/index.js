@@ -22,49 +22,35 @@ function getModalStyle() {
     };
 }
 
-async function add(dataConversations, dataReceiver, message, subject) {
 
-    var from_user={}
-    var to_user = {}
+async function add(message , IDCourse, parent_ID) {
+    var dataUser = {}
+
     await axios.get('/api/users/'+sessionStorage.getItem("UserAutotentificateId"))
-        .then(data => from_user = data.data)
-    await axios.get('/api/users/'+dataReceiver.id)
-        .then(data => to_user = data.data)
+        .then(data => dataUser = data.data)
 
-    const conversation = {
+    const dataPost = {
+        "content": message.message,
         "dateTime": new Date(),
-        "from": from_user,
-        "status": "string",
-        "subject": subject.subject,
-        "to": to_user
+        "number_dislike": 0,
+        "number_like": 0,
+        "parent_id": parent_ID,
+        "user": dataUser
     }
 
+    console.log(dataPost)
 
-    const idConversation = dataConversations[dataConversations.length -1].id +1
-    const dataPostMessage = {
-        "conversation": conversation,
-        "message": {
-            "content": message.message,
-            "conversation_id": 1 ,
-            "dateTime": new Date(),
-            "conversation" : conversation,
-            "is_from_sender": true,
-            "message_read": false
-        }
-    }
-    await axios.post('/api/conversations' , dataPostMessage)
+    await axios.post('/api/courses/'+IDCourse+"/comments" , dataPost)
         .then(function (response) {
             console.log(response);
-         }).catch(function (error) {
+        }).catch(function (error) {
             console.log(error);
         });
+
 }
-
-
-function ModalSendMessage(dataReceiver, dataConversations) {
+function ModalSendMessage(courseId , parentID , text_button) {
     const [open, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState("");
-    const [subject, setSubject] = React.useState("");
 
     const handleOpen = () => {
         setOpen(true);
@@ -78,21 +64,17 @@ function ModalSendMessage(dataReceiver, dataConversations) {
         if (event.target.name === "message") {
             setMessage(event.target.value)
         }
-        if (event.target.name === "subject") {
-            setSubject(event.target.value)
-        }
-
     }
 
     async function handleSubmit (event){
         event.preventDefault();
-        await add(dataConversations, dataReceiver, {message}, {subject})
+        await add({message} , courseId, parentID)
         handleClose()
     }
 
     return (
         <div>
-            <Button onClick={handleOpen} variant="contained" color="primary" size={"small"} >Envoyer un message</Button>
+            <Button onClick={handleOpen} variant="contained" color="primary" size={"small"} >{text_button}</Button>
             <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
@@ -103,12 +85,6 @@ function ModalSendMessage(dataReceiver, dataConversations) {
                     <Typography component="h1" variant="h5">
                         Envoyer un message
                     </Typography>
-                    <FormControl margin="normal" required className={"formControlReceiver"}>
-                        <label id="receiver" name="receiver" >Destinataire : {dataReceiver.firstName + " " + dataReceiver.lastName}</label>
-                    </FormControl>
-                    <FormControl margin="normal" required className={"formControlReceiver"}>
-                        <input type="text" name="subject" placeholder=" Object : " value={subject} onChange={handleInputChange}/>
-                    </FormControl>
                     <FormControl margin="normal" required className={"formControlMessage"}>
                         <textarea name="message" id="message" autoFocus
                                   value={message} onChange={handleInputChange} placeholder={"Entrez votre message ..."}>
@@ -120,7 +96,7 @@ function ModalSendMessage(dataReceiver, dataConversations) {
                         color="primary"
                         className={"submit"}
                     >
-                        Envoyer
+                        Répondre
                     </Button>
                 </form>
             </Modal>

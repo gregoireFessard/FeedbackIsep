@@ -10,13 +10,7 @@ import {getUsers} from "../../actions/users";
 import ModalSendMessage from "../../components/ModalSendMessage";
 import axios from "axios";
 
-const dataEtudiants =[
-    {"id":"3","username":"acanard","firstname":"Antoine","lastname":"Canard","isep_id":"3","mail":"kev@gmail.com","password":"{noop}secret","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#a6e590","parent_id":null,"enabled":"1"},
-    {"id":"4","username":"aveloso","firstname":"Alex","lastname":"Veloso","isep_id":"4","mail":"alex.veloso@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#444444","parent_id":null,"enabled":"1"},
-    {"id":"5","username":"ccisse","firstname":"Cameron","lastname":"Cisse","isep_id":"5","mail":"cameron.cisse@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#555555","parent_id":null,"enabled":"1"},
-    {"id":"1","username":"gfessar","firstname":"Gregoire","lastname":"Fessar","isep_id":"1","mail":"gregoire.fessard@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#111111","parent_id":null,"enabled":"1"},
-    {"id":"2","username":"ktan","firstname":"Kevin","lastname":"TAN","isep_id":"2","mail":"kevin.tan@isep.fr","password":"root","avatar":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAARklEQVR4nGKZZXGLgRTQsYOZJPVMJKkmA4xaMGrBqAWjFoxaQA3AwvLOhiQNL5dGkKR+6AfRqAWjFoxaMGrBiLAAEAAA//9b4QZIR8FaGQAAAABJRU5ErkJggg==","color":"#222222","parent_id":null,"enabled":"1"},
-];
+
 
 const dataAPI = getUsers();
 const EtudiantPanel = props =>
@@ -26,7 +20,7 @@ const EtudiantPanel = props =>
             <img className={"imgProfil"} src={props.data.avatar} width={'50%'} />
         </Grid>
         <Grid item xs={3}>
-            <p className={"nameProfil"} > {props.data.firstname} {props.data.lastname}</p>
+            <p className={"nameProfil"} > {props.data.firstName} {props.data.lastName}</p>
         </Grid>
         <Grid item xs = {3} className={"buttonSeeProfil"} >
             <Button variant="contained" color="primary" size={"small"}  href={'../profil/'+ props.data.id}  >Voir le Profil</Button>
@@ -43,9 +37,19 @@ class Etudiants extends React.Component{
             .then(data => this.setState({dataConversations : data.data}))
     }
 
+    async getEtudiants(){
+        await axios.get('/api/users')
+            .then(data => data.data.map((info)=> {
+                if (info.status == "student"){
+                    this.state.dataEtudiants.push(info)
+                }
+            }))
+        console.log(this.state.dataEtudiants)
+    }
 
     componentDidMount() {
         this.getConversationsData()
+        this.getEtudiants()
     }
 
     constructor(props){
@@ -53,7 +57,8 @@ class Etudiants extends React.Component{
         this.handler = this.handler.bind(this)
         this.state = {
             result: [],
-            dataConversations : {}
+            dataConversations : {},
+            dataEtudiants : []
         }
     }
 
@@ -76,7 +81,7 @@ class Etudiants extends React.Component{
                             <h1>Etudiants</h1>
                     </Grid>
                     <Grid item xs={10} justify={"center"} className={'searchBarPanel'}>
-                        <SearchBar data={dataEtudiants} handler={this.handler}/>
+                        <SearchBar data={this.state.dataEtudiants} handler={this.handler}/>
                     </Grid>
                     <Grid item  xs={10} justify={"center"} className={'resultsPanel'}>
                         {this.state.result.map((info)=>{

@@ -17,7 +17,7 @@ class Header extends React.Component{
             <Grid container direction="column" alignItems="stretch" style={{widht: '100%'}}>
 
                 <div style={{minHeight: '60px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '20px'}}>
-                    <span>Antoine Canard</span>
+                    <span>{sessionStorage.getItem("UserAutotentificateFirstname")}  {sessionStorage.getItem("UserAutotentificateLastname")}</span>
                 </div>
 
                 <Tabs
@@ -30,6 +30,7 @@ class Header extends React.Component{
                     <Tab className={'headerButtonMesMessages'} value={1} label="Mes messages" href={"../message"}/>
                     <Tab className={'headerButtonEnseignants'} value={2} label="Enseignants"  href={"../enseignant"}/>
                     <Tab className={'headerButtonEtudiants'} value={3} label="Etudiants" href={"../etudiant"}/>
+                    <Tab className={'headerButtonMaterials'} value={3} label="Mes matières" href={"../material"}/>
                 </Tabs>
             </Grid>
         );

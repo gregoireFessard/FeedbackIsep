@@ -2,7 +2,7 @@ Tabs{
     width: 100%;
     display: flex;
 }
-.headerButtonHome:hover,.headerButtonMesMessages:hover,.headerButtonEnseignants:hover,.headerButtonEtudiants:hover{
+.headerButtonHome:hover,.headerButtonMesMessages:hover,.headerButtonEnseignants:hover,.headerButtonEtudiants:hover,.headerButtonMaterials:hover{
     color : #222222;
     background-color: ghostwhite;
     transition-duration: 1s;

@@ -2,7 +2,7 @@
 .answer{
     width: 80%;
     align-self: flex-end;
-    
+    margin-bottom : 10px
 }
 .avatar{
     height : 20px;
@@ -13,10 +13,11 @@
     overflow-y: scroll
 }
 
-.comment{
+.commentGlobal{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
+    align-items: center;
 }
 .buttonSeeComment{
     width : 20%;
@@ -30,7 +31,7 @@
     justify-content: center;
 }
 
-.commentHeaderGlobal{
+.commentHeader{
     border-width: 1px;
     border-style: solid;
     width: 30%;
@@ -38,6 +39,7 @@
 .commentContent{
     border-width: 1px;
     border-style: solid;
+
     width: 100%;
 }
 .likeDislike{
