@@ -66,7 +66,6 @@ public class CoursesApiImpl implements CoursesApiDelegate{
         for(int i =0; i<comments.size(); i++){
             Comment temp = comments.get(i);
             temp.setCourse(null);
-            temp.setUser(null);
             comments.set(i, temp);
         }
         return new ResponseEntity<List<Comment>>(comments, HttpStatus.OK);
