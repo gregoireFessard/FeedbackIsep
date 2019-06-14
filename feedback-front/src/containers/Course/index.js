@@ -5,297 +5,108 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import profilPicture from "../../assets/basicProfile.png";
-import Button from '@material-ui/core/Button';
+import  Like from '../../assets/like.png';
+import Dislike from'../../assets/dislike.png';
+import './index.css'
+import {Button} from "@material-ui/core";
+import axios from "axios";
+import ModalComment from "../../components/ModalComment";
+import LikeButton from "../../components/LikeButton"
+
 
 
 const styles = theme =>({
 
-    main: {
-        overflowY: 'scroll',
-    },
+
     paper : {
         marginTop: theme.spacing.unit * 8,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         padding: `${theme.spacing.unit * 1}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
         width: '70%',
     },
-    profilPicture:{
-        height: '20px',
-        padding: '20px',
-    },
 
-    comment:{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
 
-    },
-
-    response:{
-        display: 'flex',
-        flexDirection: 'row',
-        paddingLeft: '20%',
-        width: '80%',
-
-    },
-
-    commentHeader:{
-        borderWidth:'1px',
-        borderStyle: 'solid',
-        width: '100%',
-    },
-
-    commentContent:{
-        borderWidth:'1px',
-        borderStyle: 'solid',
-        width: '100%',
-    },
-
-    button:{
-        float: 'right',
-        backgroundColor:'white',
-        margin: '3%',
-        position: 'fixed',
-    },
 })
+async function addLike(IDComment, IDCourse){
+    await axios.post('/api/courses/'+IDCourse+"/comments/"+IDComment+"/like" )
+        .then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
+}
 
-const comments = [
-    {
-        "content": "Ceci est un commentaire de cours",
-        "course": {
-            "dateEnd": "2019-06-13T23:07:18.969Z",
-            "dateTime": "2019-06-13T23:07:18.969Z",
-            "duration": "2019-06-13T23:07:18.969Z",
-            "id": 0,
-            "material": {
-                "id": 0,
-                "name": "string",
-                "users": [
-                    null
-                ]
-            },
-            "teacher": {
-                "avatar": "string",
-                "color": "string",
-                "courses": [
-                    null
-                ],
-                "email": "string",
-                "enabled": true,
-                "firstName": "string",
-                "id": 0,
-                "isep_id": 0,
-                "lastName": "string",
-                "materials": [
-                    {
-                        "id": 0,
-                        "name": "string",
-                        "users": [
-                            null
-                        ]
-                    }
-                ],
-                "password": "string",
-                "status": "string",
-                "teacher_courses": [
-                    null
-                ],
-                "username": "string"
-            },
-            "users": [
-                {
-                    "avatar": "string",
-                    "color": "string",
-                    "courses": [
-                        null
-                    ],
-                    "email": "string",
-                    "enabled": true,
-                    "firstName": "string",
-                    "id": 0,
-                    "isep_id": 0,
-                    "lastName": "string",
-                    "materials": [
-                        {
-                            "id": 0,
-                            "name": "string",
-                            "users": [
-                                null
-                            ]
-                        }
-                    ],
-                    "password": "string",
-                    "status": "string",
-                    "teacher_courses": [
-                        null
-                    ],
-                    "username": "string"
-                }
-            ]
-        },
-        "dateTime": "2019-06-13T23:07:18.969Z",
-        "id": 1,
-        "number_dislike": 0,
-        "number_like": 0,
-        "parent_id": 0,
-        "user": {
-            "avatar": "string",
-            "color": "string",
-            "courses": [
-                null
-            ],
-            "email": "string",
-            "enabled": true,
-            "firstName": "string",
-            "id": 0,
-            "isep_id": 0,
-            "lastName": "string",
-            "materials": [
-                {
-                    "id": 0,
-                    "name": "string",
-                    "users": [
-                        null
-                    ]
-                }
-            ],
-            "password": "string",
-            "status": "string",
-            "teacher_courses": [
-                null
-            ],
-            "username": "string"
-        }
-    },
-    {
-        "content": "Ceci est un commentaire de cours",
-        "course": {
-            "dateEnd": "2019-06-13T23:07:18.969Z",
-            "dateTime": "2019-06-13T23:07:18.969Z",
-            "duration": "2019-06-13T23:07:18.969Z",
-            "id": 0,
-            "material": {
-                "id": 0,
-                "name": "string",
-                "users": [
-                    null
-                ]
-            },
-            "teacher": {
-                "avatar": "string",
-                "color": "string",
-                "courses": [
-                    null
-                ],
-                "email": "string",
-                "enabled": true,
-                "firstName": "string",
-                "id": 0,
-                "isep_id": 0,
-                "lastName": "string",
-                "materials": [
-                    {
-                        "id": 0,
-                        "name": "string",
-                        "users": [
-                            null
-                        ]
-                    }
-                ],
-                "password": "string",
-                "status": "string",
-                "teacher_courses": [
-                    null
-                ],
-                "username": "string"
-            },
-            "users": [
-                {
-                    "avatar": "string",
-                    "color": "string",
-                    "courses": [
-                        null
-                    ],
-                    "email": "string",
-                    "enabled": true,
-                    "firstName": "string",
-                    "id": 0,
-                    "isep_id": 0,
-                    "lastName": "string",
-                    "materials": [
-                        {
-                            "id": 0,
-                            "name": "string",
-                            "users": [
-                                null
-                            ]
-                        }
-                    ],
-                    "password": "string",
-                    "status": "string",
-                    "teacher_courses": [
-                        null
-                    ],
-                    "username": "string"
-                }
-            ]
-        },
-        "dateTime": "2019-06-13T23:07:18.969Z",
-        "id": 2,
-        "number_dislike": 0,
-        "number_like": 0,
-        "parent_id": 1,
-        "user": {
-            "avatar": "string",
-            "color": "string",
-            "courses": [
-                null
-            ],
-            "email": "string",
-            "enabled": true,
-            "firstName": "string",
-            "id": 0,
-            "isep_id": 0,
-            "lastName": "string",
-            "materials": [
-                {
-                    "id": 0,
-                    "name": "string",
-                    "users": [
-                        null
-                    ]
-                }
-            ],
-            "password": "string",
-            "status": "string",
-            "teacher_courses": [
-                null
-            ],
-            "username": "string"
-        }
-    }
-];
+async function addDislike(IDComment, IDCourse){
+    await axios.post('/api/courses/'+IDCourse+"/comments/"+IDComment+"/dislike" )
+        .then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
 
-const comment_panel = (props) =>
+}
+const ModalReponse = (props) =>
+    <div>
+    {ModalComment(props.IDCourse, props.parentID , props.text_button)}
+    </div>
+
+const CommentPanel = (props) =>
     <div className={"comment"}>
         <div className={"commentHeader"}>
             <img className={"profilPicture"} src={props.data.user.avatar}></img>
             <Typography>
-                {props.data.user.firstname} {props.data.user.lastname}
+                {props.data.user.firstName} {props.data.user.lastName}
             </Typography>
-            {props.data.dateTime}
+            { new Date(Date.parse(props.data.dateTime)).toDateString()}
         </div>
         <div className={"commentContent"}>
             <Typography>
                 {props.data.content}
             </Typography>
         </div>
+        <div className={"likeDislike"}>
+            <Button  name="like" ><img src={Like} width={'30px'} style={{'margin-right' : '10%'}}/></Button>{props.data.number_like}
+            <Button  name="dislike" ><img src={Dislike} width={'30px'} style={{'margin-right' : '10%'}}/></Button>{props.data.number_dislike}
+        </div>
     </div>
 
 
 class Course extends Component {
+    state ={
+        yo : "",
+        comments : [],
+        dataCourseName : [],
+        dataCourseDateTime : "",
+        courseId :""
+    }
+    async getCommentCourse(IDCourse){
+        var comments = []
+        await axios.get('/api/courses/'+IDCourse+'/comments')
+            .then(data => comments.push(data.data))
+        this.setState({comments : comments[0]})
+    }
+
+    async getDataCourse(IDCourse){
+        var dataCourse = []
+        await axios.get('/api/courses')
+            .then(data => data.data.map((info)=>{
+                if (info.id == IDCourse){
+                    dataCourse.push(info)
+                }
+            }))
+        this.setState({dataCourseName : dataCourse[0].material.name, dataCourseDateTime : new Date(Date.parse(dataCourse[0].dateTime)).toDateString()})
+
+    }
+    componentDidMount() {
+        const IDCourse = this.props.match.params.IDCourse
+        this.setState({courseId : IDCourse})
+        this.getDataCourse(IDCourse)
+         this.getCommentCourse(IDCourse)
+
+    }
+
+
 
 
     render(){
@@ -303,10 +114,7 @@ class Course extends Component {
         const{classes} = this.props;
 
         return(
-            <Layout className={classes.main}>
-                <Button className={classes.button} size="small" color="primary">
-                    Commenter
-                </Button>
+            <Layout className={"main"}>
                 <Grid
                     container
                     direction="column"
@@ -314,34 +122,43 @@ class Course extends Component {
                     alignItems="center"
                 >
                     <Paper className={classes.paper}>
-                        <Typography variant="h2">
-                            Cours de Technologie Web
+                        <Typography variant="h5" align={"center"}>
+                            {this.state.dataCourseName} : Cours du {this.state.dataCourseDateTime}
                         </Typography>
                     </Paper>
-                    {comments.map((comment)=>{
+                    <br/>
+                    <Button className={"button"} size="small" variant="contained" color="primary">
+                        <ModalReponse IDCourse = {this.state.courseId} parentID = {0} text_button = "Ajouter un commentaire"/>
+                    </Button>
+                    {this.state.comments.map((comment)=> {
+                        console.log(comment)
+                        if (comment.parent_id == 0) {
+                            return (
+                                <Paper className={classes.paper}>
+                                    <div style={{'width' : '100%', 'margin-bottom' : '10px'}}>
+                                        <CommentPanel data = {comment}  IDCourse = {this.state.courseId}/>
+                                    </div>
+                                    {
+                                        this.state.comments.map((subComment)=> {
+                                            if(subComment.parent_id == comment.id){
+                                                console.log(this.state.courseId)
+                                                return(
+                                                    <div className={'answer'} >
+                                                        <CommentPanel data = {comment} IDCourse = {this.state.courseId}/>
+                                                    </div>
+                                                )
+                                            }
+                                        })
+                                    }
+                                    <div className={"buttonMessage"}>
+                                        <ModalReponse IDCourse = {this.state.courseId} parentID = {comment.id} text_button ="Répondre"/>
+                                    </div>
+                                </Paper>
+                            )
 
-                        return (
-                        <Paper className={classes.paper}>
+                        }
+                    })}
 
-                        {comment.response.map( (response) =>{return (
-                            <div className={classes.response}>
-                                <div className={classes.commentHeader}>
-                                    <img className={classes.profilPicture} src={comment.image}></img>
-                                    <Typography>
-                                        {response.name}
-                                    </Typography>
-                                    {response.date}
-                                </div>
-                                <div className={classes.commentContent}>
-                                    <Typography>
-                                        {response.content}
-                                    </Typography>
-                                </div>
-                            </div>
-                        )})}
-                        </Paper>
-
-                    )})}
                 </Grid>
             </Layout>
         )

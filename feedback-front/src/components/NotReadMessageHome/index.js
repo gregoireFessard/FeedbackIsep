@@ -46,18 +46,12 @@ class NotReadMessageHome extends React.Component{
         const listIpConversationsSender = []
         const listIpConversationsReceiver = []
 
-        await axios.get('/api/conversations')
-            .then(data => { dataConversations = data.data})
+        await axios.get('/api/conversations/'+sessionStorage.getItem("UserAutotentificateId"))
+            .then(data => { data.map((info)=>{
+                listIpConversationsSender.push(info.id)
+            })}).then(console.log(listIpConversationsSender))
 
-        dataConversations.map((infoConversations) =>{
-            if( infoConversations.from_id == sessionStorage.getItem("UserAutotentificateId")){
-                listIpConversationsSender.push(infoConversations.id)
-            }
-            if( infoConversations.to_id == sessionStorage.getItem("UserAutotentificateId")){
-                listIpConversationsReceiver.push(infoConversations.id)
-            }
 
-        })
 
        for (var i = 0; i< listIpConversationsSender.length ; i++){
            await axios.get('/api/conversations/'+ listIpConversationsSender[i] +'/messages')
@@ -80,9 +74,7 @@ class NotReadMessageHome extends React.Component{
                     })
                 })
         }
-        console.log(listIpConversationsReceiver)
-        console.log(listIpConversationsSender)
-        console.log(this.state.nbNotReadMessage)
+
 
     }
 

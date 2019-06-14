@@ -47,7 +47,7 @@ class SideBarComponent extends React.Component{
 
                             return(
                                 <ListItem button >
-                                    <ListItemText primary={date} secondary={info.teacher.firstName + " " +info.teacher.lastName}/>
+                                    <ListItemText onClick={() => window.location.href = '../course/'+info.id} primary={date} secondary={info.teacher.firstName + " " +info.teacher.lastName}/>
                                 </ListItem>
                             )
                         })

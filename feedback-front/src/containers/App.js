@@ -10,6 +10,7 @@ import Profil from '../containers/Profil';
 import { Route, Switch, Redirect } from 'react-router';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Enseignants from "./Enseignants";
+import GlobalPageCourse from "./GlobalPageCourse";
 
 
 const muiTheme = createMuiTheme({
@@ -71,9 +72,10 @@ class App extends Component {
          <Switch>
           <Route exact path="/(index.html|)/" component={LoginPage} />
           <Route exact path="/home" component={Home}  />
-          <Route exact path="/course" component={Course} />
+          <Route exact path="/course/:IDCourse" component={Course} />
           <Route exact path="/message" component={Message} />
           <Route exact path="/profil/:IDUser" component={Profil} />
+          <Route exact path="/material/:IDMaterial" component={GlobalPageCourse} />
           <Route exact path="/etudiant" component={Etudiants} />
           <Route exact path="/enseignant" component={Enseignants} />
          </Switch>
